@@ -1,4 +1,3 @@
-using GameFrame.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +7,17 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// 根节点
     /// </summary>
-    public class RootNode: Node
+    [Node("#e84393", NodeAttribute.PortType.None, NodeAttribute.PortType.Single)]
+    [NodeCategory("NULL")]
+    [SerializeField]
+    public class RootNode : Node
     {
-        /// <summary>
-        /// 子节点
-        /// </summary>
-        public Node Child;
-
 #if UNITY_EDITOR
-        public override sealed INode.PortType Input => INode.PortType.None;
-        public override sealed INode.PortType Output => INode.PortType.Single;
-
         public override void AddChild(Node node)
         {
-            if (Child)
+            if (Child != null)
             {
-                Debug.Log("尝试向根节点非法添加复数个节点");
+                Debug.LogWarning("尝试向根节点非法添加复数个节点");
                 return;
             }
             Child = node;
@@ -32,26 +26,32 @@ namespace GameFrame.Behavior.Tree
         {
             if (Child != node)
             {
-                Debug.Log($"尝试移除{Name}的{node.Name}子节点，但是{name}已无{node.Name}子节点");
+                Debug.LogWarning($"尝试移除{Name}的{node.Name}子节点，但是{Name}已无{node.Name}子节点");
                 return;
             }
             Child = null;
         }
 #endif
-        public override Node Clone()
+        /// <summary>
+        /// 子节点
+        /// </summary>
+        public Node Child;
+        public override BaseNode Clone(BehaviorTree tree)
         {
-            var node = Instantiate(this);
-#if UNITY_EDITOR
-            node.Guid = UnityEditor.GUID.Generate().ToString();
-#endif
-            node.Child = Child?.Clone();
+            var node = base.Clone(tree) as RootNode;
+            var child = tree.Nodes.Find(node => node.Guid == Child.Guid);
+            if (child == null)
+            {
+                child = Child.Clone(tree);
+            }
+            node.Child = child as Node;
             return node;
         }
 
-        public override INode[] GetChildren()
+        public override Node[] GetChildren()
         {
-            if (Child) return new INode[] { Child };
-            else return new INode[] { };
+            if (Child != null) return new Node[] { Child };
+            else return new Node[] { };
         }
 
         protected override NodeStatus OnUpdate()

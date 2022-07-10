@@ -28,7 +28,7 @@ namespace GameFrame.Behavior.Tree
                 if (AbortType == AbortType.Self || AbortType == AbortType.Both)
                 {
                     var condition = Childrens[i] as ConditionNode;
-                    if (condition && condition.Tick() == NodeStatus.Success)
+                    if (condition != null && condition.Tick() == NodeStatus.Success)
                     {
                         Childrens[_current].Abort();
                         return NodeStatus.Aborting;
@@ -37,7 +37,7 @@ namespace GameFrame.Behavior.Tree
                 }
                 //如果子结合节点打断右方则，若存在返回成功则直接打断
                 var composite = Childrens[i] as CompositeNode;
-                if (composite && (composite.AbortType == AbortType.LowerPriority
+                if (composite != null && (composite.AbortType == AbortType.LowerPriority
                     || composite.AbortType == AbortType.Both))
                 {
                     var s = composite.Tick();

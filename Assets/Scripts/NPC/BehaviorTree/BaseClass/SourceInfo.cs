@@ -7,16 +7,17 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// 资源边信息
     /// </summary>
+    [System.Serializable]
     public struct SourceInfo
     {
-        Node _sourceNode;
+        BaseNode _sourceNode;
         string _sourceField;
         string _targetField;
 
         /// <summary>
         /// 源节点
         /// </summary>
-        public Node SourceNode { get { return _sourceNode; } }
+        public BaseNode SourceNode { get { return _sourceNode; } }
         /// <summary>
         /// 源数据段名称
         /// </summary>
@@ -26,7 +27,7 @@ namespace GameFrame.Behavior.Tree
         /// </summary>
         public string TargetField { get { return _targetField; } }
 
-        public SourceInfo(Node sourceNode, string sourceField, string targetField)
+        public SourceInfo(BaseNode sourceNode, string sourceField, string targetField)
         {
             _sourceNode = sourceNode;
             _sourceField = sourceField;

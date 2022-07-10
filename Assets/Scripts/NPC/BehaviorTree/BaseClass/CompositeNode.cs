@@ -1,4 +1,3 @@
-using GameFrame.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +7,25 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// 组合节点
     /// </summary>
+    [Node("#ffeaa7", NodeAttribute.PortType.Single, NodeAttribute.PortType.Multi)]
+    [NodeCategory("Composite")]
     public abstract class CompositeNode : Node
     {
+#if UNITY_EDITOR
+        public override void AddChild(Node node)
+        {
+            Childrens.Add(node);
+        }
+        public override void RemoveChild(Node node)
+        {
+            if (!Childrens.Contains(node))
+            {
+                Debug.LogWarning($"尝试移除{Name}的{node.Name}子节点，但是{Name}已无{node.Name}子节点");
+                return;
+            }
+            Childrens.Remove(node);
+        }
+#endif
         /// <summary>
         /// 该节点打断方式
         /// </summary>
@@ -19,30 +35,12 @@ namespace GameFrame.Behavior.Tree
 
         public List<Node> Childrens = new List<Node>();
 
-#if UNITY_EDITOR
-        public override sealed INode.PortType Input => INode.PortType.Single;
-        public override sealed INode.PortType Output => INode.PortType.Multi;
-        public override void AddChild(Node node)
-        {
-            Childrens.Add(node);
-        }
-        public override void RemoveChild(Node node)
-        {
-            if (!Childrens.Contains(node))
-            {
-                Debug.Log($"尝试移除{Name}的{node.Name}子节点，但是{name}已无{node.Name}子节点");
-                return;
-            }
-            Childrens.Remove(node);
-        }
-#endif
-
         protected override void OnAbort()
         {
             Childrens.Find(node => node.Status == NodeStatus.Running).Abort();
         }
 
-        public override INode[] GetChildren()
+        public override Node[] GetChildren()
         {
             return Childrens.ToArray();
         }
@@ -58,23 +56,20 @@ namespace GameFrame.Behavior.Tree
             });
         }
 
-        public override Node Clone()
+        public override BaseNode Clone(BehaviorTree tree)
         {
-            var node = Instantiate(this);
-#if UNITY_EDITOR
-            node.Guid = UnityEditor.GUID.Generate().ToString();
-#endif
+            var node = base.Clone(tree) as CompositeNode;
             node.Childrens = new List<Node>(Childrens);
-            for (int i = Childrens.Count - 1; i >= 0; --i)
+            node.Childrens.Clear();
+            Childrens.ForEach((child) =>
             {
-                if (!Childrens[i])
+                var n = tree.Nodes.Find(node => node.Guid == child.Guid);
+                if(n == null)
                 {
-                    Childrens.RemoveAt(i);
-                    node.Childrens.RemoveAt(i);
-                    continue;
+                    n = child.Clone(tree);
                 }
-                node.Childrens[i] = Childrens[i].Clone();
-            }
+                node.Childrens.Add(n as Node);
+            });
             return node;
         }
     }

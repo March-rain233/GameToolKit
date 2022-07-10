@@ -12,17 +12,14 @@ namespace GameFrame.Behavior.Tree
     {
         string _name;
         PortType _portType;
-        Type _valueType;
 
         public string Name => _name;
         public PortType PortType => _portType; 
-        public Type ValueType => _valueType;
 
-        public PortAttribute(string name, PortType portType, Type valueType)
+        public PortAttribute(string name, PortType portType)
         {
             _name = name;
             _portType = portType;
-            _valueType = valueType;
         }
     }
     public enum PortType {

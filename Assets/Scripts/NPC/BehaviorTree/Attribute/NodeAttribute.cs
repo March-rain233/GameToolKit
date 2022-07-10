@@ -6,29 +6,73 @@ using System;
 namespace GameFrame.Behavior.Tree
 {
     /// <summary>
-    /// 定义视图中节点的属性
+    /// 定义视图中节点的固有属性
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class NodeAttribute : Attribute
     {
-        string _name;
-        public string Name => _name;
-        public NodeAttribute(string name)
+        /// <summary>
+        /// 流程端口类型
+        /// </summary>
+        public enum PortType
         {
-            _name = name;
+            None,
+            Single,
+            Multi,
+        }
+
+        Color _color;
+        /// <summary>
+        /// 节点颜色
+        /// </summary>
+        public Color Color => _color;
+
+        PortType _inputPort;
+        /// <summary>
+        /// 输入节点类型
+        /// </summary>
+        public PortType InputPort => _inputPort;
+
+        PortType _outputPort;
+        /// <summary>
+        /// 输出节点类型
+        /// </summary>
+        public PortType OutputPort => _outputPort;
+
+        public NodeAttribute(string hexColor, PortType inputPort = PortType.None, PortType outputPort = PortType.None)
+        {
+            ColorUtility.TryParseHtmlString(hexColor, out _color);
+            _inputPort = inputPort;
+            _outputPort = outputPort;
         }
     }
     /// <summary>
-    /// 设定节点颜色
+    /// 定义节点及子类的分类路径
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class NodeColorAttribute : Attribute
+    public class NodeCategoryAttribute : Attribute
     {
-        Color _color;
-        public Color Color => _color;
-        public NodeColorAttribute(Color color)
+        string _category;
+        public string Category => _category;
+        public NodeCategoryAttribute(string category)
         {
-            _color = color;
+            _category = category;
+        }
+    }
+    /// <summary>
+    /// 定义节点显示的默认名字
+    /// </summary>
+    /// <remarks>
+    /// 如果附着该特性则默认显示类名
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class NodeNameAttribute : Attribute
+    {
+        string _name;
+        public string Name => _name;
+        public NodeNameAttribute(string name)
+        {
+            _name = name;
         }
     }
 }
