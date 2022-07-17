@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &358067564
+--- !u!1 &247414037
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,8 +131,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 358067566}
-  - component: {fileID: 358067565}
+  - component: {fileID: 247414039}
+  - component: {fileID: 247414038}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -140,13 +140,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &358067565
+--- !u!114 &247414038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358067564}
+  m_GameObject: {fileID: 247414037}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c284ee5ee9587fb4da7269a7a604447a, type: 3}
@@ -155,15 +155,19 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 9597693d68665ff4d989972f82bb922a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: ModelTree
+      Entry: 10
+      Data: 0
     - Name: Variables
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameFrame.Behavior.Tree.BlackboardVariable,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameFrame.BlackboardVariable,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -174,42 +178,21 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: adds
-    - Name: $v
-      Entry: 7
-      Data: 2|GameFrame.Behavior.Tree.StringVariable, Assembly-CSharp
-    - Name: Domain
-      Entry: 3
       Data: 0
-    - Name: _value
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  ModelTreeSlot: {fileID: 11400000, guid: e365a1319861259448a9c6b1c727fc76, type: 2}
---- !u!4 &358067566
+  _modelTree: {fileID: 11400000, guid: 9597693d68665ff4d989972f82bb922a, type: 2}
+--- !u!4 &247414039
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358067564}
+  m_GameObject: {fileID: 247414037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.297972, y: 7.1035, z: -5.9426365}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -264,7 +247,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.841183, y: 1}
+    m_SensorSize: {x: 2.0968292, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

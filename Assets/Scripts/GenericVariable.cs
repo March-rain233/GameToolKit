@@ -1,19 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using System;
+
 namespace GameFrame
 {
     public abstract class GenericVariable<T> : BlackboardVariable
     {
         [SerializeField]
+        [OnValueChanged("OnValueChangedEditor", true)]
         T _value;
-        public override object Value { get => _value; set => _value = (T)value; }
-        public override BlackboardVariable Clone()
+        bool _isReadOnly = false;
+        public override bool IsReadOnly => _isReadOnly;
+        public override Type TypeOfValue => typeof(T);
+        protected override object GetValue()
         {
-            var obj = this.MemberwiseClone() as GenericVariable<T>;
-            obj._value = _value;
-            return obj;
+            return _value;
         }
+        protected override void SetValue(object value)
+        {
+            _value = (T)value;
+        }
+
+#if UNITY_EDITOR
+        T _last;
+        private void OnValueChangedEditor()
+        {
+            OnValueChanged(_value, _last);
+            _last = _value;
+        }
+#endif
     }
     public class ObjectVariable : GenericVariable<object> { }
     public class StringVariable : GenericVariable<string> { }
