@@ -7,15 +7,15 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// 局部变量节点
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class InputNode<T> : SourceNode
+    /// <typeparam name="TValue"></typeparam>
+    public class InputNode<TValue> : SourceNode
     {
         [Port("Output", Direction.Output)]
         [SerializeField]
         [HideInInspector]
-        protected T _value = default;
+        protected TValue _value = default;
         [OdinSerialize]
-        public T Value
+        public TValue Value
         {
             get { return _value; }
             set 
@@ -27,6 +27,11 @@ namespace GameFrame.Behavior.Tree
         protected override void OnValueUpdate()
         {
             
+        }
+
+        protected override object GetValue(string name)
+        {
+            return _value;
         }
     }
     public class IntegerNode : InputNode<int> { }

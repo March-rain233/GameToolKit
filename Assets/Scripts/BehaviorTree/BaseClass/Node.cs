@@ -15,7 +15,8 @@ using System;
 namespace GameFrame.Behavior.Tree
 {
     [Serializable]
-    [Node("#E4007F")]
+    [Node]
+    [NodeColor("#E4007F")]
     public abstract class Node : BaseNode
     {
         #region 编辑器相关成员

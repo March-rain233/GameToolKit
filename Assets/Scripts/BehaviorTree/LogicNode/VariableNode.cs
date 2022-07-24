@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.Serialization;
 using Sirenix.OdinInspector;
+using System.Linq;
+using DG.Tweening;
 namespace GameFrame.Behavior.Tree
 {
-    [NodeCategory("NULL")]
     public class VariableNode<T> : InputNode<T>
     {
-        [OdinSerialize, HideInInspector]
+        [OdinSerialize]
+        [HideInInspector]
         private string _index = "";
 
         [OdinSerialize]
-        [ValueDropdown("GetValidIndex")]
+        [ValueDropdown("GetValidIndex", AppendNextDrawer = true)]
+        [InfoBox("The index is not contained in the dataset", InfoMessageType.Warning, "IsNotContainIndex")]
+        [DelayedProperty]
         public string Index
         {
             get { return _index; }
@@ -21,24 +25,35 @@ namespace GameFrame.Behavior.Tree
                 var old = _index;
                 if (!string.IsNullOrEmpty(_index))
                 {
-                    _blackboard.UnregisterCallback<IBlackboard.NameChangedEvent>(_index, OnIndexChanged);
-                    _blackboard.UnregisterCallback<IBlackboard.ValueChangeEvent>(_index, OnValueChanged);
+                    _blackboard?.UnregisterCallback<IBlackboard.NameChangedEvent>(_index, OnIndexChanged);
+                    _blackboard?.UnregisterCallback<IBlackboard.ValueChangeEvent>(_index, OnValueChanged);
                 }
                 _index = value;
                 if(_index != null && old != null)//如果old等于null，说明现在是在被序列化，不应该重复绑定
                 {
-                    _blackboard.RegisterCallback<IBlackboard.NameChangedEvent>(_index, OnIndexChanged);
-                    _blackboard.RegisterCallback<IBlackboard.ValueChangeEvent>(_index, OnValueChanged);
-                    Value = _blackboard.GetValue<T>(_index);
+                    _blackboard?.RegisterCallback<IBlackboard.NameChangedEvent>(_index, OnIndexChanged);
+                    _blackboard?.RegisterCallback<IBlackboard.ValueChangeEvent>(_index, OnValueChanged);
+                    if (_blackboard != null && _blackboard.HasValue(_index))
+                    {
+                        Value = _blackboard.GetValue<T>(_index);
+                    }
                 }
             }
         }
+
+        /// <summary>
+        /// 是否不存在该索引
+        /// </summary>
+        public bool IsNotContainIndex => !GetValidIndex().Contains(Index); 
 
         protected virtual IBlackboard _blackboard => BehaviorTree.Blackboard;
 
         protected override void OnValueUpdate()
         {
-            _value = _blackboard.GetValue<T>(_index);
+            if (_blackboard != null && _blackboard.HasValue(_index))
+            {
+                _value = _blackboard.GetValue<T>(_index);
+            }
         }
 
         protected override void OnInit()
@@ -60,6 +75,10 @@ namespace GameFrame.Behavior.Tree
             Value = (T)e.NewValue;
         }
 
+        /// <summary>
+        /// 获取存在的索引列表
+        /// </summary>
+        /// <returns></returns>
         protected virtual IEnumerable<string> GetValidIndex()
         {
             var blackboard = _blackboard as BehaviorTree.TreeBlackboard;

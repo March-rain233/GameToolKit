@@ -24,23 +24,20 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Nodes
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[GameFrame.Behavior.Tree.BaseNode,
-        Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[GameFrame.Behavior.Tree.Node, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
       Data: 1|GameFrame.Behavior.Tree.RootNode, Assembly-CSharp
-    - Name: BehaviorTree
-      Entry: 10
-      Data: 0
     - Name: LastDataUpdataTime
       Entry: 4
       Data: 0
     - Name: Name
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: RootNode
     - Name: ViewPosition
       Entry: 7
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
@@ -54,12 +51,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: Guid
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: 3d3fa64e-a454-473b-9de0-3274f218aa42
     - Name: InputEdges
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[GameFrame.Behavior.Tree.SourceInfo,
-        Assembly-CSharp]], mscorlib
+      Data: 2|System.Collections.Generic.List`1[[GameFrame.SourceInfo, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -71,8 +68,8 @@ MonoBehaviour:
       Data: 
     - Name: OutputEdges
       Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[GameFrame.Behavior.Tree.SourceInfo,
-        Assembly-CSharp]], mscorlib
+      Data: 3|System.Collections.Generic.List`1[[GameFrame.SourceInfo, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -82,6 +79,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: BehaviorTree
+      Entry: 10
+      Data: 0
     - Name: Child
       Entry: 6
       Data: 

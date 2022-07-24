@@ -10,8 +10,9 @@ namespace GameFrame.Behavior.Tree {
     /// <remarks>
     /// 负责数据运算
     /// </remarks>
-    [Node("#81ecec", NodeAttribute.PortType.None, NodeAttribute.PortType.None)]
+    [Node(NodeAttribute.PortType.None, NodeAttribute.PortType.None)]
     [NodeCategory("Logic")]
+    [NodeColor("#81ecec")]
     public abstract class LogicNode : Node
     {
 

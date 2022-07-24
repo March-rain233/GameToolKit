@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Sirenix.Utilities.Editor;
 using System.Collections.Generic;
+using GameFrame.Editor;
 
 namespace GameFrame.EventProcessor.Editor {
 
@@ -50,30 +51,30 @@ namespace GameFrame.EventProcessor.Editor {
                 var processor = list[0] as EventProcessor;
                 LoadProcessor(processor);
             };
-            _listView.AddManipulator(new ContextualMenuManipulator((ContextualMenuPopulateEvent e) =>
-            {
-            }));
+
+            GraphView.Window = this;
         }
 
         private void CreateAsset()
         {
-            var dialog = EventTypeDialog.CreateWindow<EventTypeDialog>();
-            dialog.maxSize = dialog.minSize = new Vector2(300, 100);
-            dialog.EventType = typeof(NormalEvent);
-            dialog.FolderPath = "Assets/Resources";
-            dialog.Callback = (t, n) =>
-            {
-                var asset = CreateInstance<EventProcessor>();
-                asset.EventType = t;
-                asset.EventName = n;
-                var type = typeof(EventSenderNode<>);
-                type = type.MakeGenericType(t);
-                var node = asset.CreateNode(type);
-                asset.SenderNode = node as EventSenderNode;
-                AssetDatabase.CreateAsset(asset, dialog.FolderPath + "/" + dialog.EventName + ".asset");
-            };
-            //如果模态窗口的bug能解决就改成模态窗口
-            dialog.ShowPopup();
+            var dialog = CreateWindow<GenericSelectorEditorWindow>();
+            dialog.TypeDatas = new GenericSelectorEditorWindow.TypeData[1] {new GenericSelectorEditorWindow.TypeData() { Name = "1"} };
+            //var dialog = EventTypeDialog.CreateWindow<EventTypeDialog>();
+            //dialog.maxSize = dialog.minSize = new Vector2(300, 100);
+            //dialog.EventType = typeof(NormalEvent);
+            //dialog.FolderPath = "Assets/Resources";
+            //dialog.Callback = (t, n) =>
+            //{
+            //    var asset = CreateInstance<EventProcessor>();
+            //    asset.EventName = n;
+            //    var type = typeof(EventSenderNode<>);
+            //    type = type.MakeGenericType(t);
+            //    var node = asset.CreateNode(type);
+            //    asset.SenderNode = node as EventSenderNode;
+            //    AssetDatabase.CreateAsset(asset, dialog.FolderPath + "/" + dialog.EventName + ".asset");
+            //};
+            ////如果模态窗口的bug能解决就改成模态窗口
+            //dialog.ShowPopup();
         }
 
         private void LoadProcessor(EventProcessor processor)
@@ -95,6 +96,13 @@ namespace GameFrame.EventProcessor.Editor {
                 var index = _listView.itemsSource.IndexOf(processor);
                 _listView.selectedIndex = index;
             }
+            _listView.RefreshItems();
+        }
+        
+        public void Refresh()
+        {
+            _listView.RefreshItems();
+            LoadProcessor(_listView.selectedItem as EventProcessor);
         }
 
         private void OnProjectChange()

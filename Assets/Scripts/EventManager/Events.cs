@@ -15,4 +15,5 @@ namespace GameFrame
     {
 
     }
+    public class KeyCodeEvent : GenericEvent<KeyCode> { }
 }

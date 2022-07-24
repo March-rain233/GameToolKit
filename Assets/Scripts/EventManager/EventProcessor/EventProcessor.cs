@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System;
 using UnityEditor;
 using System.Text.RegularExpressions;
@@ -15,12 +16,8 @@ namespace GameFrame.EventProcessor
     /// 负责进行事件的逻辑处理
     /// </remarks>
     [CreateAssetMenu(fileName = "EventProcessor", menuName = "EventManager/EventProcessor")]
-    public class EventProcessor : SerializedScriptableObject
+    public class EventProcessor : CustomGraph<Node>
     {
-        /// <summary>
-        /// 节点列表
-        /// </summary>
-        public List<Node> Nodes = new List<Node>();
         /// <summary>
         /// 事件名称
         /// </summary>
@@ -28,7 +25,8 @@ namespace GameFrame.EventProcessor
         /// <summary>
         /// 事件类型
         /// </summary>
-        public Type EventType;
+        [ReadOnly, ShowInInspector]
+        public Type EventType => SenderNode.EventType;
         /// <summary>
         /// 入口节点
         /// </summary>
@@ -76,53 +74,21 @@ namespace GameFrame.EventProcessor
             }
         }
 
-        /// <summary>
-        /// 根据guid查找节点
-        /// </summary>
-        /// <param name="guid"></param>
-        /// <returns></returns>
-        public Node FindNode(string guid)
+
+        public override Node CreateNode(Type type)
         {
-            return Nodes.Find(n => n.Guid == guid);
-        }
-#if UNITY_EDITOR
-        /// <summary>
-        /// 移除节点
-        /// </summary>
-        /// <param name="node"></param>
-        public void RemoveNode(Node node)
-        {
-            Nodes.Remove(node);
-            //移除以该节点的资源边
-            foreach (var child in Nodes)
+            var node = base.CreateNode(type);
+            if (type.IsSubclassOf(typeof(EventSenderNode)))
             {
-                for (int i = child.InputEdges.Count - 1; i >= 0; --i)
-                    if (child.InputEdges[i].SourceNode == node)
-                        child.InputEdges.RemoveAt(i);
-                for (int i = child.OutputEdges.Count - 1; i >= 0; --i)
-                    if (child.OutputEdges[i].TargetNode == node)
-                        child.OutputEdges.RemoveAt(i);
+                node.Name = "Sender";
             }
-        }
-        public Node CreateNode(Type type)
-        {
-            var node = Activator.CreateInstance(type) as Node;
-            string newName = type.Name;
-            int count = Nodes.FindAll(node => Regex.IsMatch(node.Name, @$"{newName}(\(\d+\))?$")).Count;
-            if (count > 0)
-            {
-                newName = newName + $"({count})";
-            }
-            node.Name = newName;
-            node.Guid = GUID.Generate().ToString();
             typeof(Node).GetProperty("Processor").SetValue(node, this);
-            Nodes.Add(node);
             return node;
         }
-#endif
+
         public override string ToString()
         {
-            return EventName;
+            return $"{name}({EventType.Name}.{EventName})";
         }
     }
 }

@@ -8,9 +8,8 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 namespace GameFrame.Editor
 {
-    public class EdgeField : GraphElement
+    public class EdgeField : GraphElementField
     {
-        public SourceInfo Source;
         private class Assist : SerializedScriptableObject
         {
             public SourceInfo info;
@@ -41,17 +40,23 @@ namespace GameFrame.Editor
                 SirenixEditorGUI.EndBox();
             }
         }
-        UnityEditor.Editor _editor;
+
+        private SourceInfo _instance;
         public EdgeField(SourceInfo info, SyncType type, System.Action<SourceInfo, SyncType> callback)
         {
-            Source = info;
+            _instance = info;
             Assist test = ScriptableObject.CreateInstance<Assist>();
             test.callback = callback;
             test.syncType = type;
             test.info = info;
-            _editor = Sirenix.OdinInspector.Editor.OdinEditor.CreateEditor(test);
-            IMGUIContainer container = new IMGUIContainer(() => { _editor.OnInspectorGUI(); });
+            var editor = Sirenix.OdinInspector.Editor.OdinEditor.CreateEditor(test);
+            IMGUIContainer container = new IMGUIContainer(() => { editor.OnInspectorGUI(); });
             Add(container);
+        }
+
+        public override bool IsAssociatedWith(object obj)
+        {
+            return _instance.Equals(obj);
         }
     }
 }

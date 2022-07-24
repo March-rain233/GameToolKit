@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace GameFrame.Behavior.Tree
 {
-    [Node("#55efc4", NodeAttribute.PortType.Single, NodeAttribute.PortType.None)]
+    [Node(NodeAttribute.PortType.Single, NodeAttribute.PortType.None)]
+    [NodeColor("#55efc4")]
     public abstract class Leaf : ProcessNode
     {
         public override void AddChild(ProcessNode node)

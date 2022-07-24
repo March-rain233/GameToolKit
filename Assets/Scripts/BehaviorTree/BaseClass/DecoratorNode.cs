@@ -7,8 +7,9 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// ÐÞÊÎ½Úµã
     /// </summary>
-    [Node("#00b894", NodeAttribute.PortType.Single, NodeAttribute.PortType.Single)]
+    [Node(NodeAttribute.PortType.Single, NodeAttribute.PortType.Single)]
     [NodeCategory("Decorator")]
+    [NodeColor("#00b894")]
     public abstract class DecoratorNode : ProcessNode
     {
         /// <summary>

@@ -42,54 +42,41 @@ namespace GameFrame.EventProcessor.Editor
             style.left = node.ViewPosition.x;
             style.top = node.ViewPosition.y;
             //创建资源端口
-            var type = node.GetType();
-            while (type != typeof(Node))
+            var list = node.GetValidPortDataList();
+            foreach(var portData in list)
             {
-                var portField = type.GetFields(
-                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance
-                    ).Where(field => field.IsDefined(typeof(PortAttribute), true) && field.DeclaringType == type);
-                foreach (var field in portField)
+                var tooltip = portData.PreferredType.Name;
+                foreach(var t in portData.PortTypes)
                 {
-                    PortAttribute attr = field.GetCustomAttributes(typeof(PortAttribute), true)[0] as PortAttribute;
-                    Type valueType = field.FieldType;
-                    var portname = attr.Name;
-                    var tooltip = valueType.Name;
-                    var typelist = new HashSet<Type>();
-                    typelist.Add(valueType);
-                    if (attr.ExtendPortTypes != null)
+                    if(t != portData.PreferredType)
                     {
-                        typelist.UnionWith(attr.ExtendPortTypes);
-                        foreach (var t in attr.ExtendPortTypes)
-                        {
-                            tooltip += $" {t.Name}";
-                        }
-                    }
-                    if (attr.Direction == Direction.Input)
-                    {
-                        var port = base.InstantiatePort(Orientation.Horizontal,
-                            UnityEditor.Experimental.GraphView.Direction.Input,
-                            Port.Capacity.Single,
-                            valueType);
-                        port.portName = portname;
-                        port.name = field.Name;
-                        port.tooltip = tooltip;
-                        port.userData = typelist;
-                        inputContainer.Add(port);
-                    }
-                    else
-                    {
-                        var port = base.InstantiatePort(Orientation.Horizontal,
-                            UnityEditor.Experimental.GraphView.Direction.Output,
-                            Port.Capacity.Multi,
-                            valueType);
-                        port.portName = portname;
-                        port.name = field.Name;
-                        port.tooltip = tooltip;
-                        port.userData = typelist;
-                        outputContainer.Add(port);
+                        tooltip += $" {t.Name}";
                     }
                 }
-                type = type.BaseType;
+                if (portData.PortDirection == Direction.Input)
+                {
+                    var port = base.InstantiatePort(Orientation.Horizontal,
+                        UnityEditor.Experimental.GraphView.Direction.Input,
+                        Port.Capacity.Single,
+                        portData.PreferredType);
+                    port.portName = portData.NickName;
+                    port.name = portData.Name;
+                    port.tooltip = tooltip;
+                    port.userData = portData.PortTypes;
+                    inputContainer.Add(port);
+                }
+                else
+                {
+                    var port = base.InstantiatePort(Orientation.Horizontal,
+                        UnityEditor.Experimental.GraphView.Direction.Output,
+                        Port.Capacity.Multi,
+                        portData.PreferredType);
+                    port.portName = portData.NickName;
+                    port.name = portData.Name;
+                    port.tooltip = tooltip;
+                    port.userData = portData.PortTypes;
+                    outputContainer.Add(port);
+                }
             }
             //设置外观
             titleContainer.style.backgroundColor = (node.GetType().GetCustomAttributes(typeof(NodeColorAttribute), true)[0] as NodeColorAttribute).Color;

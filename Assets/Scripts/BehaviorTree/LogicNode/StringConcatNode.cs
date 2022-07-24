@@ -19,5 +19,10 @@ namespace GameFrame.Behavior.Tree
         {
             Result = Input1 + Input2;
         }
+
+        protected override object GetValue(string name)
+        {
+            return Result;
+        }
     }
 }

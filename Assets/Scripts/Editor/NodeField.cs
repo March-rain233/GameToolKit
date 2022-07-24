@@ -1,43 +1,45 @@
+using Sirenix.OdinInspector;
+using Sirenix.Utilities.Editor;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using Sirenix.OdinInspector;
-using UnityEditor.UIElements;
-using UnityEngine.UIElements;
-using Sirenix.Utilities.Editor;
-using Sirenix.OdinInspector.Editor;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GameFrame.Editor
 {
-    public class NodeField : GraphElement
+    public class NodeField : GraphElementField
     {
-        public BaseNode Node;
-        private class Assist : SerializedScriptableObject
+        /// <summary>
+        /// 辅助显示类
+        /// </summary>
+        public class Assist : SerializedScriptableObject
         {
-            public BaseNode Node;
+            public BaseNode Element;
+            public string Name;
         }
-        [CustomEditor(typeof(Assist))]
+
+        /// <summary>
+        /// 辅助类编辑器
+        /// </summary>
         private class AssistEditor : Sirenix.OdinInspector.Editor.OdinEditor
         {
-            bool foldout = true;
             Assist assist => target as Assist;
+            bool foldout = true;
             public override void OnInspectorGUI()
             {
                 SirenixEditorGUI.BeginBox();
                 SirenixEditorGUI.BeginBoxHeader();
-                foldout = SirenixEditorGUI.Foldout(foldout, assist.Node.Name);
+                foldout = SirenixEditorGUI.Foldout(foldout, assist.Name);
                 SirenixEditorGUI.EndBoxHeader();
                 if (foldout)
                 {
                     Tree.BeginDraw(true);
-                    var property = Tree.GetPropertyAtPath("Node");
+                    var property = Tree.GetPropertyAtPath("Element");
                     var children = property.Children;
                     foreach (var child in children)
                     {
-                        if(child.Attributes.Where(a=>a.GetType()==typeof(HideInTreeInspectorAttribute)).Count() > 0)
+                        if (child.Attributes.Where(a => a.GetType() == typeof(HideInTreeInspectorAttribute)).Count() > 0)
                         {
                             continue;
                         }
@@ -48,15 +50,41 @@ namespace GameFrame.Editor
                 SirenixEditorGUI.EndBox();
             }
         }
-        UnityEditor.Editor _editor;
-        public NodeField(BaseNode node)
+
+        /// <summary>
+        /// 监视器实例
+        /// </summary>
+        public UnityEditor.Editor Inspector;
+
+        /// <summary>
+        /// 监视器容器
+        /// </summary>
+        public IMGUIContainer GUIContainer;
+
+        /// <summary>
+        /// 绑定的对象
+        /// </summary>
+        public BaseNode Instance;
+
+        /// <summary>
+        /// 创建指定对象的字段
+        /// </summary>
+        /// <param name="element">对象</param>
+        /// <param name="Name">对象显示的名字</param>
+        public NodeField(BaseNode element, string Name)
         {
-            Assist test = ScriptableObject.CreateInstance<Assist>();
-            Node = node;
-            test.Node = node;
-            _editor = Sirenix.OdinInspector.Editor.OdinEditor.CreateEditor(test);
-            IMGUIContainer container = new IMGUIContainer(() => { _editor.OnInspectorGUI(); });
-            Add(container);
+            Instance = element;
+            Assist assist = ScriptableObject.CreateInstance<Assist>();
+            assist.Element = Instance;
+            assist.Name = Name;
+            Inspector = Sirenix.OdinInspector.Editor.OdinEditor.CreateEditor(assist, typeof(AssistEditor));
+            GUIContainer = new IMGUIContainer(() => { Inspector.OnInspectorGUI(); });
+            Add(GUIContainer);
+        }
+
+        public override bool IsAssociatedWith(object obj)
+        {
+            return Instance.Equals(obj);
         }
     }
 }

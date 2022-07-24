@@ -53,7 +53,7 @@ MonoBehaviour:
       Data: 
     - Name: Guid
       Entry: 1
-      Data: 91386e95f38b8d746b5c47584861a504
+      Data: 21f62192181eb9243b61fe43c7ddbc55
     - Name: InputEdges
       Entry: 7
       Data: 2|System.Collections.Generic.List`1[[GameFrame.SourceInfo, Assembly-CSharp]],
@@ -95,15 +95,6 @@ MonoBehaviour:
     - Name: 
       Entry: 13
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: EventType
-      Entry: 7
-      Data: 4|System.RuntimeType, mscorlib
-    - Name: 
-      Entry: 1
-      Data: GameFrame.NormalEvent, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

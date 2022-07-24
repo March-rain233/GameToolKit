@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.Linq;
+using System;
 
 namespace GameFrame
 {
@@ -148,6 +150,62 @@ namespace GameFrame
                 edge.TargetNode.PushValue(edge.TargetField, GetValue(edge.SourceField));
             }
         }
+
+        /// <summary>
+        /// 获取合法的端口列表
+        /// </summary>
+        /// <returns></returns>
+        public virtual List<PortData> GetValidPortDataList()
+        {
+            var list = new List<PortData>();
+            var type = GetType();
+            while (type != typeof(BaseNode))
+            {
+                var portField = type.GetFields(
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance
+                    ).Where(field => field.IsDefined(typeof(PortAttribute), true) && field.DeclaringType == type);
+                foreach (var field in portField)
+                {
+                    var data = new PortData();
+                    PortAttribute attr = field.GetCustomAttributes(typeof(PortAttribute), true)[0] as PortAttribute;
+                    data.PreferredType = field.FieldType;
+                    data.NickName = attr.Name;
+                    data.Name = field.Name;
+                    data.PortDirection = attr.Direction;
+                    data.PortTypes = new HashSet<Type>() { data.PreferredType };
+                    if (attr.ExtendPortTypes != null)
+                    {
+                        data.PortTypes.UnionWith(attr.ExtendPortTypes);
+                    }
+                    list.Add(data);
+                }
+                type = type.BaseType;
+            }
+            return list;
+        }
         #endregion
+        public struct PortData
+        {
+            /// <summary>
+            /// 字段的名称
+            /// </summary>
+            public string Name;
+            /// <summary>
+            /// 字段的显示名称
+            /// </summary>
+            public string NickName;
+            /// <summary>
+            /// 端口数据流动方向
+            /// </summary>
+            public Direction PortDirection;
+            /// <summary>
+            /// 端口可匹配的数据类型
+            /// </summary>
+            public HashSet<Type> PortTypes;
+            /// <summary>
+            /// 端口的首选数据类型
+            /// </summary>
+            public Type PreferredType;
+        }
     }
 }

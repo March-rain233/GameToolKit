@@ -8,8 +8,9 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// 组合节点
     /// </summary>
-    [Node("#ffeaa7", NodeAttribute.PortType.Single, NodeAttribute.PortType.Multi)]
+    [Node(NodeAttribute.PortType.Single, NodeAttribute.PortType.Multi)]
     [NodeCategory("Composite")]
+    [NodeColor("#ffeaa7")]
     public abstract class CompositeNode : ProcessNode
     {
         /// <summary>

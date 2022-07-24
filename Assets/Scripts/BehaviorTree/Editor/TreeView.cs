@@ -16,37 +16,27 @@ namespace GameFrame.Behavior.Tree.Editor
     /// <summary>
     /// 行为树图
     /// </summary>
-    public class TreeView : GraphView
+    public class TreeView : CustomGraphView<Node>
     {
+        public new class UxmlFactory : UxmlFactory<TreeView, UxmlTraits> { }
+
         /// <summary>
-        /// 当前显示的树
+        /// 变量定义域
         /// </summary>
-        private BehaviorTree _tree;
-        private Blackboard _blackboard;
-        private GraphInspector _inspector;
-        public override bool supportsWindowedBlackboard => true;
-        protected override bool canCopySelection => false;
-        protected override bool canDeleteSelection => true;
-        protected override bool canPaste => false;
-        protected override bool canCutSelection => false;
-        public override bool canGrabFocus => true;
-        protected override bool canDuplicateSelection => false;
-        public TreeView()
+        private enum Domain
         {
-            var background = new GridBackground();
-            Insert(0, background);
+            Global,
+            Prototype,
+            Local
+        }
 
-            this.AddManipulator(new ContentZoomer());
-            this.AddManipulator(new ContentDragger());
-            this.AddManipulator(new SelectionDragger());
-            this.AddManipulator(new RectangleSelector());
+        private Blackboard _blackboard;
+        private BehaviorTree _tree => _graph as BehaviorTree;
 
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Scripts/BehaviorTree/Editor/USS/BehaviorTreeEditor.uss");
-            styleSheets.Add(styleSheet);
+        public override bool supportsWindowedBlackboard => true;
 
-            var searchProvider = ScriptableObject.CreateInstance<NodeSearchProvider>();
-            nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchProvider);
-
+        public TreeView() : base()
+        {
             RegisterCallback<DragUpdatedEvent>((e) =>
             {
                 DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
@@ -56,11 +46,11 @@ namespace GameFrame.Behavior.Tree.Editor
                 Vector2 point = contentViewContainer.WorldToLocal(e.localMousePosition);
                 foreach (BlackboardField field in _blackboard.selection)
                 {
-                    (var variableType, var domain) = (ValueTuple<Type, Domain>)field.userData;
+                    (var variableType, var domain, var dataset) = (ValueTuple<Type, Domain, string>)field.userData; ;
                     Type type;
                     if(domain == Domain.Global)
                     {
-                        type = typeof(GlobalVariableNode<>);
+                        type = typeof(DataSetVariableNode<>);
                     }
                     else
                     {
@@ -69,68 +59,27 @@ namespace GameFrame.Behavior.Tree.Editor
                     type = type.MakeGenericType(variableType.BaseType.GetGenericArguments()[0]);
                     var view = CreateNode(type);
                     view.SetPosition(new Rect(point, Vector2.zero));
+                    type.GetProperty("DataSetName")?.SetValue(view.Node, dataset);
                     type.GetProperty("Index").SetValue(view.Node, field.text);
                     view.ChangeName(field.text);
                 }
             });
-            _inspector = new GraphInspector();
-            Add(_inspector);
-            _inspector.visible = false;
         }
-        /// <summary>
-        /// 获取节点视图
-        /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        NodeView FindNodeView(Node node)
+
+        protected override NodeSearchProviderBase GetSearchWindowProvider()
         {
-            return GetNodeByGuid(node.Guid) as NodeView;
+            var provider = ScriptableObject.CreateInstance<NodeSearchProvider>();
+            provider.Init(this, Window);
+            return provider;
         }
-        /// <summary>
-        /// 更新树，当选择的tree改变时，重新加载视图
-        /// </summary>
-        /// <param name="tree"></param>
-        internal void PopulateView(BehaviorTree tree)
+
+        public override void PopulateView(CustomGraph<Node> graph)
         {
-            _tree = tree;
-
-            //删除上一颗树的视图
-            graphViewChanged -= OnGraphViewChanged;
-            DeleteElements(graphElements.ToList());
-            graphViewChanged += OnGraphViewChanged;
-
-            //生成黑板
-            if (_blackboard != null)
-            {
-                ReleaseBlackboard(_blackboard);
-            }
-            _blackboard = GetBlackboard();
-
-            //为传入的树的原有节点生成视图
-            foreach (var node in _tree.Nodes)
-            {
-                CreateNodeView(node);
-            }
-
+            base.PopulateView(graph);
             //为传入的树的边生成视图
-            foreach (var node in _tree.Nodes)
+            foreach (var node in graph.Nodes)
             {
                 var view = FindNodeView(node);
-                //生成资源边
-                foreach (var edge in node.InputEdges)
-                {
-                    var sourcePort = FindNodeView(edge.SourceNode as Node).outputContainer.Q<Port>(edge.SourceField);
-                    var e = view.inputContainer.Q<Port>(edge.TargetField).ConnectTo(sourcePort);
-                    e.userData = SyncType.Pull;
-                    AddElement(e);
-                }
-                foreach (var edge in node.OutputEdges)
-                {
-                    var targetPort = FindNodeView(edge.TargetNode as Node).inputContainer.Q<Port>(edge.TargetField);
-                    var e = view.outputContainer.Q<Port>(edge.SourceField).ConnectTo(targetPort);
-                    e.userData = (SyncType)e.userData | SyncType.Push;
-                    AddElement(e);
-                }
                 //连接行为后继
                 if (node is ProcessNode)
                 {
@@ -147,75 +96,26 @@ namespace GameFrame.Behavior.Tree.Editor
                     });
                 }
             }
-
-            //修改显示参数
-            _inspector.title = tree.name;
-        }
-
-        /// <summary>
-        /// 清除组件
-        /// </summary>
-        public void ClearView()
-        {
-            _tree = null;
-
-            graphViewChanged -= OnGraphViewChanged;
-            DeleteElements(graphElements.ToList());
-            graphViewChanged += OnGraphViewChanged;
-
-            if (_blackboard != null)
+            if(_blackboard != null)
             {
                 ReleaseBlackboard(_blackboard);
             }
-
-            ShowInspector(false);
+            _blackboard = GetBlackboard();
         }
 
-        /// <summary>
-        /// 删除指定节点
-        /// </summary>
-        /// <param name="node"></param>
-        private void DeleteNodeView(NodeView node)
+        protected override NodeView CreateNodeView(BaseNode node)
         {
-            var list = edges.ToList();
-            //移除与节点连接的边
-            for (int i = list.Count - 1; i >= 0; --i)
-            {
-                if (list[i].input.node == node || list[i].output.node == node)
-                {
-                    RemoveElement(list[i]);
-                }
-            }
-            //移除点的视图
-            RemoveElement(node);
-            //移除树的点
-            _tree.RemoveNode(node.Node);
+            var view = new TreeNodeView(node as Node);
+            AddElement(view);
+            return view;
         }
-        /// <summary>
-        /// 根据传入节点创建节点视图
-        /// </summary>
-        /// <param name="node"></param>
-        private NodeView CreateNodeView(Node node)
-        {
-            NodeView nodeView = new NodeView(node);
-            AddElement(nodeView);
-            return nodeView;
-        }
-        /// <summary>
-        /// 创建节点
-        /// </summary>
-        /// <param name="type"></param>
-        public NodeView CreateNode(Type type)
-        {
-            Node node = _tree.CreateNode(type);
-            return CreateNodeView(node);
-        }
+
         /// <summary>
         /// 当图发生变化时
         /// </summary>
         /// <param name="graphViewChange"></param>
         /// <returns></returns>
-        private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
+        protected override GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
         {
             //当元素被移除
             if (graphViewChange.elementsToRemove != null)
@@ -227,7 +127,14 @@ namespace GameFrame.Behavior.Tree.Editor
                     NodeView nodeView = elem as NodeView;
                     if (nodeView != null)
                     {
-                        _tree.RemoveNode(nodeView.Node);
+                        if (nodeView.Node is not RootNode)
+                        {
+                            _graph.RemoveNode(nodeView.Node as Node);
+                        }
+                        else
+                        {
+                            CreateNodeView(nodeView.Node);
+                        }
                     }
                     //移除边
                     Edge edge = elem as Edge;
@@ -266,34 +173,29 @@ namespace GameFrame.Behavior.Tree.Editor
                 {
                     NodeView parentView = edge.output.node as NodeView;
                     NodeView childView = edge.input.node as NodeView;
+                    edge.userData = SyncType.Pull;
                     if (edge.input.name == "Pre" && edge.output.name == "Next")
                     {
                         (parentView.Node as ProcessNode).AddChild(childView.Node as ProcessNode);
                     }
                     else
                     {
-                        edge.userData = SyncType.Pull;
                         childView.Node.InputEdges.Add(new SourceInfo(parentView.Node, childView.Node, edge.output.name, edge.input.name));
                     }
                 });
             }
             return graphViewChange;
         }
-        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
-        {
-            var typeList = startPort.userData as HashSet<Type>;
-            var list = ports.ToList().Where(endPort =>
-                endPort.direction != startPort.direction
-                && endPort.node != startPort.node
-                && (endPort.userData as HashSet<Type>).Overlaps(typeList))
-                .ToList();
-            return list;
-        }
+
+        /// <summary>
+        /// 显示黑板
+        /// </summary>
+        /// <param name="visible"></param>
         public void ShowBlackboard(bool visible)
         {
-            if (_tree == null) return;
-            _blackboard.visible = visible;
+            _blackboard.visible = visible && _graph != null;
         }
+
         public override Blackboard GetBlackboard()
         {
             Dictionary<Type, string> variableTypeList = new Dictionary<Type, string>();
@@ -309,22 +211,23 @@ namespace GameFrame.Behavior.Tree.Editor
             blackboard.subTitle = "Blackboard";
             blackboard.scrollable = true;
             var global = new Foldout() { text = "Global" };
+            global.value = false;
             var prototype = new Foldout() { text = "Prototype" };
             var local = new Foldout() { text = "Local" };
-            Func<string, Type, bool, Domain, BlackboardField> getVariable = (string name, Type type, bool newItem, Domain domain) =>
+            Func<string , string, Type, bool, Domain, BlackboardField> getVariable = (string dataset, string name, Type type, bool newItem, Domain domain) =>
             {
                 var field = new BlackboardField();
                 field.text = name;
                 field.typeText = variableTypeList[type];
-                field.userData = (Type: type, Domain: domain);
+                field.userData = (Type: type, Domain: domain, DataSet: dataset);
                 if (domain != Domain.Global)
                 {
                     bool init = newItem;
                     string oldName = name;
-                    field.RegisterCallback<FocusOutEvent>((e) =>
+                    field.RegisterCallback<FocusOutEvent>((EventCallback<FocusOutEvent>)((e) =>
                     {
                         if (string.IsNullOrEmpty(field.text) || 
-                        (_tree.Blackboard.HasValueInTree(field.text) && field.text != oldName))
+                        (_tree.Blackboard.HasValue(field.text) && field.text != oldName))
                         {
                             EditorUtility.DisplayDialog("Warring", "Name should not be empty or a variable with the same name already exists", "OK");
                             if (init)
@@ -350,7 +253,7 @@ namespace GameFrame.Behavior.Tree.Editor
                             }
                             oldName = field.text;
                         }
-                    });
+                    }));
                     field.RegisterCallback<ContextualMenuPopulateEvent>(e =>
                     {
                         e.menu.AppendAction("Delete", e =>
@@ -378,17 +281,24 @@ namespace GameFrame.Behavior.Tree.Editor
                 return field;
             };
             //创建全局变量
-            foreach (var variable in GlobalDatabase.Instance.GetVariables())
+            foreach(var dataset in DataSetManager.Instance.ExistDataSets)
             {
-                global.Add(getVariable(variable.Key, variable.Value.GetType(), false, Domain.Global));
+                var fold = new Foldout() { text = dataset };
+                fold.Q<Toggle>().style.marginLeft = 0;
+                fold.value = false;
+                global.Add(fold);
+                foreach(var variable in DataSetManager.Instance.GetDataSet(dataset).GetVariables())
+                {
+                    fold.Add(getVariable(dataset, variable.Key, variable.Value.GetType(), false, Domain.Global));
+                }
             }
             foreach (var variable in _tree.Blackboard.GetLocalVariables())
             {
-                local.Add(getVariable(variable.Key, variable.Value.GetType(), false, Domain.Local));
+                local.Add(getVariable(null, variable.Key, variable.Value.GetType(), false, Domain.Local));
             }
             foreach(var variable in _tree.Blackboard.GetPrototypeVariables())
             {
-                prototype.Add(getVariable(variable.Key, variable.Value.GetType(), false, Domain.Prototype));
+                prototype.Add(getVariable(null, variable.Key, variable.Value.GetType(), false, Domain.Prototype));
             }
             //变量更改定义域
             local.RegisterCallback<DragUpdatedEvent>((e) =>
@@ -400,13 +310,11 @@ namespace GameFrame.Behavior.Tree.Editor
                 var selection = new List<ISelectable>(blackboard.selection);
                 foreach (BlackboardField field in selection)
                 {
-                    (var type, var domain) = (ValueTuple<Type, Domain>)field.userData;
-                    if(domain == Domain.Prototype)
+                    (var type, var domain, var dataset) = (ValueTuple<Type, Domain, string>)field.userData;
+                    if (domain == Domain.Prototype)
                     {
-                        var v = _tree.Blackboard.GetVariable(field.text);
-                        _tree.Blackboard.RemoveValue(field.text);
-                        _tree.Blackboard.AddLocalVariable(field.text, v);
-                        field.userData = (type, Domain.Local);
+                        _tree.Blackboard.MoveToLocal(field.text);
+                        field.userData = (type, Domain.Local, dataset);
                         prototype.Remove(field);
                         local.Add(field);
                     }
@@ -422,13 +330,11 @@ namespace GameFrame.Behavior.Tree.Editor
                 var selection = new List<ISelectable>(blackboard.selection);
                 foreach (BlackboardField field in selection)
                 {
-                    (var type, var domain) = (ValueTuple<Type, Domain>)field.userData;
+                    (var type, var domain, var dataset) = (ValueTuple<Type, Domain, string>)field.userData;
                     if (domain == Domain.Local)
                     {
-                        var v = _tree.Blackboard.GetVariable(field.text);
-                        _tree.Blackboard.RemoveValue(field.text);
-                        _tree.Blackboard.AddPrototypeVariable(field.text, v);
-                        field.userData = (type, Domain.Prototype);
+                        _tree.Blackboard.MoveToPrototype(field.text);
+                        field.userData = (type, Domain.Prototype, dataset);
                         local.Remove(field);
                         prototype.Add(field);
                     }
@@ -441,7 +347,7 @@ namespace GameFrame.Behavior.Tree.Editor
                 foreach (var item in variableTypeList)
                 {
                     string name = item.Value;
-                    menu.AddItem(new GUIContent(name), false, () => local.Add(getVariable("", item.Key, true, Domain.Local)));
+                    menu.AddItem(new GUIContent(name), false, () => local.Add(getVariable(null, "", item.Key, true, Domain.Local)));
                 }
                 menu.ShowAsContext();
             };
@@ -452,15 +358,13 @@ namespace GameFrame.Behavior.Tree.Editor
             blackboard.visible = true;
             return blackboard;
         }
+
         public override void ReleaseBlackboard(Blackboard toRelease)
         {
             RemoveElement(toRelease);
+            _blackboard = null;
         }
-        public void ShowInspector(bool visible)
-        {
-            if (_tree == null) return;
-            _inspector.visible = visible;
-        }
+
         /// <summary>
         /// 整理全图
         /// </summary>
@@ -506,12 +410,13 @@ namespace GameFrame.Behavior.Tree.Editor
                 return true;
             })(_tree.RootNode);
         }
+
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
             if (_tree != null)
             {
                 base.BuildContextualMenu(evt);
-                if(evt.target is NodeView && (evt.target as NodeView).Node is RootNode)
+                if(evt.target is TreeNodeView && (evt.target as TreeNodeView).Node is RootNode)
                 {
                     var list = evt.menu.MenuItems();
                     for(int i = 0; i < list.Count; i++)
@@ -527,101 +432,63 @@ namespace GameFrame.Behavior.Tree.Editor
                 }
             }
         }
-        public override void AddToSelection(ISelectable selectable)
+
+        protected override void OnAddField(ISelectable selectable)
         {
-            base.AddToSelection(selectable);
-            var node = selectable as NodeView;
-            if (node != null)
+            switch (selectable)
             {
-                _inspector.Add(new NodeField(node.Node));
-            }
-            var field = selectable as BlackboardField;
-            if (field != null)
-            {
-                (var type, var domain) = (ValueTuple<Type, Domain>)field.userData;
-                if (domain == Domain.Global)
-                {
-                    _inspector.Add(new VariableField(GlobalDatabase.Instance.GetVariable(field.text), field.text));
-                }
-                else
-                {
-                    _inspector.Add(new VariableField(_tree.Blackboard.GetVariable(field.text), field.text));
-                }
-            }
-            var edge = selectable as Edge;
-            if(edge != null && edge.userData != null)
-            {
-                _inspector.Add(new EdgeField(
-                    new SourceInfo((edge.output.node as NodeView).Node, 
-                    (edge.input.node as NodeView).Node,
-                    edge.output.portName,
-                    edge.input.portName), 
-                    (SyncType)edge.userData,
-                    SetEdge));
+                case Edge edge:
+                    if (edge.input.name != "Pre" || edge.output.name != "Next")
+                    {
+                        base.OnAddField(selectable);
+                    }
+                    return;
+                case BlackboardField field:
+                    (var type, var domain, var dataset) = (ValueTuple<Type, Domain, string>)field.userData;
+                    if (domain == Domain.Global)
+                    {
+                        _inspector.AddToTab(new VariableField(DataSetManager.Instance.GetDataSet(dataset).GetVariable(field.text), dataset + '-' + field.text));
+                    }
+                    else
+                    {
+                        _inspector.AddToTab(new VariableField(_tree.Blackboard.GetVariable(field.text), field.text));
+                    }
+                    return;
+                default:
+                    base.OnAddField(selectable);
+                    return;
             }
         }
-        public override void ClearSelection()
+
+        protected override void OnRemoveField(ISelectable selectable)
         {
-            base.ClearSelection();
-            _inspector.Clear();
-        }
-        public override void RemoveFromSelection(ISelectable selectable)
-        {
-            base.RemoveFromSelection(selectable);
-            var node = selectable as NodeView;
-            if (node != null)
+            switch (selectable)
             {
-                foreach (var child in _inspector.Children())
-                {
-                    var n = child as NodeField;
-                    if (n != null && n.Node == node.Node)
+                case Edge edge:
+                    if (edge.input.name != "Pre" || edge.output.name != "Next")
                     {
-                        _inspector.Remove(child);
-                        break;
+                        base.OnRemoveField(selectable);
                     }
-                }
-            }
-            var field = selectable as BlackboardField;
-            if (field != null)
-            {
-                (var type, var domain) = (ValueTuple<Type, Domain>)field.userData;
-                BlackboardVariable v;
-                if (domain == Domain.Global)
-                {
-                    v = GlobalDatabase.Instance.GetVariable(field.text);
-                }
-                else
-                {
-                    v = _tree.Blackboard.GetVariable(field.text);
-                }
-                foreach (var child in _inspector.Children())
-                {
-                    var n = child as VariableField;
-                    if (n != null && n.Variable == v)
+                    return;
+                case BlackboardField field:
+                    (var type, var domain, var dataset) = (ValueTuple<Type, Domain, string>)field.userData;
+                    BlackboardVariable v;
+                    if (domain == Domain.Global)
                     {
-                        _inspector.Remove(child);
-                        break;
+                        v = DataSetManager.Instance.GetDataSet(dataset).GetVariable(field.text);
                     }
-                }
-            }
-            var edge = selectable as Edge;
-            if (edge != null && edge.userData != null)
-            {
-                var info = new SourceInfo((edge.output.node as NodeView).Node,
-                    (edge.input.node as NodeView).Node,
-                    edge.output.portName,
-                    edge.input.portName);
-                foreach (var child in _inspector.Children())
-                {
-                    var n = child as EdgeField;
-                    if (n != null && n.Source == info)
+                    else
                     {
-                        _inspector.Remove(child);
-                        break;
+                        v = _tree.Blackboard.GetVariable(field.text);
                     }
-                }
+                    RemoveAssociatedFieldAll(v);
+                    return;
+                default:
+                    base.OnRemoveField(selectable);
+                    return;
             }
         }
+
         public void Search(string text)
         {
             ClearSelection();
@@ -634,73 +501,5 @@ namespace GameFrame.Behavior.Tree.Editor
                 }
             }
         }
-
-        /// <summary>
-        /// 设置指定边的数据传输方式
-        /// </summary>
-        /// <param name="edge"></param>
-        /// <param name="type"></param>
-        private void SetEdge(SourceInfo edge, SyncType type)
-        {
-            var e = edges.ToList().Find(e => new SourceInfo((e.output.node as NodeView).Node,
-                    (e.input.node as NodeView).Node,
-                    e.output.portName,
-                    e.input.portName) == edge);
-            var actual = new SourceInfo((e.output.node as NodeView).Node,
-                    (e.input.node as NodeView).Node,
-                    e.output.name,
-                    e.input.name);
-            if ((type & SyncType.Pull) != 0)
-            {
-                if(edge.TargetNode.InputEdges.Find(e=>e==actual) == default)
-                {
-                    edge.TargetNode.InputEdges.Add(actual);
-                }
-            }
-            else
-            {
-                var temp = edge.TargetNode.InputEdges.Find(e=>e==actual);
-                if(temp != default)
-                {
-                    edge.TargetNode.InputEdges.Remove(temp);
-                }
-            }
-            if((type & SyncType.Push) != 0)
-            {
-                if(edge.SourceNode.OutputEdges.Find(e=>e==actual) == default)
-                {
-                    edge.SourceNode.OutputEdges.Add(actual);
-                }
-            }
-            else
-            {
-                var temp = edge.SourceNode.OutputEdges.Find(e=>e==actual);
-                if(temp != default)
-                {
-                    edge.SourceNode.OutputEdges.Remove(temp);
-                }
-            }
-            if(type == 0)
-            {
-                RemoveFromSelection(e);
-                e.output.Disconnect(e);
-                e.input.Disconnect(e);
-                RemoveElement(e);
-            }
-            else
-            {
-                e.userData = type;
-            }
-        }
-        /// <summary>
-        /// 变量定义域
-        /// </summary>
-        private enum Domain
-        {
-            Global,
-            Prototype,
-            Local
-        }
-        public new class UxmlFactory : UxmlFactory<TreeView, UxmlTraits> { }
     }
 }

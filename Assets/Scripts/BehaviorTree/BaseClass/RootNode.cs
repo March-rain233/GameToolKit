@@ -7,8 +7,9 @@ namespace GameFrame.Behavior.Tree
     /// <summary>
     /// ¸ù½Úµã
     /// </summary>
-    [Node("#e84393", NodeAttribute.PortType.None, NodeAttribute.PortType.Single)]
+    [Node(NodeAttribute.PortType.None, NodeAttribute.PortType.Single)]
     [NodeCategory("NULL")]
+    [NodeColor("#e84393")]
     [SerializeField]
     public class RootNode : ProcessNode
     {

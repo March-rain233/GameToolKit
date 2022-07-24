@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 namespace GameFrame.EventProcessor
 {
+    [NodeCategory("NULL")]
     public abstract class EventSenderNode : Node
     {
         /// <summary>
@@ -13,15 +14,16 @@ namespace GameFrame.EventProcessor
         [Port("Invoke", Direction.Input)]
         [ReadOnly]
         public bool IsInvoke;
+        public abstract System.Type EventType { get; }
     }
     /// <summary>
     /// 事件发送者
     /// </summary>
     public class EventSenderNode<TEventType> : EventSenderNode where TEventType : EventBase
     {
-        [HideInTreeInspector]
+        [Port("Event", Direction.Input)]
         public TEventType EventArg;
-
+        public override System.Type EventType => typeof(TEventType);
         protected override void OnValueUpdate()
         {
             if (IsInvoke)

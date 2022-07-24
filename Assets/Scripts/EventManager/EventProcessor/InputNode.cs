@@ -9,7 +9,8 @@ namespace GameFrame.EventProcessor
     /// 局部变量节点
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class InputNode<T> : Node
+    [NodeCategory("Sources")]
+    public class InputNode<T> : Node
     {
         [Port("Output", Direction.Output)]
         [SerializeField]

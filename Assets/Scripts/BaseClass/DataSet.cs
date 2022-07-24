@@ -8,21 +8,12 @@ using Sirenix.Serialization;
 
 namespace GameFrame
 {
-    [CreateAssetMenu(fileName = "GlobalVariable", menuName = "Config/GlobalVariable")]
-    public class GlobalDatabase : SerializedScriptableObject, IBlackboard
+    /// <summary>
+    /// Êý¾Ý¼¯
+    /// </summary>
+    [CreateAssetMenu(fileName = "Data Set", menuName = "Data Set/Data Set")]
+    public class DataSet : SerializedScriptableObject, IBlackboard
     {
-        public static GlobalDatabase Instance 
-        {
-            get
-            {
-                if(_instance == null)
-                { 
-                    _instance = Resources.Load<GlobalDatabase>("GlobalVariable");
-                }
-                return _instance;
-            }
-        }
-        static GlobalDatabase _instance;
         [NoSaveDuringPlay]
         [NonSerialized, OdinSerialize]
         private Dictionary<string, BlackboardVariable> _variables = new Dictionary<string, BlackboardVariable>();

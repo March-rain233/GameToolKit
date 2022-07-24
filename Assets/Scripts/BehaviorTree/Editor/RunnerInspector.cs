@@ -8,7 +8,7 @@ using Sirenix.OdinInspector.Editor;
 namespace GameFrame.Behavior.Tree.Editor
 {
     [CustomEditor(typeof(BehaviorTreeRunner))]
-    public class RunnerInspector : Sirenix.OdinInspector.Editor.OdinEditor
+    public class RunnerInspector : OdinEditor
     {
         BehaviorTreeRunner _behaviorTreeRunner => target as BehaviorTreeRunner;
         bool _foldout = true;

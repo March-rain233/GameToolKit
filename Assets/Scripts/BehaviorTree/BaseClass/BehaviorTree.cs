@@ -1,16 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using System;
-using System.Text;
 using Cinemachine;
 using Sirenix.Serialization;
-using Sirenix.OdinInspector;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace GameFrame.Behavior.Tree
 {
@@ -19,11 +12,27 @@ namespace GameFrame.Behavior.Tree
     /// 行为树
     /// </summary>
     [CreateAssetMenu(fileName = "BTree", menuName = "Behavior/Behavior Tree")]
-    public class BehaviorTree : SerializedScriptableObject
+    public class BehaviorTree : CustomGraph<Node>
     {
+        #region 黑板定义
         [Serializable]
         public class TreeBlackboard : IBlackboard
         {
+            public class ChangeDomainEvent : IBlackboard.BlackboardEventBase
+            {
+                public enum Domain
+                {
+                    Prototype,
+                    Local
+                }
+                public Domain NewDomain;
+                public Domain OldDomain;
+                public ChangeDomainEvent(Domain newDomain, Domain oldDomain, IBlackboard target, string name) : base(target, name)
+                {
+                    NewDomain = newDomain;
+                    OldDomain = oldDomain;
+                }
+            }
             [OdinSerialize]
             IBlackboard.CallBackList _callBackList = new IBlackboard.CallBackList();
             /// <summary>
@@ -42,29 +51,22 @@ namespace GameFrame.Behavior.Tree
             /// </remarks>
             [OdinSerialize]
             Dictionary<string, BlackboardVariable> _prototype = new Dictionary<string, BlackboardVariable>();
+
             #region 事件注册
             public void RegisterCallback<T>(string name, Action<T> callback) where T : IBlackboard.BlackboardEventBase
             {                    
-                if (HasValueInTree(name))
+                if (HasValue(name))
                 {
 
                     _callBackList.RegisterCallback(name, callback);
-                }
-                else
-                {
-                    GlobalDatabase.Instance.RegisterCallback(name, callback);
                 }
             }
 
             public void UnregisterCallback<TEventType>(string name, Action<TEventType> callback) where TEventType : IBlackboard.BlackboardEventBase
             {
-                if (HasValueInTree(name))
+                if (HasValue(name))
                 {
                     _callBackList.UnregisterCallback(name, callback);
-                }
-                else
-                {
-                    GlobalDatabase.Instance.UnregisterCallback(name, callback);
                 }
             }
 
@@ -84,7 +86,6 @@ namespace GameFrame.Behavior.Tree
                 }
                 else
                 {
-                    GlobalDatabase.Instance.RemoveValue(name);
                     return;
                 }
                 target[name].ValueChanged -= Variable_ValueChanged;
@@ -107,7 +108,6 @@ namespace GameFrame.Behavior.Tree
                 }
                 else
                 {
-                    GlobalDatabase.Instance.RenameValue(oldName, newName);
                     return;
                 }
                 {
@@ -130,10 +130,7 @@ namespace GameFrame.Behavior.Tree
                 {
                     return _prototype[name];
                 }
-                else
-                {
-                    return GlobalDatabase.Instance.GetVariable(name);
-                }
+                return null;
             }
 
             public Dictionary<string, BlackboardVariable> GetLocalVariables()
@@ -156,23 +153,10 @@ namespace GameFrame.Behavior.Tree
                 {
                     return (T)_prototype[name].Value;
                 }
-                else
-                {
-                    return GlobalDatabase.Instance.GetValue<T>(name);
-                }
+                return default;
             }
 
             public bool HasValue(string name)
-            {
-                return HasValueInTree(name) || GlobalDatabase.Instance.HasValue(name);
-            }
-
-            /// <summary>
-            /// 判断树内是否存在变量（不检查全局变量）
-            /// </summary>
-            /// <param name="name"></param>
-            /// <returns></returns>
-            public bool HasValueInTree(string name)
             {
                 return _local.ContainsKey(name) || _prototype.ContainsKey(name);
             }
@@ -190,7 +174,6 @@ namespace GameFrame.Behavior.Tree
                 }
                 else
                 {
-                    GlobalDatabase.Instance.SetValue(name, value);
                     return;
                 }
                 target[name].Value = value;
@@ -228,7 +211,32 @@ namespace GameFrame.Behavior.Tree
             {
                 AddLocalVariable(name, variable);
             }
-
+            /// <summary>
+            /// 将变量移入树域
+            /// </summary>
+            /// <param name="name"></param>
+            public void MoveToPrototype(string name)
+            {
+                if(_local.TryGetValue(name, out var variable))
+                {
+                    _prototype[name] = variable;
+                    _local.Remove(name);
+                    _callBackList.Invoke(name, new ChangeDomainEvent(ChangeDomainEvent.Domain.Prototype, ChangeDomainEvent.Domain.Local, this, name));
+                }
+            }
+            /// <summary>
+            /// 将变量移入本地域
+            /// </summary>
+            /// <param name="name"></param>
+            public void MoveToLocal(string name)
+            {
+                if (_prototype.TryGetValue(name, out var variable))
+                {
+                    _local[name] = variable;
+                    _prototype.Remove(name);
+                    _callBackList.Invoke(name, new ChangeDomainEvent(ChangeDomainEvent.Domain.Local, ChangeDomainEvent.Domain.Prototype, this, name));
+                }
+            }
             private void Variable_ValueChanged(BlackboardVariable sender, object newValue, object oldValue)
             {
                 foreach (var variable in _local)
@@ -251,6 +259,7 @@ namespace GameFrame.Behavior.Tree
                 }
             }
             #endregion
+
             public TreeBlackboard Clone()
             {
                 var bb = new TreeBlackboard();
@@ -262,65 +271,13 @@ namespace GameFrame.Behavior.Tree
                 return bb;
             }
         }
-
-        #region 编辑器相关成员
-#if UNITY_EDITOR
-        /// <summary>
-        /// 移除节点
-        /// </summary>
-        /// <param name="node"></param>
-        public void RemoveNode(Node node)
-        {
-            Nodes.Remove(node);
-            //移除与父节点的连接
-            var n = node as ProcessNode;
-            if (n != null)
-            {
-                foreach(ProcessNode item in Nodes)
-                {
-                    var children = item.GetChildren();
-                    if (children.Contains(node))
-                        n.RemoveChild(n);
-                }
-            }
-            //移除以该节点的资源边
-            foreach(var child in Nodes)
-            {
-                for(int i = child.InputEdges.Count - 1; i >= 0; --i)
-                    if(child.InputEdges[i].SourceNode == node)
-                        child.InputEdges.RemoveAt(i);
-                for(int i = child.OutputEdges.Count - 1; i >= 0; --i)
-                    if(child.OutputEdges[i].TargetNode == node)
-                        child.OutputEdges.RemoveAt(i);
-            }
-        }
-        public Node CreateNode(Type type)
-        {
-            var node = Activator.CreateInstance(type) as Node;
-            string newName = type.Name;
-            int count = Nodes.FindAll(node => Regex.IsMatch(node.Name, @$"{newName}(\(\d+\))?$")).Count;
-            if (count > 0)
-            {
-                newName = newName + $"({count})";
-            }
-            node.Name = newName;
-            node.Guid = GUID.Generate().ToString();
-            typeof(Node).GetProperty("BehaviorTree").SetValue(node, this);
-            Nodes.Add(node);
-            return node;
-        }
-#endif
         #endregion
 
-        /// <summary>
-        /// 节点列表
-        /// </summary>
-        public List<Node> Nodes = new List<Node>();
         /// <summary>
         /// 根节点
         /// </summary>
         [SerializeField]
-        private RootNode _rootNode = new RootNode();
+        private RootNode _rootNode;
         public RootNode RootNode => _rootNode;
         /// <summary>
         /// 变量字典
@@ -334,9 +291,9 @@ namespace GameFrame.Behavior.Tree
         public BehaviorTreeRunner Runner { get; private set; }
         public BehaviorTree()
         {
-            typeof(Node).GetProperty("BehaviorTree").SetValue(_rootNode, this);
-            Nodes.Add(_rootNode);
+            _rootNode = CreateNode(typeof(RootNode)) as RootNode;
         }
+
         /// <summary>
         /// 更新
         /// </summary>
@@ -350,6 +307,7 @@ namespace GameFrame.Behavior.Tree
             }
             return _rootNode.Status;
         }
+
         /// <summary>
         /// 建造运行树
         /// </summary>
@@ -408,14 +366,32 @@ namespace GameFrame.Behavior.Tree
             }
             return tree;
         }
+
         /// <summary>
-        /// 根据guid查找节点
+        /// 移除节点
         /// </summary>
-        /// <param name="guid"></param>
-        /// <returns></returns>
-        public Node FindNode(string guid)
+        /// <param name="node"></param>
+        public override void RemoveNode(Node node)
         {
-            return Nodes.Find(n=>n.Guid==guid);
+            base.RemoveNode(node);
+            //移除与父节点的连接
+            var n = node as ProcessNode;
+            if (n != null)
+            {
+                foreach (ProcessNode item in Nodes)
+                {
+                    var children = item.GetChildren();
+                    if (children.Contains(node))
+                        n.RemoveChild(n);
+                }
+            }
+        }
+
+        public override Node CreateNode(Type type)
+        {
+            var node = base.CreateNode(type);
+            typeof(Node).GetProperty("BehaviorTree").SetValue(node, this);
+            return node;
         }
     }
 }

@@ -45,6 +45,8 @@ namespace GameFrame.Behavior.Tree.Editor
             {
                 TreeView.Search(e.newData);
             });
+
+            TreeView.Window = this;
         }
         private void LoadAsset()
         {
