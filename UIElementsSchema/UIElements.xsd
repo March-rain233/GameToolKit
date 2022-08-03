@@ -10,6 +10,8 @@
   <xs:include schemaLocation="GlobalNamespace.xsd" />
   <xs:import schemaLocation="UnityEditor.U2D.Layout.xsd" namespace="UnityEditor.U2D.Layout" />
   <xs:import schemaLocation="UnityEditor.U2D.Animation.xsd" namespace="UnityEditor.U2D.Animation" />
+  <xs:import schemaLocation="GameFrame.EventProcessor.Editor.xsd" namespace="GameFrame.EventProcessor.Editor" />
+  <xs:import schemaLocation="GameFrame.Dialog.Editor.xsd" namespace="GameFrame.Dialog.Editor" />
   <xs:import schemaLocation="GameFrame.Behavior.Tree.Editor.xsd" namespace="GameFrame.Behavior.Tree.Editor" />
   <xs:import schemaLocation="UnityEditor.ShortcutManagement.xsd" namespace="UnityEditor.ShortcutManagement" />
   <xs:import schemaLocation="UnityEditor.UIElements.Debugger.xsd" namespace="UnityEditor.UIElements.Debugger" />
