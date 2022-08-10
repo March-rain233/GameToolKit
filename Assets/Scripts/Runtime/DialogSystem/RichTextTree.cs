@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Linq;
 using System.Collections.ObjectModel;
-
+using GameFrame.Utility;
 namespace GameFrame.Dialog
 {
     /// <summary>
@@ -44,13 +44,13 @@ namespace GameFrame.Dialog
                 var match = Regex.Match(temp, "<([^\"<>]|\".*\")*?>");//查找下一标签
                 if (match.Success)
                 {
-                    if(match.Index != 0)
+                    if (match.Index != 0)
                     {
                         createTextNode(temp.Substring(0, match.Index));
                     }
 
                     string tag = match.Value.Substring(1, match.Length - 2);
-                    if(tag[0] == '/')//如果是闭标签弹出栈顶元素
+                    if (tag[0] == '/')//如果是闭标签弹出栈顶元素
                     {
                         var node = stack.Pop();
                         if (node.Tag != tag.Remove(0, 1))
@@ -62,7 +62,7 @@ namespace GameFrame.Dialog
                     else
                     {
                         //获取标签对应类型
-                        var tagName = Regex.Match(tag, "^\\w*").Value;
+                        var tagName = RichTextUtility.GetTagType(tag);
                         //判断是否是空标签
                         if (!isEmptyTag.ContainsKey(tagName))
                         {
@@ -90,7 +90,7 @@ namespace GameFrame.Dialog
                 }
             }
 
-            if(stack.Peek() != RootNode)
+            if (stack.Peek() != RootNode)
             {
                 throw new RichTextTreeException(RootNode, "Parse failure");
             }
@@ -103,23 +103,23 @@ namespace GameFrame.Dialog
         /// <param name="text"></param>
         public void InsertPlainText(int index, string text)
         {
-            if(RootNode.Children.Count == 0)
+            InnerTextNode node = null;
+            foreach (InnerTextNode child in this.Where(t => t is InnerTextNode))
             {
-                RootNode.InsertChild(0, new InnerTextNode(text));
+                if (index - child.Length <= 0)
+                {
+                    node = child;
+                    break;
+                }
+                index -= child.Length;
+            }
+            if (node != null)
+            {
+                node.Insert(index, text);
             }
             else
             {
-                InnerTextNode node = null;
-                foreach(InnerTextNode child in this.Where(t=>t is InnerTextNode))
-                {
-                    if(index - child.Length <= 0)
-                    {
-                        node = child;
-                        break;
-                    }
-                    index -= child.Length;
-                }
-                node.Insert(index, text);
+                RootNode.AddChild(new InnerTextNode(text));
             }
         }
 
@@ -140,28 +140,29 @@ namespace GameFrame.Dialog
                 {
                     case InnerTextNode text:
                         index += text.Length;
-                        if(index >= startIndex)
+                        if (index > startIndex)
                         {
                             int length = Math.Min(Math.Min(index, endIndex) - startIndex, text.Length);
-                            textList.Add((text, text.Length - length, length));
+                            int start = Math.Max(startIndex + text.Length - index, 0);
+                            textList.Add((text, start, length));
                         }
                         break;
                     case EmptyTagNode emptyTag:
                         emptyTagList.Add(emptyTag);
                         break;
                 }
-                if(index >= endIndex)
+                if (index >= endIndex)
                 {
                     break;
                 }
             }
 
             //删除元素
-            foreach((var n, var i, var l) in textList)
+            foreach ((var n, var i, var l) in textList)
             {
                 n.Remove(i, l);
             }
-            foreach(var n in emptyTagList)
+            foreach (var n in emptyTagList)
             {
                 n.Parent.RemoveChild(n);
             }
@@ -185,10 +186,11 @@ namespace GameFrame.Dialog
                 {
                     case InnerTextNode text:
                         index += text.Length;
-                        if (index >= startIndex)
+                        if (index > startIndex)
                         {
                             int length = Math.Min(Math.Min(index, endIndex) - startIndex, text.Length);
-                            textList.Add((text, text.Length - length, length));
+                            int temp = Math.Max(startIndex + text.Length - index, 0);
+                            textList.Add((text, temp, length));
                         }
                         break;
                     case EmptyTagNode emptyTag:
@@ -220,13 +222,159 @@ namespace GameFrame.Dialog
         }
 
         /// <summary>
+        /// 获取范围内指定的标签
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public List<PairTagNode> GetPairTagInRange(int startIndex, int endIndex, string tag)
+        {
+            var list = new HashSet<PairTagNode>();
+            var index = 0;
+            foreach (var child in this)
+            {
+                if (child is InnerTextNode)
+                {
+                    index += child.Length;
+                }
+                if (child is not PairTagNode)
+                {
+                    if (index >= startIndex)
+                    {
+                        list.Add(child.Parent);
+                    }
+                    if (index >= endIndex)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            var pairList = new HashSet<PairTagNode>();
+            foreach (var elem in list)
+            {
+                var p = elem;
+                while (p != null)
+                {
+                    if (p.Tag == tag)
+                    {
+                        pairList.Add(p);
+                        break;
+                    }
+                    p = p.Parent;
+                }
+            }
+            return pairList.ToList();
+        }
+
+        /// <summary>
+        /// 设置范围内的成对标签
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="tag"></param>
+        /// <param name="attr"></param>
+        public void SetPairTag(int startIndex, int endIndex, string tag, string attr)
+        {
+            (var nodes, var start, var end) = GetNodeBetweenIndex(startIndex, endIndex);
+
+            //修剪尾部文本
+            (nodes.Last(t => t is InnerTextNode) as InnerTextNode).Spilt(end);
+
+            //修剪头部文本
+            var temp = nodes.First(t => t is InnerTextNode) as InnerTextNode;
+            var buffer = temp.Spilt(start);
+            var index = nodes.IndexOf(temp);
+            nodes.RemoveAt(index);
+            nodes.Insert(index, buffer);
+
+            //todo：实现更加高效的插入方法，尽可能减少文本复杂度
+
+            //插入标签对
+            var parents = nodes.Select(t => t.Parent).ToHashSet();
+            foreach (var node in nodes)
+            {
+                var pair = new PairTagNode(tag, attr);
+                node.Parent.InsertChild(node.Parent.Children.IndexOf(node), pair);
+                node.Parent.RemoveChild(node);
+                pair.AddChild(node);
+            }
+
+            //刷新
+            foreach (var p in parents)
+            {
+                p.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// 插入空标签
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="tag"></param>
+        /// <param name="attr"></param>
+        public void InsertEmptyTag(int index, string tag, string attr)
+        {
+            InnerTextNode node = null;
+            foreach (InnerTextNode child in this.Where(t => t is InnerTextNode))
+            {
+                if (index - child.Length <= 0)
+                {
+                    node = child;
+                    break;
+                }
+                index -= child.Length;
+            }
+            if (node != null)
+            {
+                node.Spilt(index);
+                node.Parent.InsertChild(node.Parent.Children.IndexOf(node) + 1, new EmptyTagNode(tag, attr));
+            }
+            else
+            {
+                RootNode.AddChild(new EmptyTagNode(tag, attr));
+            }
+        }
+
+        (List<RichTextNode> nodes, int startIndex, int endIndex) GetNodeBetweenIndex(int startIndex, int endIndex)
+        {
+            int index = 0;
+            int head = 0, end = 0;
+            bool flag = true;
+            List<RichTextNode> nodes = new List<RichTextNode>();
+            foreach (InnerTextNode child in this.Where(t => t is InnerTextNode || t is EmptyTagNode))
+            {
+                if (child is InnerTextNode)
+                {
+                    index += child.Length;
+                }
+                if (index > startIndex)
+                {
+                    if (flag)
+                    {
+                        head = child.Length - (index - startIndex);
+                        flag = false;
+                    }
+                    nodes.Add(child);
+                }
+                if (index >= endIndex)
+                {
+                    end = child.Length - (index - endIndex);
+                    break;
+                }
+            }
+            return (nodes, head, end);
+        }
+
+        /// <summary>
         /// 获取纯文本
         /// </summary>
         /// <returns></returns>
         public string GetPlainText()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach(InnerTextNode elem in this.Where(n=>n is InnerTextNode))
+            foreach (InnerTextNode elem in this.Where(n => n is InnerTextNode))
             {
                 stringBuilder.Append(elem.Text);
             }
@@ -252,6 +400,7 @@ namespace GameFrame.Dialog
             return GetEnumerator();
         }
     }
+
     /// <summary>
     /// 富文本解析节点
     /// </summary>
@@ -269,10 +418,10 @@ namespace GameFrame.Dialog
         {
             get
             {
-                if(Parent != null)
+                if (Parent != null)
                 {
                     int index = Parent.Children.IndexOf(this) + 1;
-                    if(index != Parent.Children.Count)
+                    if (index != Parent.Children.Count)
                     {
                         return Parent.Children[index];
                     }
@@ -330,6 +479,35 @@ namespace GameFrame.Dialog
         /// 文本长度
         /// </summary>
         public virtual int Length => EndIndex - StartIndex;
+
+        /// <summary>
+        /// 是否是指定节点的后代节点
+        /// </summary>
+        /// <remarks>
+        /// 当传入自身时返回true
+        /// </remarks>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public bool IsSubOf(PairTagNode node)
+        {
+            var p = this;
+            while (p != null)
+            {
+                if (p == node)
+                {
+                    return true;
+                }
+                p = p.Parent;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 矫正内部格式
+        /// </summary>
+        public virtual void Refresh()
+        {
+        }
     }
 
     /// <summary>
@@ -418,10 +596,87 @@ namespace GameFrame.Dialog
         {
             _children.Remove(node);
             node.Parent = null;
-            if(_children.Count == 0)
+            if (_children.Count == 0)
             {
                 Parent?.RemoveChild(this);
             }
+        }
+
+        public override void Refresh()
+        {
+            //让子节点先刷新
+            for (int i = _children.Count - 1; i >= 0; --i)
+            {
+                _children[i].Refresh();
+            }
+
+            //整合直接子节点标签
+            for (int i = 0; i < _children.Count; ++i)
+            {
+                var head = _children[i] as PairTagNode;
+                if (head != null)
+                {
+                    //将后续所有相等的标签对整合入第一个标签
+                    while (i + 1 < _children.Count)
+                    {
+                        var elem = _children[i + 1] as PairTagNode;
+                        if (elem?.IsEqualTag(head) ?? false)
+                        {
+                            RemoveChild(elem);
+                            foreach (var child in elem.Children)
+                            {
+                                head.AddChild(child);
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (_children.Count == 0)
+            {
+                Parent?.RemoveChild(this);
+            }
+
+            //合并与自身相同的标签
+            PairTagNode p = this;
+            while (p._children.Count == 1)
+            {
+                var next = p._children[0] as PairTagNode;
+                if (next == null)
+                {
+                    break;
+                }
+                if (next.Tag == Tag)
+                {
+                    foreach (var child in next.Children)
+                    {
+                        p.AddChild(child);
+                    }
+                    p.RemoveChild(next);
+                    Attr = next.Attr;
+                    next = p;
+                }
+                p = next;
+            }
+        }
+
+        /// <summary>
+        /// 判断是否是数据相同的标签
+        /// </summary>
+        /// <param name="pairTag"></param>
+        /// <returns></returns>
+        public bool IsEqualTag(PairTagNode pairTag)
+        {
+            //进行标签对比较
+            if (pairTag.Tag == Tag)
+            {
+                return pairTag.Attr == Attr || RichTextUtility.GetPropertys(Attr).ToHashSet().SetEquals(RichTextUtility.GetPropertys(pairTag.Attr));
+            }
+            return false;
         }
 
         /// <summary>
@@ -445,13 +700,13 @@ namespace GameFrame.Dialog
 
         public IEnumerator<RichTextNode> GetEnumerator()
         {
-            for(int i = 0; i < _children.Count; i++)
+            for (int i = 0; i < _children.Count; i++)
             {
                 yield return _children[i];
                 var pair = _children[i] as PairTagNode;
-                if(pair != null)
+                if (pair != null)
                 {
-                    foreach(var child in pair)
+                    foreach (var child in pair)
                     {
                         yield return child;
                     }
@@ -504,7 +759,7 @@ namespace GameFrame.Dialog
     /// </summary>
     public class InnerTextNode : RichTextNode
     {
-        public string Text { get;protected set; }
+        public string Text { get; protected set; }
         public override int EndIndex => StartIndex + Text.Length;
 
         public override int Length => Text.Length;
@@ -514,14 +769,55 @@ namespace GameFrame.Dialog
             Text = text;
         }
 
+        /// <summary>
+        /// 插入字符串
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="value"></param>
         public void Insert(int startIndex, string value)
         {
             Text = Text.Insert(startIndex, value);
         }
 
+        /// <summary>
+        /// 移除字符串
+        /// </summary>
+        /// <remarks>
+        /// 当节点的文本内容为空时，会将自身从父节点移除
+        /// </remarks>
+        /// <param name="startIndex"></param>
+        /// <param name="length"></param>
         public void Remove(int startIndex, int length)
         {
             Text = Text.Remove(startIndex, length);
+            if (string.IsNullOrEmpty(Text))
+            {
+                Parent?.RemoveChild(this);
+            }
+        }
+
+        /// <summary>
+        /// 分割字符串
+        /// </summary>
+        /// <remarks>
+        /// 当分割点位于文本开头或结尾时，不做处理并返回自身
+        /// </remarks>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
+        public InnerTextNode Spilt(int startIndex)
+        {
+            if (startIndex == 0 || startIndex == Text.Length)
+            {
+                return this;
+            }
+            var node = new InnerTextNode(Text.Substring(startIndex));
+            Parent.InsertChild(Parent.Children.IndexOf(this) + 1, node);
+            Remove(startIndex, Length - startIndex);
+            return node;
+        }
+
+        public override void Refresh()
+        {
             if (string.IsNullOrEmpty(Text))
             {
                 Parent?.RemoveChild(this);

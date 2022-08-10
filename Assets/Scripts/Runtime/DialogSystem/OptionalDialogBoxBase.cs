@@ -10,6 +10,6 @@ namespace GameFrame.Dialog
     /// </summary>
     public abstract class OptionalDialogBoxBase : DialogBoxBase
     {
-        public abstract void ShowOptions(List<ChoiceText> options, Action<int> onSelected);
+        public abstract void ShowOptions(List<OptionText> options, Action<int> onSelected);
     }
 }

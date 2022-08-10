@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Sirenix.OdinInspector;
 
 namespace GameFrame.Dialog {
     public class MainDialog : OptionalDialogBoxBase
@@ -10,7 +11,7 @@ namespace GameFrame.Dialog {
         /// <summary>
         /// ÎÄ±¾¿ØÖÆÆ÷
         /// </summary>
-        public TextMeshPro TextController;
+        public TextMeshProUGUI TextController;
 
         public override void DestoryDialog()
         {
@@ -22,9 +23,13 @@ namespace GameFrame.Dialog {
             throw new NotImplementedException();
         }
 
-        public override void PlayDialog(DialogArgument argument, Action onDialogEnd = null)
+        [Button]
+        public override void PlayDialog(NormalText argument, Action onDialogEnd = null)
         {
-            throw new NotImplementedException();
+            var processor = new TextEffectProcessor(argument.Text, TextController);
+            processor.OnAllCharactersVisiable += onDialogEnd;
+            StopAllCoroutines();
+            StartCoroutine(processor.Process());
         }
 
         public override void ShowDialog()
@@ -32,7 +37,7 @@ namespace GameFrame.Dialog {
             throw new NotImplementedException();
         }
 
-        public override void ShowOptions(List<ChoiceText> options, Action<int> onSelected)
+        public override void ShowOptions(List<OptionText> options, Action<int> onSelected)
         {
             throw new NotImplementedException();
         }

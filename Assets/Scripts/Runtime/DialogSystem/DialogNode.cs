@@ -39,7 +39,7 @@ namespace GameFrame.Dialog
         /// <summary>
         /// 对话数据
         /// </summary>
-        public List<DialogArgument> Sentences = new List<DialogArgument>();
+        public List<NormalText> Sentences = new List<NormalText>();
         protected override void OnPlay()
         {
             Output(0, DialogBoxBase.GetDialogBox(DialogBoxType));
@@ -75,7 +75,7 @@ namespace GameFrame.Dialog
             var Options = new List<OptionNode>();
             foreach(OptionNode option in Children)
             {
-                if (option.Option.isEnable)
+                if (option.Option.IsEnable)
                 {
                     Options.Add(option);
                 }
@@ -108,7 +108,7 @@ namespace GameFrame.Dialog
     public class OptionNode : ProcessNode
     {
         [ShowInNodeExtension]
-        public ChoiceText Option = new ChoiceText();
+        public OptionText Option = new OptionText();
         protected override void OnPlay()
         {
             Finish();

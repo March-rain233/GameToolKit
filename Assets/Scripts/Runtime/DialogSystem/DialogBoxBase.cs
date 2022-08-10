@@ -46,6 +46,6 @@ namespace GameFrame.Dialog
         /// ²¥·Å¶Ô»°
         /// </summary>
         /// <param name="argument"></param>
-        public abstract void PlayDialog(DialogArgument argument, System.Action onDialogEnd = null);
+        public abstract void PlayDialog(NormalText argument, System.Action onDialogEnd = null);
     }
 }

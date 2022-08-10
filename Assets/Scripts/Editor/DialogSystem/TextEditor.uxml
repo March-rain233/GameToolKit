@@ -12,9 +12,9 @@
                 <uie:IntegerField label="Begin Index" name="begin-index" is-delayed="true" />
                 <uie:IntegerField label="End Index" name="end-index" is-delayed="true" />
                 <ui:VisualElement name="tag" style="flex-direction: row;">
-                    <ui:DropdownField label="Tag" name="preset" />
-                    <ui:TextField picking-mode="Ignore" name="tagfield" style="flex-grow: 1;" />
-                    <ui:RadioButton tooltip="Is Empty Tag" name="empty-toggle" value="true" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                    <ui:DropdownField label="Tag" name="tag-selector" />
+                    <ui:TextField picking-mode="Ignore" name="tag-field" is-delayed="true" style="flex-grow: 1;" />
+                    <ui:RadioButton name="empty-flag" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="tag-setting" style="flex-grow: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
                     <ui:Label text="Title" display-tooltip-when-elided="true" name="tag-title" class="title" style="border-bottom-color: rgb(13, 13, 13);" />

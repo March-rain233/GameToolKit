@@ -67,3 +67,21 @@ The following packages were 已更新:
   com.unity.timeline 从版本 1.4.8 到 1.6.3
 The following packages were 已移除:
   com.unity.ui.builder@1.0.0-preview.18
+
+=== Wed Aug  3 18:03:35 2022
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were 已更新:
+  com.unity.2d.animation 从版本 7.0.3 到 8.0.2
+  com.unity.2d.psdimporter 从版本 6.0.2 到 7.0.1
+  com.unity.2d.spriteshape 从版本 7.0.3 到 8.0.0
+  com.unity.cinemachine 从版本 2.8.4 到 2.8.6
+  com.unity.collab-proxy 从版本 1.15.12 到 1.17.1
+  com.unity.ide.rider 从版本 3.0.12 到 3.0.15
+  com.unity.ide.visualstudio 从版本 2.0.14 到 2.0.16
+  com.unity.ide.vscode 从版本 1.2.4 到 1.2.5
+  com.unity.shadergraph 从版本 12.1.4 到 13.1.8
+  com.unity.test-framework 从版本 1.1.29 到 1.1.31
+  com.unity.timeline 从版本 1.6.3 到 1.7.1

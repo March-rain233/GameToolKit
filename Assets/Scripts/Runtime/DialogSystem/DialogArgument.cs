@@ -9,6 +9,12 @@ namespace GameFrame.Dialog
     /// </summary>
     public abstract class DialogArgument
     {
+    }
+    /// <summary>
+    /// 普通的文本参数
+    /// </summary>
+    public class NormalText : DialogArgument 
+    {
         /// <summary>
         /// 正文
         /// </summary>
@@ -16,17 +22,18 @@ namespace GameFrame.Dialog
         public string Text;
     }
     /// <summary>
-    /// 普通的文本参数
-    /// </summary>
-    public class NormalText : DialogArgument { }
-    /// <summary>
     /// 选择项参数
     /// </summary>
-    public class ChoiceText : DialogArgument 
+    public class OptionText : DialogArgument 
     {
+        /// <summary>
+        /// 正文
+        /// </summary>
+        [TextArea]
+        public string Option;
         /// <summary>
         /// 该选项是否启用
         /// </summary>
-        public bool isEnable;
+        public bool IsEnable;
     }
 }
