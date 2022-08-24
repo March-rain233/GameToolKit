@@ -15,7 +15,7 @@ namespace GameFrame.EventProcessor.Editor
     {
         public new class UxmlFactory : UxmlFactory<ProcessorView, UxmlTraits> { }
 
-        EventProcessor _processor => _graph as EventProcessor;
+        AutomaticProcessor _processor => _graph as AutomaticProcessor;
 
         const string _elementSetting = "Element Setting";
         const string _processorSetting = "Processor Setting";

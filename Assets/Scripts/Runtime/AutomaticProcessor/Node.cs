@@ -13,7 +13,7 @@ namespace GameFrame.EventProcessor
         /// 节点绑定的处理器
         /// </summary>
         [OdinSerialize, HideInInspector]
-        public EventProcessor Processor { get; private set; }
+        public AutomaticProcessor Processor { get; private set; }
         public void Attach() 
         { 
             LastDataUpdataTime = Time.time;

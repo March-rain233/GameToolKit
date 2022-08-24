@@ -11,24 +11,8 @@ namespace GameFrame.Dialog
     /// <summary>
     /// 对话系统管理器
     /// </summary>
-    public class DialogManager
+    public class DialogManager : IService
     {
-        /// <summary>
-        /// 实例
-        /// </summary>
-        public static DialogManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new DialogManager();
-                }
-                return _instance;
-            }
-        }
-        static DialogManager _instance;
-
         /// <summary>
         /// 等待运行的对话队列
         /// </summary>
@@ -38,11 +22,6 @@ namespace GameFrame.Dialog
         /// 正在运行的对话列表
         /// </summary>
         public List<DialogTree> RunningList { get; private set; } = new List<DialogTree> ();
-
-        DialogManager()
-        {
-            EventManager.Instance.RegisterCallbackAll<DialogEvent>(e=>PlayDialog(e.Dialog));
-        }
 
         /// <summary>
         /// 播放对话
@@ -103,6 +82,12 @@ namespace GameFrame.Dialog
                     addDialog();
                 }
             }
+        }
+
+        void IService.Init()
+        {
+            ServiceFactory.Instance.GetService<EventManager>()
+                .RegisterCallback<DialogEnqueueEvent>(e => PlayDialog(e.DialogTree));
         }
     }
 }

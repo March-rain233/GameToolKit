@@ -11,33 +11,8 @@ namespace GameFrame
     /// </summary>
     [CreateAssetMenu(fileName = "Data Set Manager", menuName = "Data Set/Data Set Manager")]
     [ExecuteInEditMode]
-    public class DataSetManager : SerializedScriptableObject
+    public class DataSetManager : ScriptableSingleton<DataSetManager>
     {
-        public static DataSetManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    var assets = Resources.FindObjectsOfTypeAll<DataSetManager>();
-                    if(assets.Length == 0)
-                    {
-                        Debug.LogError("Could not find the Asset");
-                    }
-                    else if(assets.Length > 1)
-                    {
-                        Debug.LogError("Multiple Assets exist");
-                    }
-                    else
-                    {
-                        _instance = assets[0];
-                    }
-                }
-                return _instance;
-            }
-        }
-        static DataSetManager _instance;
-
         [OdinSerialize]
 
         private Dictionary<string, DataSet> _dataSets = new Dictionary<string, DataSet>();

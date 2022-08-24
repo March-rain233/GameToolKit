@@ -15,7 +15,7 @@ namespace GameFrame.Dialog {
 
         public override void DestoryDialog()
         {
-            throw new NotImplementedException();
+
         }
 
         public override void HideDialog()

@@ -10,13 +10,13 @@ using System.Text.RegularExpressions;
 namespace GameFrame.EventProcessor
 {
     /// <summary>
-    /// 事件处理器
+    /// 自动处理器
     /// </summary>
     /// <remarks>
-    /// 负责进行事件的逻辑处理
+    /// 根据系统中的变量与事件自动执行逻辑
     /// </remarks>
     [CreateAssetMenu(fileName = "EventProcessor", menuName = "EventManager/EventProcessor")]
-    public class EventProcessor : CustomGraph<Node>
+    public class AutomaticProcessor : CustomGraph<Node>
     {
         /// <summary>
         /// 事件名称
@@ -35,10 +35,6 @@ namespace GameFrame.EventProcessor
         /// 是否只触发一次
         /// </summary>
         public bool IsTrigger = false;
-        /// <summary>
-        /// 事件是否持久
-        /// </summary>
-        public bool IsPresistent = false;
         /// <summary>
         /// 初始化处理器
         /// </summary>
@@ -67,7 +63,8 @@ namespace GameFrame.EventProcessor
         /// <param name="event">时间参数</param>
         internal void SendEvent<TEventType>(TEventType @event) where TEventType : EventBase
         {
-            EventManager.Instance.Broadcast(EventName, @event, IsPresistent);
+            ServiceFactory.Instance.GetService<EventManager>()
+                .Broadcast(@event);
             if (IsTrigger)
             {
                 EventProcessorManager.Instance.DetachProcessor(this);

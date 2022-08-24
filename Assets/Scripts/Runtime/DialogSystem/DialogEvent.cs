@@ -10,8 +10,14 @@ namespace GameFrame.Dialog
     /// <remarks>
     /// 通过发送该事件来通知对话系统播放对话
     /// </remarks>
-    public class DialogEvent : EventBase
+    public abstract class DialogEvent : EventBase
     {
-        public DialogTree Dialog;
+    }
+    /// <summary>
+    /// 对话入栈事件
+    /// </summary>
+    public class DialogEnqueueEvent : DialogEvent
+    {
+        public DialogTree DialogTree;
     }
 }

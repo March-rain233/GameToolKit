@@ -36,7 +36,7 @@ namespace GameFrame.EventProcessor.Editor
             GraphView = root.Q<ProcessorView>();
             _listView = root.Q<ListView>("processor-list");
 
-            var list = new List<EventProcessor>(Resources.FindObjectsOfTypeAll<EventProcessor>());
+            var list = new List<AutomaticProcessor>(Resources.FindObjectsOfTypeAll<AutomaticProcessor>());
             _listView.itemsSource = list;
             _listView.RefreshItems();
             _listView.onSelectionChange += e =>
@@ -46,7 +46,7 @@ namespace GameFrame.EventProcessor.Editor
                 {
                     return;
                 }
-                var processor = list[0] as EventProcessor;
+                var processor = list[0] as AutomaticProcessor;
                 LoadProcessor(processor);
             };
 
@@ -75,7 +75,7 @@ namespace GameFrame.EventProcessor.Editor
             //dialog.ShowPopup();
         }
 
-        private void LoadProcessor(EventProcessor processor)
+        private void LoadProcessor(AutomaticProcessor processor)
         {
             _filePath.text = AssetDatabase.GetAssetPath(processor);
             GraphView.PopulateView(processor);
@@ -84,7 +84,7 @@ namespace GameFrame.EventProcessor.Editor
 
         private void OnSelectionChange()
         {
-            EventProcessor processor = Selection.activeObject as EventProcessor;
+            AutomaticProcessor processor = Selection.activeObject as AutomaticProcessor;
             if (processor != null && !AssetDatabase.Contains(processor))
             {
                 processor = null;
@@ -100,13 +100,13 @@ namespace GameFrame.EventProcessor.Editor
         public void Refresh()
         {
             _listView.RefreshItems();
-            LoadProcessor(_listView.selectedItem as EventProcessor);
+            LoadProcessor(_listView.selectedItem as AutomaticProcessor);
         }
 
         private void OnProjectChange()
         {
             var select = _listView.selectedItem;
-            var list = Resources.FindObjectsOfTypeAll<EventProcessor>();
+            var list = Resources.FindObjectsOfTypeAll<AutomaticProcessor>();
             _listView.itemsSource = list;
             _listView.RefreshItems();
             var index = _listView.itemsSource.IndexOf(select);

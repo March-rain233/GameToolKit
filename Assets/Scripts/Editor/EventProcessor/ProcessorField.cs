@@ -17,7 +17,7 @@ namespace GameFrame.EventProcessor.Editor
     {
         private class AssistEditor : OdinEditor
         {
-            EventProcessor assist => target as EventProcessor;
+            AutomaticProcessor assist => target as AutomaticProcessor;
             public override void OnInspectorGUI()
             {
                 SirenixEditorGUI.BeginBox();
@@ -62,8 +62,8 @@ namespace GameFrame.EventProcessor.Editor
             }
         }
         UnityEditor.Editor _editor;
-        EventProcessor instance;
-        public ProcessorField(EventProcessor processor)
+        AutomaticProcessor instance;
+        public ProcessorField(AutomaticProcessor processor)
         {
             instance = processor;
             _editor = Sirenix.OdinInspector.Editor.OdinEditor.CreateEditor(processor, typeof(AssistEditor));

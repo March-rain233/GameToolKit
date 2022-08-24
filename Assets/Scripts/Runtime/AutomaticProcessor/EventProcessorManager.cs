@@ -21,13 +21,13 @@ namespace GameFrame.EventProcessor
         /// <summary>
         /// 工作中的处理器
         /// </summary>
-        List<EventProcessor> _runningProcessorList;
+        List<AutomaticProcessor> _runningProcessorList;
         private EventProcessorManager() { }
         /// <summary>
         /// 设置处理器
         /// </summary>
         /// <param name="processor"></param>
-        public void AttachProcessor(EventProcessor processor)
+        public void AttachProcessor(AutomaticProcessor processor)
         {
             processor.Attach();
             _runningProcessorList.Add(processor);
@@ -36,7 +36,7 @@ namespace GameFrame.EventProcessor
         /// 移除处理器
         /// </summary>
         /// <param name="processor"></param>
-        public void DetachProcessor(EventProcessor processor)
+        public void DetachProcessor(AutomaticProcessor processor)
         {
             processor.Detach();
             _runningProcessorList.Remove(processor);
@@ -45,9 +45,9 @@ namespace GameFrame.EventProcessor
         /// 获取运行中的处理器列表
         /// </summary>
         /// <returns></returns>
-        public List<EventProcessor> GetEventProcessors()
+        public List<AutomaticProcessor> GetEventProcessors()
         {
-            return new List<EventProcessor>(_runningProcessorList);
+            return new List<AutomaticProcessor>(_runningProcessorList);
         }
     }
 }
