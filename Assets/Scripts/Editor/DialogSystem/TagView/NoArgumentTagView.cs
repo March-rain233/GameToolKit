@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     /// <summary>
     /// 无参数标签基类

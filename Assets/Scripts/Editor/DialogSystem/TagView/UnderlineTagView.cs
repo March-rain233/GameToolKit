@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Text/Underline", false)]
     public class UnderlineTagView : NoArgumentTagView

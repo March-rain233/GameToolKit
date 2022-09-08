@@ -5,7 +5,7 @@ using Cinemachine;
 using Sirenix.Serialization;
 using System.Linq;
 
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     using NodeStatus = ProcessNode.NodeStatus;
     /// <summary>
@@ -289,7 +289,8 @@ namespace GameFrame.Behavior.Tree
         /// 当前树的运行对象
         /// </summary>
         public BehaviorTreeRunner Runner { get; private set; }
-        public BehaviorTree()
+
+        private void Reset()
         {
             _rootNode = CreateNode(typeof(RootNode)) as RootNode;
         }

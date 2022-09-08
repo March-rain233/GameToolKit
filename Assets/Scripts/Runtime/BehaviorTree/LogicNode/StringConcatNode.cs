@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     /// <summary>
     /// 连接输入的两个字符串

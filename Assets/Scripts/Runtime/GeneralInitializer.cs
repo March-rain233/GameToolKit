@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameFrame
+namespace GameToolKit
 {
     /// <summary>
     /// Ä¬ÈÏ³õÊ¼»¯Æ÷
@@ -12,9 +12,10 @@ namespace GameFrame
         public override void Initialize()
         {
             var instance = ServiceFactory.Instance;
-            instance.Register<EventManager>();
-            instance.Register<PanelManager>();
-            instance.Register<Dialog.DialogManager>();
+            instance.Register<EventManager, EventManager>();
+            instance.Register<PanelManager, PanelManager>();
+            instance.Register<Dialog.IDialogViewManager, Dialog.DialogViewManager>();
+            instance.Register<Dialog.DialogManager, Dialog.DialogManager>();
         }
     }
 }

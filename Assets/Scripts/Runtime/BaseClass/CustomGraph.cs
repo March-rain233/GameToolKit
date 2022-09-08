@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System;
 using System.Text.RegularExpressions;
 
-namespace GameFrame
+namespace GameToolKit
 {
-    public class CustomGraph<TNode> : SerializedScriptableObject where TNode : BaseNode
+    public class CustomGraph<TNode> : SerializedScriptableObject, IGraphBase where TNode : BaseNode
     {
         /// <summary>
         /// 节点列表
@@ -79,7 +80,12 @@ namespace GameFrame
             //生成节点的唯一标识符
             node.Guid = Guid.NewGuid().ToString();
             Nodes.Add(node);
+            node.Graph = this;
             return node;
         }
+    }
+    public interface IGraphBase
+    {
+
     }
 }

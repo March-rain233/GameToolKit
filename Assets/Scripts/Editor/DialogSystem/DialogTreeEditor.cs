@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     public class DialogTreeEditor : EditorWindow
     {
@@ -11,7 +11,7 @@ namespace GameFrame.Dialog.Editor
         Label _filePath;
         ToolbarToggle _inspector;
 
-        [MenuItem("«≥≤÷”Í§Œπ§æﬂ/Dialog Tree Editor")]
+        [MenuItem("GameToolKit/Dialog Tree Editor")]
         public static void ShowExample()
         {
             DialogTreeEditor wnd = GetWindow<DialogTreeEditor>();
@@ -27,6 +27,7 @@ namespace GameFrame.Dialog.Editor
             GraphView = root.Q<DialogTreeView>();
             _filePath = root.Q<Label>("filepath");
             _inspector = root.Q<ToolbarToggle>("inspector");
+            root.Q<ToolbarButton>("save").clicked += GraphView.SaveChange;
 
             GraphView.Window = this;
             _inspector.RegisterValueChangedCallback(e=>GraphView.ShowInspector(e.newValue));

@@ -12,7 +12,7 @@ using UnityEditor;
 #endif
 using System;
 
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     [Serializable]
     [Node]

@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System.Linq;
 
-namespace GameFrame.EventProcessor
+namespace GameToolKit.EventProcessor
 {
     public class DataSetVariableNode<T> : InputNode<T>
     {

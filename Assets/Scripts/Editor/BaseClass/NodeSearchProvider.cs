@@ -6,7 +6,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UIElements;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     public class NodeSearchProvider<TNode> : NodeSearchProviderBase 
         where TNode : BaseNode

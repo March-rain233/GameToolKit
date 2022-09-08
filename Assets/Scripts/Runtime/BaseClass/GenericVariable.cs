@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 
-namespace GameFrame
+namespace GameToolKit
 {
     public abstract class GenericVariable<T> : BlackboardVariable
     {

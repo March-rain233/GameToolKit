@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     [NodeCategory("Logic/Input")]
     public abstract class SourceNode : LogicNode

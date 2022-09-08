@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 using UnityEditor.Experimental.GraphView;
 using System;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using Sirenix.OdinInspector;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     public class DialogNodeView : NodeView
     {

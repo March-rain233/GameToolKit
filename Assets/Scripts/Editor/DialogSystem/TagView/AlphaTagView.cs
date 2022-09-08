@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Text/Alpha", true)]
     public class AlphaTagView : TagView

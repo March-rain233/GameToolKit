@@ -6,7 +6,7 @@ using System;
 using Cinemachine;
 using Sirenix.Serialization;
 
-namespace GameFrame
+namespace GameToolKit
 {
     /// <summary>
     /// Êý¾Ý¼¯

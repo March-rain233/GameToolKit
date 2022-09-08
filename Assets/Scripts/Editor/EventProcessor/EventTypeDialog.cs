@@ -7,7 +7,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using System.Linq;
-namespace GameFrame.EventProcessor.Editor
+namespace GameToolKit.EventProcessor.Editor
 {
     public class EventTypeDialog : OdinEditorWindow
     {
@@ -29,7 +29,7 @@ namespace GameFrame.EventProcessor.Editor
         }
         public IEnumerable<Type> GetValidList()
         {
-            var temp = UnityTypeCacheUtility.GetTypesDerivedFrom(typeof(EventBase));
+            var temp = TypeCache.GetTypesDerivedFrom(typeof(EventBase));
             return temp.Where(t => !t.IsAbstract && !t.IsInterface);
         }
     }

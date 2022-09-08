@@ -5,9 +5,9 @@ using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     /// <summary>
     /// 携带单位用于表述长度的标签基类

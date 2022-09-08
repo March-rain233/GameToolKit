@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Linq;
 
-namespace GameFrame {
+namespace GameToolKit {
 
     /// <summary>
     /// µ¥ÀýSO»ùÀà
@@ -21,7 +21,7 @@ namespace GameFrame {
             {
                 if (_instance == null)
                 {
-                    _instance = Resources.FindObjectsOfTypeAll<TSingleton>().FirstOrDefault();
+                    _instance = Resources.Load<TSingleton>($"{typeof(TSingleton).Name}");
                 }
                 if (_instance == null)
                 {

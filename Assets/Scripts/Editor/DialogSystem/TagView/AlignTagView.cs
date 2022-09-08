@@ -5,7 +5,7 @@ using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System.Linq;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Layout/Align", false)]
     public class AlignTagView : TagView

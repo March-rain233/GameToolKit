@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-namespace GameFrame.Behavior.Tree {
+namespace GameToolKit.Behavior.Tree {
     /// <summary>
     /// 行为节点基类
     /// </summary>

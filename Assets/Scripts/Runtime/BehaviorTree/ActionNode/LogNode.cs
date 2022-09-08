@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     public class LogNode : ActionNode
     {

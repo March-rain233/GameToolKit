@@ -5,10 +5,10 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System.Linq;
 using System;
-using GameFrame.Utility;
+using GameToolKit.Utility;
 using System.Reflection;
 
-namespace GameFrame
+namespace GameToolKit
 {
     public abstract class BaseNode
     {
@@ -31,20 +31,26 @@ namespace GameFrame
         /// <summary>
         /// 唯一标识符
         /// </summary>
-        [HideInGraphInspector]
-        public string Guid;
+        [HideInGraphInspector, OdinSerialize]
+        public string Guid { get; internal protected set; }
+
+        [ReadOnly, OdinSerialize]
+        public IGraphBase Graph { get; internal protected set; }
+
         /// <summary>
         /// 输入边信息
         /// </summary>
         [SerializeField]
         [HideInGraphInspector]
         public List<SourceInfo> InputEdges = new List<SourceInfo>();
+
         /// <summary>
         /// 输出边信息
         /// </summary>
         [SerializeField]
         [HideInGraphInspector]
         public List<SourceInfo> OutputEdges = new List<SourceInfo>();
+
         /// <summary>
         /// 上一次数据更新时间
         /// </summary>

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 using UnityEngine.UIElements;
 using System;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     public class DialogTreeView : CustomGraphView<Node>
     {
@@ -40,7 +40,7 @@ namespace GameFrame.Dialog.Editor
                     {
                         if (nodeView.Node is not EntryNode && nodeView.Node is not ExitNode)
                         {
-                            _graph.RemoveNode(nodeView.Node as Node);
+                            Graph.RemoveNode(nodeView.Node as Node);
                         }
                         else
                         {

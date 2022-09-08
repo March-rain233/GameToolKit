@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor.Experimental.GraphView;
-namespace GameFrame.Behavior.Tree.Editor
+namespace GameToolKit.Behavior.Tree.Editor
 {
     /// <summary>
     /// ÐÐÎªÊ÷±à¼­Æ÷
@@ -16,13 +16,12 @@ namespace GameFrame.Behavior.Tree.Editor
         public TreeView TreeView;
         private Label _filename;
 
-        [MenuItem("Ç³²ÖÓê¤Î¹¤¾ß/BTree Editor")]
+        [MenuItem("GameToolKit/BTree Editor")]
         public static void ShowMenu()
         {
             BehaviorTreeEditor wnd = GetWindow<BehaviorTreeEditor>();
             wnd.titleContent = new GUIContent("BTree Editor");
         }
-
         public void CreateGUI()
         {
             VisualElement root = rootVisualElement;
@@ -41,6 +40,7 @@ namespace GameFrame.Behavior.Tree.Editor
             });
             root.Q<ToolbarButton>("sort").clicked += TreeView.SortGraph;
             root.Q<ToolbarButton>("load").clicked += LoadAsset;
+            root.Q<ToolbarButton>("save").clicked += TreeView.SaveChange;
             root.Q<ToolbarSearchField>("search").RegisterCallback((InputEvent e) =>
             {
                 TreeView.Search(e.newData);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     /// <summary>
     /// Í¼ÔªËØ¼àÊÓÆ÷×Ö¶Î

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameFrame {
+namespace GameToolKit {
     /// <summary>
     /// 服务初始化器
     /// </summary>

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-namespace GameFrame
+namespace GameToolKit
 {
     /// <summary>
     /// 在图形编辑器的监视器中隐藏

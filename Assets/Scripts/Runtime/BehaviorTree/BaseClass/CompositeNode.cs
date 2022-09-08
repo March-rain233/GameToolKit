@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     /// <summary>
     /// 组合节点

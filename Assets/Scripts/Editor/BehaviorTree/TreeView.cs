@@ -8,10 +8,10 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using GameFrame.Behavior.Tree;
-using GameFrame.Editor;
+using GameToolKit.Behavior.Tree;
+using GameToolKit.Editor;
 
-namespace GameFrame.Behavior.Tree.Editor
+namespace GameToolKit.Behavior.Tree.Editor
 {
     /// <summary>
     /// ÐÐÎªÊ÷Í¼
@@ -31,7 +31,7 @@ namespace GameFrame.Behavior.Tree.Editor
         }
 
         private Blackboard _blackboard;
-        private BehaviorTree _tree => _graph as BehaviorTree;
+        private BehaviorTree _tree => Graph as BehaviorTree;
 
         public override bool supportsWindowedBlackboard => true;
 
@@ -133,7 +133,7 @@ namespace GameFrame.Behavior.Tree.Editor
                     {
                         if (nodeView.Node is not RootNode)
                         {
-                            _graph.RemoveNode(nodeView.Node as Node);
+                            Graph.RemoveNode(nodeView.Node as Node);
                         }
                         else
                         {
@@ -208,6 +208,7 @@ namespace GameFrame.Behavior.Tree.Editor
                     }
                 }
             }
+
             return graphViewChange;
         }
 
@@ -217,7 +218,7 @@ namespace GameFrame.Behavior.Tree.Editor
         /// <param name="visible"></param>
         public void ShowBlackboard(bool visible)
         {
-            _blackboard.visible = visible && _graph != null;
+            _blackboard.visible = visible && Graph != null;
         }
 
         public override Blackboard GetBlackboard()
@@ -248,9 +249,9 @@ namespace GameFrame.Behavior.Tree.Editor
                 {
                     bool init = newItem;
                     string oldName = name;
-                    field.RegisterCallback<FocusOutEvent>((EventCallback<FocusOutEvent>)((e) =>
+                    field.RegisterCallback<FocusOutEvent>(e =>
                     {
-                        if (string.IsNullOrEmpty(field.text) || 
+                        if (string.IsNullOrEmpty(field.text) ||
                         (_tree.Blackboard.HasValue(field.text) && field.text != oldName))
                         {
                             EditorUtility.DisplayDialog("Warring", "Name should not be empty or a variable with the same name already exists", "OK");
@@ -277,7 +278,7 @@ namespace GameFrame.Behavior.Tree.Editor
                             }
                             oldName = field.text;
                         }
-                    }));
+                    });
                     field.RegisterCallback<ContextualMenuPopulateEvent>(e =>
                     {
                         e.menu.AppendAction("Delete", e =>

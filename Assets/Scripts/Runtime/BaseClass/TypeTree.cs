@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Sirenix.Serialization;
 
-namespace GameFrame
+namespace GameToolKit
 {
+    [System.Serializable]
     public class TypeTree
     {
+        [System.Serializable]
         class TypeNode
         {
             public Type Type;
@@ -13,8 +16,10 @@ namespace GameFrame
             public TypeNode Parent;
         }
 
+        [OdinSerialize]
         TypeNode _root;
 
+        [OdinSerialize]
         Dictionary<Type, TypeNode> _typeNodes = new Dictionary<Type, TypeNode>();
 
         public Type BaseType => _root.Type;
@@ -74,7 +79,7 @@ namespace GameFrame
 
         TypeNode GetTypeNode(Type type)
         {
-            return _typeNodes[type];
+            return _typeNodes.GetValueOrDefault(type, null);
         }
 
         public bool TryAddType(Type type)
@@ -84,35 +89,41 @@ namespace GameFrame
                 TypeNode p = _root;
                 while (p.Type != type)
                 {
-                    if (p.Children.Count == 0)
-                    {
-                        p.Children.Add(new TypeNode() 
-                        { 
-                            Children = new List<TypeNode>(),
-                            Type = type,
-                            Parent = p
-                        });
-                        return true;
-                    }
+                    bool find = false;
                     foreach (TypeNode child in p.Children)
                     {
                         if (type.IsSubclassOf(child.Type))
                         {
                             p = child;
+                            find = true;
                         }
                         else if (child.Type.IsSubclassOf(type))
                         {
-                            int i = p.Children.FindIndex(x => x == child);
-                            p.Children.RemoveAt(i);
-                            p.Children.Insert(i, new TypeNode()
+                            var n = new TypeNode()
                             {
                                 Children = new List<TypeNode> { child },
                                 Type = type,
                                 Parent = p
-                            });
+                            };
+                            int i = p.Children.FindIndex(x => x == child);
+                            p.Children.RemoveAt(i);
+                            p.Children.Insert(i, n);
                             child.Parent = p.Children[i];
+                            _typeNodes.Add(type, n);
                             return true;
                         }
+                    }
+                    if (!find)
+                    {
+                        var n = new TypeNode()
+                        {
+                            Children = new List<TypeNode>(),
+                            Type = type,
+                            Parent = p
+                        };
+                        p.Children.Add(n);
+                        _typeNodes.Add(type, n);
+                        return true;
                     }
                 }
             }

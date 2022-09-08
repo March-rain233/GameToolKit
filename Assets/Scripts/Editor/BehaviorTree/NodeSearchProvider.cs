@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameFrame.Behavior.Tree.Editor
+namespace GameToolKit.Behavior.Tree.Editor
 {
-    public class NodeSearchProvider : GameFrame.Editor.NodeSearchProvider<Node>
+    public class NodeSearchProvider : GameToolKit.Editor.NodeSearchProvider<Node>
     {
     }
 }

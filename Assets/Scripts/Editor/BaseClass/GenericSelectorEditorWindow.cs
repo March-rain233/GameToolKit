@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     /// <summary>
     /// ·ºÐÍÑ¡ÔñÆ÷
@@ -46,14 +46,14 @@ namespace GameFrame.Editor
             {
                 if(constraints.Length == 0)
                 {
-                    return UnityTypeCacheUtility.GetTypesDerivedFrom(typeof(object));
+                    return TypeCache.GetTypesDerivedFrom(typeof(object));
                 }
                 else
                 {
-                    var set = new HashSet<Type>(UnityTypeCacheUtility.GetTypesDerivedFrom(constraints[0]));
+                    var set = new HashSet<Type>(TypeCache.GetTypesDerivedFrom(constraints[0]));
                     for(int i = 1; i < constraints.Length; i++)
                     {
-                        set.IntersectWith(UnityTypeCacheUtility.GetTypesDerivedFrom(constraints[i]));
+                        set.IntersectWith(TypeCache.GetTypesDerivedFrom(constraints[i]));
                     }
                     return set;
                 }

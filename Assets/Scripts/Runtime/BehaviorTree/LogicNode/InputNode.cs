@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.Serialization;
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     /// <summary>
     /// 局部变量节点

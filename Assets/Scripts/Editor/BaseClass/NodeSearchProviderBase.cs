@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace GameFrame.Editor {
+namespace GameToolKit.Editor {
     public abstract class NodeSearchProviderBase : ScriptableObject, ISearchWindowProvider
     {
         public abstract List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context);

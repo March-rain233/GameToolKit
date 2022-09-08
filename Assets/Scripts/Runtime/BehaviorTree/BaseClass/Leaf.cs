@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     [Node(NodeAttribute.PortType.Single, NodeAttribute.PortType.None)]
     [NodeColor("#55efc4")]

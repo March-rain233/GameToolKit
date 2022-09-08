@@ -5,46 +5,59 @@ using TMPro;
 using System;
 using Sirenix.OdinInspector;
 
-namespace GameFrame.Dialog {
-    public class MainDialog : OptionalDialogBoxBase
+namespace GameToolKit.Dialog 
+{
+    public class MainDialog : DialogPanelBase
     {
         /// <summary>
         /// ÎÄ±¾¿ØÖÆÆ÷
         /// </summary>
         public TextMeshProUGUI TextController;
 
-        public override void DestoryDialog()
-        {
+        public TextEffectProcessor Processor;
 
-        }
-
-        public override void HideDialog()
+        protected override void Reset()
         {
-            throw new NotImplementedException();
+            base.Reset();
+            TextController = TextController ?? GetComponent<TextMeshProUGUI>();
+            Processor = new TextEffectProcessor();
         }
 
         [Button]
-        public override void PlayDialog(NormalText argument, Action onDialogEnd = null)
+        public override void PlayDialog(TextArgument argument, Action onDialogEnd = null)
         {
-            var processor = new TextEffectProcessor(argument.Text, TextController);
-            processor.OnAllCharactersVisiable += onDialogEnd;
-            StopAllCoroutines();
-            StartCoroutine(processor.Process());
+            var task = Processor.RunTask(TextController, argument.Text);
+            task.OnComplete(() =>
+            {
+                task.EndTask();
+                onDialogEnd?.Invoke();
+            });
         }
 
-        public override void ShowDialog()
+        protected override void OnClose()
         {
-            throw new NotImplementedException();
+            enabled = false;
+            Dispose();
         }
 
-        public override void ShowOptions(List<OptionText> options, Action<int> onSelected)
+        protected override void OnDispose()
         {
-            throw new NotImplementedException();
+            
         }
 
-        protected override void InitDialog()
+        protected override void OnHide()
         {
-            throw new NotImplementedException();
+            enabled = false;
+        }
+
+        protected override void OnOpen()
+        {
+            enabled = true;
+        }
+
+        protected override void OnShow()
+        {
+            enabled = true;
         }
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.Behavior.Tree.Editor
+namespace GameToolKit.Behavior.Tree.Editor
 {
     public class TreeNodeView : NodeView
     {

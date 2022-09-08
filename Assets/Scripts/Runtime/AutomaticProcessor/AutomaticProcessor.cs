@@ -7,7 +7,7 @@ using System;
 using UnityEditor;
 using System.Text.RegularExpressions;
 
-namespace GameFrame.EventProcessor
+namespace GameToolKit.EventProcessor
 {
     /// <summary>
     /// 自动处理器

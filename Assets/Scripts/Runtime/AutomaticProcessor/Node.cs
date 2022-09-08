@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace GameFrame.EventProcessor
+namespace GameToolKit.EventProcessor
 {
     [NodeColor("#ffffff")]
     public abstract class Node : BaseNode

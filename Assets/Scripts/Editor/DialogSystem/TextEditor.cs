@@ -2,12 +2,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using GameFrame.Utility;
+using GameToolKit.Utility;
 using System.Collections.Generic;
 using System;
 using System.Linq;
 
-namespace GameFrame.Dialog.Editor {
+namespace GameToolKit.Dialog.Editor {
     public class TextEditor : EditorWindow
     {
         /// <summary>
@@ -58,7 +58,7 @@ namespace GameFrame.Dialog.Editor {
         TagView tagView => tagBody.Q<TagView>();
         bool isCustomTag => tagSelector.value == "Custom";
 
-        [MenuItem("«≥≤÷”Í§Œπ§æﬂ/Text Editor")]
+        [MenuItem("GameToolKit/Text Editor")]
         public static void ShowExample()
         {
             TextEditor wnd = GetWindow<TextEditor>();

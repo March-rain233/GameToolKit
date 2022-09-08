@@ -5,7 +5,7 @@ using UnityEditor;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
 
-namespace GameFrame.Behavior.Tree.Editor
+namespace GameToolKit.Behavior.Tree.Editor
 {
     [CustomEditor(typeof(BehaviorTreeRunner))]
     public class RunnerInspector : OdinEditor

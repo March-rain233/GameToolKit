@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Text/Color", false)]
     public class ColorTagView : TagView

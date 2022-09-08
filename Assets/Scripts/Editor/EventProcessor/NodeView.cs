@@ -4,7 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System.Linq;
 using System;
-namespace GameFrame.EventProcessor.Editor
+namespace GameToolKit.EventProcessor.Editor
 {
     public class NodeView : UnityEditor.Experimental.GraphView.Node
     {

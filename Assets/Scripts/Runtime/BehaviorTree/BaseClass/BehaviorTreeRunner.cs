@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     /// <summary>
     /// 行为树运行脚本

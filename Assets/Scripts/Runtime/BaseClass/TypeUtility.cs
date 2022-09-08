@@ -3,14 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Reflection;
+using System.Linq;
 
-namespace GameFrame.Utility
+namespace GameToolKit.Utility
 {
     /// <summary>
     /// 类型辅助工具
     /// </summary>
     public static class TypeUtility
     {
+        class TypeComparer : IEqualityComparer<FieldInfo>
+        {
+            public bool Equals(FieldInfo x, FieldInfo y)
+            {
+                return x.Name == y.Name && x.DeclaringType == y.DeclaringType;
+            }
+
+            public int GetHashCode(FieldInfo obj)
+            {
+                return $"{obj.Name}+{obj.DeclaringType}".GetHashCode();
+            }
+        }
+
         /// <summary>
         /// 获取类型的所有字段
         /// </summary>
@@ -27,7 +41,7 @@ namespace GameFrame.Utility
        
         public static IEnumerable<FieldInfo> GetAllField(Type type, Type endType, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
         {
-            var list = new HashSet<FieldInfo>();
+            var list = new HashSet<FieldInfo>(new TypeComparer());
             if (!type.IsSubclassOf(endType))
             {
                 throw new ArgumentException($"{type} is not Subclass of {endType}");
@@ -37,6 +51,7 @@ namespace GameFrame.Utility
                 list.UnionWith(type.GetFields(flags));
                 type = type.BaseType;
             }
+            var test = list.Where(e=>e.Name == "_value").ToArray();
             return list;
         }
 

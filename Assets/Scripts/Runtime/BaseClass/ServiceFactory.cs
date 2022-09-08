@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace GameFrame
+namespace GameToolKit
 {
     /// <summary>
     /// 管理器工厂
@@ -16,7 +16,9 @@ namespace GameFrame
         /// 注册管理器
         /// </summary>
         /// <typeparam name="TService"></typeparam>
-        public void Register<TService>() where TService : IService
+        public void Register<TService, TActualService>() 
+            where TService : IService 
+            where TActualService : TService
         {
             var type = typeof(TService);
             if (managers.ContainsKey(type))
@@ -25,7 +27,7 @@ namespace GameFrame
             }
             else
             {
-                AddManager(type, System.Activator.CreateInstance<TService>());
+                AddManager(type, System.Activator.CreateInstance<TActualService>());
             }
         }
 
@@ -34,7 +36,8 @@ namespace GameFrame
         /// </summary>
         /// <typeparam name="TService"></typeparam>
         /// <param name="creator">创建函数</param>
-        public void Register<TService>(System.Func<TService> creator) where TService : IService
+        public void Register<TService>(System.Func<TService> creator) 
+            where TService : IService
         {
             var type = typeof(TService);
             if (managers.ContainsKey(type))
@@ -58,7 +61,8 @@ namespace GameFrame
         /// </summary>
         /// <typeparam name="TService"></typeparam>
         /// <returns></returns>
-        public TService GetService<TService>() where TService : class, IService
+        public TService GetService<TService>() 
+            where TService : class, IService
         {
             var type = typeof(TService);
             if(managers.TryGetValue(type, out var manager))

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System.Text.RegularExpressions;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Layout/MonoSpacing", false)]
     public class MonoSpacingTagView : LengthTagView

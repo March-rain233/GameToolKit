@@ -7,15 +7,15 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System;
 using System.Linq;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.EventProcessor.Editor
+namespace GameToolKit.EventProcessor.Editor
 {
     public class ProcessorView : CustomGraphView<Node>
     {
         public new class UxmlFactory : UxmlFactory<ProcessorView, UxmlTraits> { }
 
-        AutomaticProcessor _processor => _graph as AutomaticProcessor;
+        AutomaticProcessor _processor => Graph as AutomaticProcessor;
 
         const string _elementSetting = "Element Setting";
         const string _processorSetting = "Processor Setting";

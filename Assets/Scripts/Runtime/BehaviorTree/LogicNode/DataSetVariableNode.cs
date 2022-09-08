@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace GameFrame.Behavior.Tree {
+namespace GameToolKit.Behavior.Tree {
     [NodeCategory("NULL")]
     public class DataSetVariableNode<T> : VariableNode<T>
     {

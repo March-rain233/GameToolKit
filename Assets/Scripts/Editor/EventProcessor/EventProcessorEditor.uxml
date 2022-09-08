@@ -14,7 +14,7 @@
                 <uie:ToolbarSearchField focusable="true" name="search-node" style="flex-grow: 1;" />
                 <uie:ToolbarToggle focusable="false" label="Inspector" name="inspector" value="true" style="width: 70px; -unity-text-align: upper-center; justify-content: center;" />
             </uie:Toolbar>
-            <GameFrame.EventProcessor.Editor.ProcessorView focusable="true" style="flex-grow: 1;" />
+            <GameToolKit.EventProcessor.Editor.ProcessorView focusable="true" style="flex-grow: 1;" />
             <ui:Label text="Label" display-tooltip-when-elided="true" name="file-path" style="-unity-text-align: upper-right; background-color: rgb(47, 47, 47);" />
         </ui:VisualElement>
     </ui:VisualElement>

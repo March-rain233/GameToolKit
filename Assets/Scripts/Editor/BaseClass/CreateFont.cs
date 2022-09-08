@@ -4,7 +4,7 @@ using System.IO;
 
 public class CreateFont : EditorWindow
 {
-    [MenuItem("浅仓雨の工具/创建字体(sprite)")]
+    [MenuItem("GameToolKit/创建字体(sprite)")]
     public static void Open()
     {
         GetWindow<CreateFont>("创建字体");

@@ -1,6 +1,6 @@
 using System;
 
-namespace GameFrame.Utility
+namespace GameToolKit.Utility
 {
     /// <summary>
     /// lambdaº¯Êý¸¨ÖúÀà
@@ -28,6 +28,14 @@ namespace GameFrame.Utility
         public static Func<T1, T2, TResult> Fix<T1, T2, TResult>(Func<Func<T1, T2, TResult>, Func<T1, T2, TResult>> f)
         {
             return (x, y) => f(Fix(f))(x, y);
+        }
+        public static Action<T1, T2> Fix<T1, T2>(Func<Action<T1,T2>, Action<T1, T2>> f)
+        {
+            return (x, y) => f(Fix(f))(x, y);
+        }
+        public static Action<T1> Fix<T1>(Func<Action<T1>, Action<T1>> f)
+        {
+            return x => f(Fix(f))(x);
         }
     }
 }

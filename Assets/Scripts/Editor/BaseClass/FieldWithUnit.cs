@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace GameFrame.Editor {
+namespace GameToolKit.Editor {
     /// <summary>
     /// 带有单位的浮点数字段
     /// </summary>

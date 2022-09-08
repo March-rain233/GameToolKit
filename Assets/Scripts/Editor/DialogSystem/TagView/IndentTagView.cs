@@ -5,9 +5,9 @@ using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Layout/Indent", false)]
     public class IndentTagView : LengthTagView

@@ -9,9 +9,9 @@ using UnityEngine.UIElements;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
 using System.Linq;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.EventProcessor.Editor
+namespace GameToolKit.EventProcessor.Editor
 {
     public class ProcessorField : GraphElementField
     {

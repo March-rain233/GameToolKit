@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     /// <summary>
     /// 数据同步方式

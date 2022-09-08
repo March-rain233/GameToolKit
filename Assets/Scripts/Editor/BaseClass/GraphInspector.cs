@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using System.Linq;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     /// <summary>
     /// Í¼¼àÊÓÆ÷

@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     public class EdgeField : GraphElementField
     {

@@ -6,11 +6,11 @@ using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using Sirenix.Utilities.Editor;
 
-namespace GameFrame
+namespace GameToolKit
 {
     public class FrameMenu : OdinMenuEditorWindow
     {
-        [MenuItem("«≥≤÷”Í§Œπ§æﬂ/Frame Menu")]
+        [MenuItem("GameToolKit/Frame Menu")]
         public static void ShowMenu()
         {
             FrameMenu wnd = GetWindow<FrameMenu>();
@@ -23,6 +23,7 @@ namespace GameFrame
             if (EditorApplication.isPlaying)
             {
                 menu.Add("EventManager", ServiceFactory.Instance.GetService<EventManager>(), EditorIcons.SmartPhone);
+                menu.Add("DialogManager", ServiceFactory.Instance.GetService<Dialog.DialogManager>(), EditorIcons.Info);
             }
             else
             {

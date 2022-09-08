@@ -6,7 +6,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     public abstract class CustomGraphView<TNode> : GraphView where TNode : BaseNode
     {
@@ -30,7 +30,8 @@ namespace GameFrame.Editor
         /// <summary>
         /// 当前操作的图表
         /// </summary>
-        protected CustomGraph<TNode> _graph;
+        public CustomGraph<TNode> Graph { get; protected set; }
+
         /// <summary>
         /// 附着的窗口
         /// </summary>
@@ -72,7 +73,7 @@ namespace GameFrame.Editor
         /// <param name="graph"></param>
         public virtual void PopulateView(CustomGraph<TNode> graph)
         {
-            _graph = graph;
+            Graph = graph;
 
             //删除上一颗树的视图
             graphViewChanged -= OnGraphViewChanged;
@@ -93,15 +94,35 @@ namespace GameFrame.Editor
                 foreach (var edge in node.InputEdges)
                 {
                     var sourcePort = FindNodeView(edge.SourceNode).outputContainer.Q<Port>(edge.SourceField);
-                    var e = view.inputContainer.Q<Port>(edge.TargetField).ConnectTo(sourcePort);
-                    e.userData = SyncType.Pull;
+                    var targetPort = view.inputContainer.Q<Port>(edge.TargetField);
+                    //查看边是否已创建
+                    Edge e = sourcePort.connections.FirstOrDefault(e => e.input == targetPort);
+                    if (e == null)
+                    {
+                        e = targetPort.ConnectTo(sourcePort);
+                        e.userData = SyncType.Pull;
+                    }
+                    else
+                    {
+                        e.userData = SyncType.Pull | SyncType.Push;
+                    }
                     AddElement(e);
                 }
                 foreach (var edge in node.OutputEdges)
                 {
                     var targetPort = FindNodeView(edge.TargetNode).inputContainer.Q<Port>(edge.TargetField);
-                    var e = view.outputContainer.Q<Port>(edge.SourceField).ConnectTo(targetPort);
-                    e.userData = (SyncType)e.userData | SyncType.Push;
+                    var sourcePort = view.outputContainer.Q<Port>(edge.SourceField);
+                    //查看边是否已创建
+                    Edge e = targetPort.connections.FirstOrDefault(e => e.output == sourcePort);
+                    if(e == null)
+                    {
+                        e = sourcePort.ConnectTo(targetPort);
+                        e.userData = SyncType.Push;
+                    }
+                    else
+                    {
+                        e.userData = SyncType.Pull | SyncType.Push;
+                    }
                     AddElement(e);
                 }
             }
@@ -127,7 +148,7 @@ namespace GameFrame.Editor
                     NodeView nodeView = elem as NodeView;
                     if (nodeView != null)
                     {
-                        _graph.RemoveNode(nodeView.Node as TNode);
+                        Graph.RemoveNode(nodeView.Node as TNode);
                     }
                     //移除边
                     Edge edge = elem as Edge;
@@ -178,7 +199,7 @@ namespace GameFrame.Editor
             _inspector.ClearTabAll();
             ShowInspector(false);
 
-            _graph = null;
+            Graph = null;
         }
 
         /// <summary>
@@ -197,7 +218,7 @@ namespace GameFrame.Editor
         /// </summary>
         public void Refresh()
         {
-            if(_graph == null)
+            if(Graph == null)
             {
                 ClearView();
             }
@@ -215,7 +236,7 @@ namespace GameFrame.Editor
         /// <param name="type"></param>
         public NodeView CreateNode(Type type)
         {
-            TNode node = _graph.CreateNode(type);
+            TNode node = Graph.CreateNode(type);
             return CreateNodeView(node);
         }
 
@@ -289,8 +310,14 @@ namespace GameFrame.Editor
                 e.userData = type;
             }
         }
-        #endregion
 
+        public void SaveChange()
+        {
+            EditorUtility.SetDirty(Graph);
+            AssetDatabase.SaveAssets();
+        }
+        #endregion
+        
         #region 其他
         /// <summary>
         /// 显示监视器
@@ -298,7 +325,7 @@ namespace GameFrame.Editor
         /// <param name="visible"></param>
         public void ShowInspector(bool visible)
         {
-            _inspector.visible = visible && _graph != null;
+            _inspector.visible = visible && Graph != null;
         }
 
         /// <summary>
@@ -313,7 +340,7 @@ namespace GameFrame.Editor
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            if (_graph != null)
+            if (Graph != null)
             {
                 base.BuildContextualMenu(evt);
             }

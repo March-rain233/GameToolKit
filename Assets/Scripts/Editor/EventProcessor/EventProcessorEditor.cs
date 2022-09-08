@@ -4,9 +4,9 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System;
 using System.Collections.Generic;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.EventProcessor.Editor
+namespace GameToolKit.EventProcessor.Editor
 {
 
     public class EventProcessorEditor : EditorWindow
@@ -18,7 +18,7 @@ namespace GameFrame.EventProcessor.Editor
         private Label _filePath;
         private ListView _listView;
 
-        [MenuItem("«≥≤÷”Í§Œπ§æﬂ/Processor Editor")]
+        [MenuItem("GameToolKit/Processor Editor")]
         public static void ShowExample()
         {
             EventProcessorEditor wnd = GetWindow<EventProcessorEditor>();

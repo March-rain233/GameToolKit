@@ -5,7 +5,7 @@ using Sirenix.Serialization;
 using Sirenix.OdinInspector;
 using System.Linq;
 using DG.Tweening;
-namespace GameFrame.Behavior.Tree
+namespace GameToolKit.Behavior.Tree
 {
     public class VariableNode<T> : InputNode<T>
     {

@@ -8,7 +8,7 @@ using UnityEditor;
 using Sirenix.Utilities.Editor;
 using System.Linq;
 
-namespace GameFrame.Editor
+namespace GameToolKit.Editor
 {
     /// <summary>
     /// Ω⁄µ„ ”Õº

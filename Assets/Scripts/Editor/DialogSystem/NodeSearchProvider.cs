@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameFrame.Editor;
+using GameToolKit.Editor;
 
-namespace GameFrame.Dialog
+namespace GameToolKit.Dialog
 {
     public class NodeSearchProvider : NodeSearchProvider<Node>
     {

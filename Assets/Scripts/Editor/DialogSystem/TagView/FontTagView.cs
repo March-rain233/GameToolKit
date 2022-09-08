@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using System.Linq;
-using GameFrame.Utility;
+using GameToolKit.Utility;
 
-namespace GameFrame.Dialog.Editor
+namespace GameToolKit.Dialog.Editor
 {
     [Tag("Text/Font", false)]
     public class FontTagView : TagView

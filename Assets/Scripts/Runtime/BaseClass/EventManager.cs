@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
-namespace GameFrame
+namespace GameToolKit
 {
     /// <summary>
     /// 事件管线
@@ -15,8 +16,10 @@ namespace GameFrame
     /// </remarks>
     public sealed class EventManager : IService
     {
+        [ShowInInspector, ReadOnly]
         TypeTree _typeTree = new TypeTree(typeof(EventBase));
 
+        [ShowInInspector, ReadOnly]
         Dictionary<Type, Delegate> _listeners = new Dictionary<Type, Delegate>();
 
         /// <summary>
