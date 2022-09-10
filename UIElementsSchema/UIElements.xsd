@@ -3,6 +3,9 @@
   <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
   <xs:import schemaLocation="UnityEditor.UIElements.xsd" namespace="UnityEditor.UIElements" />
   <xs:import schemaLocation="UnityEditor.Rendering.LookDev.xsd" namespace="UnityEditor.Rendering.LookDev" />
+  <xs:import schemaLocation="GameToolKit.EventProcessor.Editor.xsd" namespace="GameToolKit.EventProcessor.Editor" />
+  <xs:import schemaLocation="GameToolKit.Dialog.Editor.xsd" namespace="GameToolKit.Dialog.Editor" />
+  <xs:import schemaLocation="GameToolKit.Behavior.Tree.Editor.xsd" namespace="GameToolKit.Behavior.Tree.Editor" />
   <xs:import schemaLocation="UnityEditor.U2D.Layout.xsd" namespace="UnityEditor.U2D.Layout" />
   <xs:import schemaLocation="UnityEditor.U2D.Animation.xsd" namespace="UnityEditor.U2D.Animation" />
   <xs:import schemaLocation="UnityEditor.U2D.Animation.Upgrading.xsd" namespace="UnityEditor.U2D.Animation.Upgrading" />
@@ -11,9 +14,6 @@
   <xs:import schemaLocation="Unity.Cloud.Collaborate.Components.ChangeListEntries.xsd" namespace="Unity.Cloud.Collaborate.Components.ChangeListEntries" />
   <xs:import schemaLocation="UnityEditor.ShaderGraph.Drawing.xsd" namespace="UnityEditor.ShaderGraph.Drawing" />
   <xs:include schemaLocation="GlobalNamespace.xsd" />
-  <xs:import schemaLocation="GameFrame.EventProcessor.Editor.xsd" namespace="GameFrame.EventProcessor.Editor" />
-  <xs:import schemaLocation="GameFrame.Dialog.Editor.xsd" namespace="GameFrame.Dialog.Editor" />
-  <xs:import schemaLocation="GameFrame.Behavior.Tree.Editor.xsd" namespace="GameFrame.Behavior.Tree.Editor" />
   <xs:import schemaLocation="UnityEditor.ShortcutManagement.xsd" namespace="UnityEditor.ShortcutManagement" />
   <xs:import schemaLocation="UnityEditor.UIElements.Debugger.xsd" namespace="UnityEditor.UIElements.Debugger" />
   <xs:import schemaLocation="Unity.UI.Builder.xsd" namespace="Unity.UI.Builder" />

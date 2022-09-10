@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.march_rain.gametoolkit": {
+      "version": "file:GameToolKit",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "8.0.2",
       "depth": 0,
@@ -121,15 +127,6 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
-    },
-    "com.unity.inputsystem": {
-      "version": "1.3.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      },
       "url": "https://packages.unity.cn"
     },
     "com.unity.mathematics": {
