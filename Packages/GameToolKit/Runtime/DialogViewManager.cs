@@ -10,13 +10,13 @@ namespace GameToolKit.Dialog
     {
         public IDialogBox GetDialogBox(Type type)
         {
-            return ServiceFactory.Instance.GetService<PanelManager>()
+            return ServiceAP.Instance.GetService<PanelManager>()
                 .GetOrOpenPanel(type.Name.Split('.').Last()) as IDialogBox;
         }
 
         public IOptionalView GetOptionalView(Type type)
         {
-            return ServiceFactory.Instance.GetService<PanelManager>()
+            return ServiceAP.Instance.GetService<PanelManager>()
                 .GetOrOpenPanel(type.Name.Split('.').Last()) as IOptionalView;
         }
     }

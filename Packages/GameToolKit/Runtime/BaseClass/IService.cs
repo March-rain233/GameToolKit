@@ -12,6 +12,6 @@ namespace GameToolKit
         /// <summary>
         /// ≥ı ºªØ
         /// </summary>
-        internal protected void Init() { }
+        internal protected void Init(params object[] argus) { }
     }
 }

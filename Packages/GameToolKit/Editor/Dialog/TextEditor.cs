@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
+
 using GameToolKit.Utility;
 using System.Collections.Generic;
 using System;
@@ -13,7 +13,7 @@ namespace GameToolKit.Dialog.Editor {
         public VisualTreeAsset VisualTree;
 
         /// <summary>
-        /// Ô´ÎÄ±¾
+        /// Ô´ï¿½Ä±ï¿½
         /// </summary>
         public string RawText
         {
@@ -95,32 +95,32 @@ namespace GameToolKit.Dialog.Editor {
             rawTextField.RegisterValueChangedCallback(e => RawText = e.newValue);
             plainTextField.RegisterCallback<KeyDownEvent>(e =>
             {
-                if(e.character != char.MinValue) //µ±ÊäÈë×Ö·ûÊ±£¬³¯¹â±êËùÔÚÎ»ÖÃ²åÈë×Ö·û
+                if(e.character != char.MinValue) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã²ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
                 {
-                    if(BeginIndex == EndIndex) //µ±¹â±êÒ»ÖÂÊ±Îª¼ÓÈë×Ö·û
+                    if(BeginIndex == EndIndex) //ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±Îªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
                     {
                         _tree.InsertPlainText(BeginIndex, e.character.ToString());
                     }
-                    else //·ñÔòÎªÌæ´ú×Ö·û
+                    else //ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ö·ï¿½
                     {
                         _tree.ReplacePlainText(BeginIndex, EndIndex, e.character.ToString());
                     }
                 }
-                else if(e.keyCode == KeyCode.Backspace) //µ±É¾³ý×Ö·ûÊ±£¬É¾³ý¹â±êËùÔÚµÄ×Ö·û
+                else if(e.keyCode == KeyCode.Backspace) //ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ö·ï¿½Ê±ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ö·ï¿½
                 {
-                    if(BeginIndex == EndIndex)//µ±¹â±êÎ»ÖÃÏàÍ¬Ê±É¾³ýÇ°Ò»¸ö×Ö·û
+                    if(BeginIndex == EndIndex)//ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Í¬Ê±É¾ï¿½ï¿½Ç°Ò»ï¿½ï¿½ï¿½Ö·ï¿½
                     {
                         if(BeginIndex != 0)
                         {
                             _tree.RemovePlainText(BeginIndex - 1, EndIndex);
                         }
                     }
-                    else //·ñÔòÉ¾³ý·¶Î§ÄÚ×Ö·û
+                    else //ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½Ö·ï¿½
                     {
                         _tree.RemovePlainText(BeginIndex, EndIndex);
                     }
                 }
-                else if(e.ctrlKey && e.keyCode == KeyCode.V) //ð¤ÌùÎÄ±¾
+                else if(e.ctrlKey && e.keyCode == KeyCode.V) //ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
                 {
                     Paste();
                 }
@@ -190,12 +190,12 @@ namespace GameToolKit.Dialog.Editor {
                     if (_showRawText)
                     {
                         left.style.width = 250;
-                        floatBtnView.text = "¡û";
+                        floatBtnView.text = "ï¿½ï¿½";
                     }
                     else
                     {
                         left.style.width = 0;
-                        floatBtnView.text = "¡ú";
+                        floatBtnView.text = "ï¿½ï¿½";
                     }
                 }
             });
@@ -284,7 +284,7 @@ namespace GameToolKit.Dialog.Editor {
         }
 
         /// <summary>
-        /// µ±¿Õ±êÇ©×´Ì¬ÇÐ»»
+        /// ï¿½ï¿½ï¿½Õ±ï¿½Ç©×´Ì¬ï¿½Ð»ï¿½
         /// </summary>
         /// <param name="isEmpty"></param>
         void OnFlagValueChange(bool isEmpty)
@@ -323,11 +323,11 @@ namespace GameToolKit.Dialog.Editor {
 
         void Paste()
         {
-            if (BeginIndex == EndIndex) //µ±¹â±êÒ»ÖÂÊ±Îª¼ÓÈë×Ö·û
+            if (BeginIndex == EndIndex) //ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±Îªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
             {
                 _tree.InsertPlainText(BeginIndex, GUIUtility.systemCopyBuffer);
             }
-            else //·ñÔòÎªÌæ´ú×Ö·û
+            else //ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ö·ï¿½
             {
                 _tree.ReplacePlainText(BeginIndex, EndIndex, GUIUtility.systemCopyBuffer);
             }

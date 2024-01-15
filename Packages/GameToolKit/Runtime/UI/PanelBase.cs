@@ -21,24 +21,25 @@ namespace GameToolKit
         [ReadOnly, ShowInInspector]
         public virtual PanelShowType ShowType => PanelShowType.Normal;
 
-        protected CanvasGroup _canvasGroup;
+        [ReadOnly, SerializeField]
+        protected CanvasGroup CanvasGroup;
 
         public bool BlocksRaycasts
         {
-            get { return _canvasGroup.blocksRaycasts; }
-            set { _canvasGroup.blocksRaycasts = value; }
+            get { return CanvasGroup.blocksRaycasts; }
+            set { CanvasGroup.blocksRaycasts = value; }
         }
 
         public bool Interactable
         {
-            get { return _canvasGroup.interactable; }
-            set { _canvasGroup.interactable = value; }
+            get { return CanvasGroup.interactable; }
+            set { CanvasGroup.interactable = value; }
         }
 
         public float Alpha
         {
-            get { return _canvasGroup.alpha; }
-            set { _canvasGroup.alpha = value; }
+            get { return CanvasGroup.alpha; }
+            set { CanvasGroup.alpha = value; }
         }
 
         /// <summary>
@@ -47,20 +48,20 @@ namespace GameToolKit
 
         public bool IsShowing { get; private set; } = false;
 
-        protected virtual void Reset()
+        private void OnValidate()
         {
-            _canvasGroup = _canvasGroup ?? GetComponent<CanvasGroup>();
+            CanvasGroup = CanvasGroup ?? GetComponent<CanvasGroup>();
         }
 
         /// <summary>
         /// 当面板数据初始化
         /// </summary>
-        protected abstract void OnInit();
+        protected virtual void OnInit() { }
 
         /// <summary>
         /// 当面板被打开时
         /// </summary>
-        protected abstract void OnOpen();
+        protected virtual void OnOpen() { gameObject.SetActive(true); }
 
         internal void Open()
         {
@@ -73,9 +74,13 @@ namespace GameToolKit
         /// 当面板被关闭时
         /// </summary>
         /// <remarks>
-        /// 请在动画结束后调用DeathImmediately
+        /// 请在动画结束后调用Dispose
         /// </remarks>
-        protected abstract void OnClose();
+        protected virtual void OnClose() 
+        { 
+            gameObject.SetActive(false); 
+            Dispose();
+        }
 
         internal void Close()
         {
@@ -86,7 +91,7 @@ namespace GameToolKit
         /// <summary>
         /// 当面板显示时
         /// </summary>
-        protected abstract void OnShow();
+        protected virtual void OnShow() { gameObject.SetActive(true);}
 
         internal void Show()
         {
@@ -100,7 +105,7 @@ namespace GameToolKit
         /// <summary>
         /// 当面板隐藏时
         /// </summary>
-        protected abstract void OnHide();
+        protected virtual void OnHide() { gameObject?.SetActive(false); }
 
         internal void Hide()
         {
@@ -117,7 +122,7 @@ namespace GameToolKit
         /// <remarks>
         /// 负责关闭面板后的数据处理
         /// </remarks>
-        protected abstract void OnDispose();
+        protected virtual void OnDispose() { }
 
         /// <summary>
         /// 立即摧毁
@@ -131,7 +136,7 @@ namespace GameToolKit
             }
             else
             {
-                ServiceFactory.Instance.GetService<PanelManager>().RecyclePanel(this);
+                ServiceAP.Instance.GetService<PanelManager>().RecyclePanel(this);
             }
         }
     }

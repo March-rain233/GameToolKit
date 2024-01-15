@@ -43,6 +43,11 @@ namespace GameToolKit.Dialog
         /// </summary>
         public ExitNode ExitNode;
 
+        /// <summary>
+        /// 当对话结束
+        /// </summary>
+        public event Action OnDialogEnd;
+
         private void Reset()
         {
             EntryNode = CreateNode(typeof(EntryNode)) as EntryNode;
@@ -54,7 +59,7 @@ namespace GameToolKit.Dialog
         /// </summary>
         public void Play()
         {
-            ServiceFactory.Instance.GetService<EventManager>().Broadcast(new DialogBeginEvent()
+            ServiceAP.Instance.GetService<EventManager>().Broadcast(new DialogBeginEvent()
             {
                 DialogTree = this
             });
@@ -70,10 +75,7 @@ namespace GameToolKit.Dialog
         /// </summary>
         public void Finish()
         {
-            ServiceFactory.Instance.GetService<EventManager>().Broadcast(new DialogEndEvent()
-            {
-                DialogTree = this
-            });
+            OnDialogEnd?.Invoke();
         }
 
         public override Node CreateNode(Type type)

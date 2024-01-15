@@ -19,6 +19,11 @@ namespace GameToolKit.Dialog
         string _rawText;
 
         /// <summary>
+        /// 是否忽略空白字符的等待时间
+        /// </summary>
+        public bool IsIgnoreWhiteSpaceWaiting = true;
+
+        /// <summary>
         /// 文本当前速度 字符/秒
         /// </summary>
         public float TextSpeed
@@ -36,7 +41,7 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 文本默认速度
         /// </summary>
-        public float DefaultSpeed = 1;
+        public float DefaultSpeed = 4;
 
         /// <summary>
         /// 文本速度栈
@@ -264,7 +269,12 @@ namespace GameToolKit.Dialog
                                 if (_empty.Count == 0) //当空标签数目为0时说明读入的是显示字符
                                 {
                                     ++_textController.maxVisibleCharacters;
-                                    NextCharacterTime = SpeedToTime(TextSpeed);
+                                    //当开启忽略空白字符时，跳过读入的空格
+                                    if(!IsIgnoreWhiteSpaceWaiting ||
+                                        !char.IsWhiteSpace(textInfo.characterInfo[_textController.maxVisibleCharacters - 1].character))
+                                    {
+                                        NextCharacterTime = SpeedToTime(TextSpeed);
+                                    }
                                 }
                             }
                             else

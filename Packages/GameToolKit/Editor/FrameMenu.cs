@@ -22,8 +22,8 @@ namespace GameToolKit
             var menu = new OdinMenuTree();
             if (EditorApplication.isPlaying)
             {
-                menu.Add("EventManager", ServiceFactory.Instance.GetService<EventManager>(), EditorIcons.SmartPhone);
-                menu.Add("DialogManager", ServiceFactory.Instance.GetService<Dialog.DialogManager>(), EditorIcons.Info);
+                menu.Add("EventManager", ServiceAP.Instance.GetService<EventManager>(), EditorIcons.SmartPhone);
+                menu.Add("DialogManager", ServiceAP.Instance.GetService<Dialog.DialogManager>(), EditorIcons.Info);
             }
             else
             {

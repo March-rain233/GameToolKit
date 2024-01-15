@@ -17,6 +17,7 @@ namespace GameToolKit.Behavior.Tree
     [Serializable]
     [Node]
     [NodeColor("#E4007F")]
+    [NodeCategory("NULL")]
     public abstract class Node : BaseNode
     {
         #region 编辑器相关成员
@@ -64,7 +65,7 @@ namespace GameToolKit.Behavior.Tree
         /// 初始化节点
         /// </summary>
         /// <param name="tree"></param>
-        public void Init(BehaviorTree tree)
+        internal void Init(BehaviorTree tree)
         {
             BehaviorTree = tree;
             OnInit();
@@ -75,6 +76,16 @@ namespace GameToolKit.Behavior.Tree
         /// </summary>
         /// <param name="tree"></param>
         protected virtual void OnInit() { }
+
+        /// <summary>
+        /// 当行为树启用时
+        /// </summary>
+        internal protected virtual void OnEnable() { }
+
+        /// <summary>
+        /// 当行为树禁用时
+        /// </summary>
+        internal protected virtual void OnDiable() { }
         #endregion
     }
 }

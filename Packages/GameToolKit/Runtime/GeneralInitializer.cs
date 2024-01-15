@@ -11,7 +11,7 @@ namespace GameToolKit
     {
         public override void Initialize()
         {
-            var instance = ServiceFactory.Instance;
+            var instance = ServiceAP.Instance;
             instance.Register<EventManager, EventManager>();
             instance.Register<PanelManager, PanelManager>();
             instance.Register<Dialog.IDialogViewManager, Dialog.DialogViewManager>();

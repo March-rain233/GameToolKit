@@ -104,7 +104,6 @@ namespace GameToolKit.Behavior.Tree {
         /// <returns>该节点更新后的状态</returns>
         public NodeStatus Tick()
         {
-            LastDataUpdataTime = Time.time;
             InitInputData();
             //当节点并未处在运行状态时，进行进入状态处理
             if (Status != NodeStatus.Running)
@@ -121,6 +120,7 @@ namespace GameToolKit.Behavior.Tree {
                 OnExit();
             //更新后继节点的数据
             InitOutputData();
+            LastDataUpdataTime = Time.time;
             return Status;
         }
 
@@ -152,7 +152,7 @@ namespace GameToolKit.Behavior.Tree {
             //当节点未在运行时被打断输出错误信息
             if (Status != NodeStatus.Running)
             {
-                Debug.Log($"{BehaviorTree.name}尝试打断[{GetType()}]{Name}节点，但节点处于{Status}状态");
+                Debug.Log($"{BehaviorTree}尝试打断{this}节点，但节点处于{Status}状态");
                 return;
             }
             OnAbort();

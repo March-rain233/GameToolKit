@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace GameToolKit
 {
-    public class CustomGraph<TNode> : SerializedScriptableObject, IGraphBase where TNode : BaseNode
+    public class CustomGraph<TNode> : SerializedScriptableObject where TNode : BaseNode
     {
         /// <summary>
         /// 节点列表
@@ -68,7 +68,7 @@ namespace GameToolKit
                     newName = newName.Remove(newName.Length - 2);
                 }
             }
-
+#if UNITY_EDITOR
             //计算节点名的使用次数
             int count = Nodes.FindAll(node => Regex.IsMatch(node.Name, @$"{newName}(\(\d+\))?$")).Count;
             if (count > 0)
@@ -76,16 +76,11 @@ namespace GameToolKit
                 newName = newName + $"({count})";
             }
             node.Name = newName;
-
+#endif
             //生成节点的唯一标识符
             node.Guid = Guid.NewGuid().ToString();
             Nodes.Add(node);
-            node.Graph = this;
             return node;
         }
-    }
-    public interface IGraphBase
-    {
-
     }
 }

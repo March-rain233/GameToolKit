@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using GameToolKit.Behavior.Tree;
 using GameToolKit.Editor;
+using GameToolKit.Utility;
 
 namespace GameToolKit.Behavior.Tree.Editor
 {
@@ -19,6 +20,60 @@ namespace GameToolKit.Behavior.Tree.Editor
     public class TreeView : CustomGraphView<Node>
     {
         public new class UxmlFactory : UxmlFactory<TreeView, UxmlTraits> { }
+
+        class GraphLayoutAdapter : Utility.GraphLayoutAdapter
+        {
+            TreeView _view;
+            public override IEnumerable<int> Nodes => _nodes;
+            List<int> _nodes;
+            public GraphLayoutAdapter(TreeView view)
+            {
+                _view = view;
+                _nodes = new();
+                for (int i = 0; i < view.nodes.Where(n=>((TreeNodeView)n)?.Node is ProcessNode).Count(); i++)
+                {
+                    _nodes.Add(i);
+                }
+            }
+
+            public override IEnumerable<int> GetDescendant(int id)
+            {
+                return _view.nodes.Where(n => ((TreeNodeView)n)?.Node is ProcessNode)
+                    .ElementAt(id).outputContainer.Q<Port>("Next").connections
+                    .Select(e=>e.input.node).Distinct()
+                    .Select(e=>GetID(e as TreeNodeView));
+            }
+
+            public override NodeData GetNodeData(int id)
+            {
+                NodeData data = new NodeData();
+                var node = _view.nodes.Where(n => ((TreeNodeView)n)?.Node is ProcessNode).ElementAt(id);
+                data.Position = node.GetPosition().position;
+                data.Width = node.layout.width;
+                data.Height = node.layout.height;
+                return data;
+            }
+
+            public override IEnumerable<int> GetPrecursor(int id)
+            {
+                return _view.nodes.Where(n => ((TreeNodeView)n)?.Node is ProcessNode)
+                    .ElementAt(id).inputContainer.Q<Port>("Pre").connections
+                    .Select(e => e.input.node).Distinct()
+                    .Select(e => GetID(e as TreeNodeView));
+            }
+
+            public override void SetNodeData(int id, NodeData data)
+            {
+                var node = _view.nodes.Where(n => ((TreeNodeView)n)?.Node is ProcessNode).ElementAt(id);
+                node.SetPosition(new Rect(data.Position, Vector2.zero));
+            }
+
+            public int GetID(TreeNodeView nodeView)
+            {
+                var nodes = _view.nodes.Where((n) => ((TreeNodeView)n)?.Node is ProcessNode);
+                return nodes.Select((n, i) => i).Where(i => nodes.ElementAt(i) == nodeView).FirstOrDefault();
+            }
+        }
 
         /// <summary>
         /// 变量定义域
@@ -396,44 +451,9 @@ namespace GameToolKit.Behavior.Tree.Editor
         public void SortGraph()
         {
             if (_tree == null) return;
-            const float marginWidth = 20f;
-            const float marginHeight = 20f;
-            Dictionary<ProcessNode, Rect> treeRects = new Dictionary<ProcessNode, Rect>();
-            //生成子树的矩形大小
-            Utility.LambdaUtility.Fix<ProcessNode, Rect>(f => node =>
-            {
-                Rect rect = Rect.zero;
-                var children = node.GetChildren();
-                foreach (var child in node.GetChildren())
-                {
-                    var cr = f(child);
-                    rect.width = Mathf.Max(cr.width, rect.width);
-                    rect.height += cr.height;
-                }
-                var view = FindNodeView(node);
-                rect.height += marginHeight * (children.Count() - 1);
-                rect.width += children.Count() > 0 ? marginWidth : 0;
-                rect.width += view.layout.width;
-                rect.height = Mathf.Max(view.layout.height, rect.height);
-                return treeRects[node] = rect;
-            })(_tree.RootNode);
-            //设置子树位置
-            Utility.LambdaUtility.Fix<ProcessNode, bool>(f => node =>
-            {
-                var view = FindNodeView(node);
-                view.SetPosition(treeRects[node]);
-                Vector2 pos = treeRects[node].position + new Vector2(view.layout.width + marginWidth, -treeRects[node].height / 2);
-                var children = node.GetChildren();
-                foreach (var child in node.GetChildren())
-                {
-                    var temp = treeRects[child];
-                    temp.position += pos + new Vector2(0, treeRects[child].height / 2);
-                    treeRects[child] = temp;
-                    pos.y += treeRects[child].height + marginHeight;
-                    f(child);
-                }
-                return true;
-            })(_tree.RootNode);
+            var adap = new GraphLayoutAdapter(this);
+            GraphLayoutUtility.TreeLayout(adap, 
+                adap.GetID(FindNodeView((Graph as BehaviorTree).RootNode) as TreeNodeView));
         }
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)

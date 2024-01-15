@@ -34,7 +34,7 @@ namespace GameToolKit.Behavior.Tree
         {
             if (!Childrens.Contains(node))
             {
-                Debug.LogError($"尝试移除{Name}的{node.Name}子节点，但是{Name}已无{node.Name}子节点");
+                Debug.LogError($"尝试移除{this}的{node}子节点，但是{this}已无{node}子节点");
                 return;
             }
             Childrens.Remove(node);

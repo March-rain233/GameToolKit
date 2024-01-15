@@ -290,6 +290,11 @@ namespace GameToolKit.Behavior.Tree
         /// </summary>
         public BehaviorTreeRunner Runner { get; private set; }
 
+        /// <summary>
+        /// 行为树运行状态
+        /// </summary>
+        public bool IsEnable { get; private set; } = false;
+
         private void Reset()
         {
             _rootNode = CreateNode(typeof(RootNode)) as RootNode;
@@ -314,9 +319,10 @@ namespace GameToolKit.Behavior.Tree
         /// </summary>
         /// <param name="runner"></param>
         /// <returns></returns>
-        public BehaviorTree Create(BehaviorTreeRunner runner)
+        internal BehaviorTree CreateRunningTree(BehaviorTreeRunner runner)
         {
             var tree = CreateInstance<BehaviorTree>();
+            tree.Runner = runner;
             tree.Nodes.Clear();
             //复制黑板
             tree.Blackboard = Blackboard.Clone();
@@ -366,6 +372,38 @@ namespace GameToolKit.Behavior.Tree
                 node.Init(tree);
             }
             return tree;
+        }
+
+        /// <summary>
+        /// 启用行为树
+        /// </summary>
+        internal void Enable()
+        {
+            if (IsEnable)
+            {
+                return;
+            }
+            IsEnable = true;
+            foreach (var node in Nodes)
+            {
+                node.OnEnable();
+            }
+        }
+
+        /// <summary>
+        /// 禁用行为树
+        /// </summary>
+        internal void Disable()
+        {
+            if (!IsEnable)
+            {
+                return;
+            }
+            IsEnable = false;
+            foreach (var node in Nodes)
+            {
+                node.OnDiable();
+            }
         }
 
         /// <summary>

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameToolKit.HideInGraphInspectorAttribute" Collapsed="true">
+    <Position X="41.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\HideInGraphInspectorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.NodeCategoryAttribute" Collapsed="true">
+    <Position X="45.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\NodeCategoryAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.NodeColorAttribute" Collapsed="true">
+    <Position X="38.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\NodeColorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.NodeNameAttribute" Collapsed="true">
+    <Position X="40" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\NodeNameAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.PortAttribute" Collapsed="true">
+    <Position X="41.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAAABAAAAAAAACAAAAQAAAAAAAAAAAAIAIAAABA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\PortAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ShowInNodeExtension" Collapsed="true">
+    <Position X="45.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\ShowInNodeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.BaseNode" Collapsed="true">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAIAgAQgAAABAAAAVAAAAABACEAAAAAAAEAQA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\BaseNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.BlackboardVariable" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAIAAABgAQAAAAAAAAAEAAAAEAAAAgAAAAABA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\BlackboardVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.CustomGraph&lt;TNode&gt;" Collapsed="true">
+    <Position X="40" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAEAAAEAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\CustomGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.DataSet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="41.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAIAgAAAIAgAAAABAAEAAAAAAAABgAAQgA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\DataSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameToolKit.DataSetManager" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAQAAAABIAAAAAIAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\DataSetManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.EventManager" BaseTypeListCollapsed="true">
+    <Position X="42.75" Y="3.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACIEAAAAIAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\EventManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameToolKit.EventBase" Collapsed="true">
+    <Position X="43.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.FrameSetting" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQABAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\FrameSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.GenericVariable&lt;T&gt;" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAIAAABgAQAAAAAAAAAAAAAAAAYAAAAAAEAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ObjectVariable" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.StringVariable" Collapsed="true">
+    <Position X="22.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.BooleanVariable" Collapsed="true">
+    <Position X="29" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.DoubleVarialbe" Collapsed="true">
+    <Position X="33.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.FloatVarialbe" Collapsed="true">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.IntVarialbe" Collapsed="true">
+    <Position X="6.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Vector2Variable" Collapsed="true">
+    <Position X="11" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Vector3Variable" Collapsed="true">
+    <Position X="17.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Vector4Variable" Collapsed="true">
+    <Position X="24.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ColorVariable" Collapsed="true">
+    <Position X="31.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.GameObjectVariable" Collapsed="true">
+    <Position X="35.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ScriptableObjectVariable" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ComponentVariable" Collapsed="true">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.RectVariable" Collapsed="true">
+    <Position X="13.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.BoundsVariable" Collapsed="true">
+    <Position X="20" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.CurveVariable" Collapsed="true">
+    <Position X="26.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GenericVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ScriptableSingleton&lt;TSingleton&gt;" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\ScriptableSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ServiceFactory" Collapsed="true">
+    <Position X="5.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAIAABAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\ServiceFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.ServiceInitializer" Collapsed="true">
+    <Position X="43.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\ServiceInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.SingletonBase&lt;TSingleton&gt;" Collapsed="true">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\SingletonBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.TypeTree" Collapsed="true">
+    <Position X="38.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAIAEAAAAAQAAAAAAAABAAAAAAAABAIAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\TypeTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Utility.GraphLayoutAdapter" Collapsed="true">
+    <Position X="38.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAEAAAAAABCAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GraphLayout\GraphLayoutAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Utility.GraphLayoutUtility" Collapsed="true">
+    <Position X="40" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GraphLayout\GraphLayoutUtility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Utility.LambdaUtility" Collapsed="true">
+    <Position X="43.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\LambdaUtility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameToolKit.Utility.TypeUtility" Collapsed="true">
+    <Position X="40" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\TypeUtility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="GameToolKit.SourceInfo" Collapsed="true">
+    <Position X="40" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgMAAAAgAAgAAAAAAAAAIAAAACAAgAhAiA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\SourceInfo.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GameToolKit.Utility.NodeData" Collapsed="true">
+    <Position X="38.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\GraphLayout\GraphLayoutAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="GameToolKit.IBlackboard" Collapsed="true">
+    <Position X="38.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAIAgAAAIAgAAAABAAEAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\IBlackboard.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GameToolKit.IService" Collapsed="true">
+    <Position X="40" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="GameToolKit.PortDirection" Collapsed="true">
+    <Position X="40" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\Attribute\PortAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameToolKit.LifeType" Collapsed="true">
+    <Position X="38.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Packages\GameToolKit\Runtime\BaseClass\BlackboardVariable.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

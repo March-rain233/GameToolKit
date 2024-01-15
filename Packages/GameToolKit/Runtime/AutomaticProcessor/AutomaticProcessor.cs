@@ -63,7 +63,7 @@ namespace GameToolKit.EventProcessor
         /// <param name="event">时间参数</param>
         internal void SendEvent<TEventType>(TEventType @event) where TEventType : EventBase
         {
-            ServiceFactory.Instance.GetService<EventManager>()
+            ServiceAP.Instance.GetService<EventManager>()
                 .Broadcast(@event);
             if (IsTrigger)
             {
@@ -75,10 +75,12 @@ namespace GameToolKit.EventProcessor
         public override Node CreateNode(Type type)
         {
             var node = base.CreateNode(type);
+#if UNITY_EDITOR
             if (type.IsSubclassOf(typeof(EventSenderNode)))
             {
                 node.Name = "Sender";
             }
+#endif
             typeof(Node).GetProperty("Processor").SetValue(node, this);
             return node;
         }

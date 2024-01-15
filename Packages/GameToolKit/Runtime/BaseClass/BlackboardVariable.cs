@@ -5,21 +5,6 @@ using System;
 namespace GameToolKit
 {
     /// <summary>
-    /// 生命周期类型
-    /// </summary>
-    public enum LifeType
-    {
-        /// <summary>
-        /// 不销毁
-        /// </summary>
-        Presistent,
-        /// <summary>
-        /// 当场景改变后销毁
-        /// </summary>
-        WhenSceneChanged,
-    }
-
-    /// <summary>
     /// 黑板变量基类
     /// </summary>
     [System.Serializable]
@@ -27,11 +12,6 @@ namespace GameToolKit
     {
         [System.Serializable]
         public delegate void VariableChangedHandler(BlackboardVariable sender, object newValue, object oldValue);
-
-        /// <summary>
-        /// 生命周期
-        /// </summary>
-        public LifeType LifeType;
 
         /// <summary>
         /// 变量值

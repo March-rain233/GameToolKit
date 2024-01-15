@@ -34,9 +34,6 @@ namespace GameToolKit
         [HideInGraphInspector, OdinSerialize]
         public string Guid { get; internal protected set; }
 
-        [ReadOnly, OdinSerialize]
-        public IGraphBase Graph { get; internal protected set; }
-
         /// <summary>
         /// 输入边信息
         /// </summary>
@@ -114,6 +111,7 @@ namespace GameToolKit
                 InitInputData();
                 OnValueUpdate();
                 LastDataUpdataTime = Time.time;
+                InitOutputData();
             }
             return GetValue(fieldName);
         }
@@ -125,6 +123,7 @@ namespace GameToolKit
         {
             SetValue(fieldName, value);
             OnValueUpdate();
+            LastDataUpdataTime = Time.time;
             InitOutputData();
         }
 
@@ -154,6 +153,22 @@ namespace GameToolKit
             {
                 edge.TargetNode.PushValue(edge.TargetField, GetValue(edge.SourceField));
             }
+        }
+
+        /// <summary>
+        /// 修复端口索引
+        /// </summary>
+        /// <param name="oldIndex"></param>
+        /// <returns>新端口索引；当返回null时表示无法修复，将删除该条连接数据</returns>
+        /// <remarks>
+        /// 用于当端口变量更名时的数据错误
+        /// </remarks>
+        public virtual string FixPortIndex(string oldIndex)
+        {
+#if UNITY_EDITOR
+            Debug.LogWarning($"节点:{Name} 端口:{oldIndex} 丢失");
+#endif
+            return null;
         }
 
         /// <summary>

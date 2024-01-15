@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace GameToolKit
 {
@@ -30,6 +33,11 @@ namespace GameToolKit
         public Camera UICamera { get; private set; }
 
         /// <summary>
+        /// UI事件系统
+        /// </summary>
+        public EventSystem EventSystem { get; private set; }
+
+        /// <summary>
         /// 开启状态的面板列表
         /// </summary>
         [ShowInInspector, ReadOnly]
@@ -49,10 +57,18 @@ namespace GameToolKit
             UICamera = new GameObject("UICamera", typeof(Camera)).GetComponent<Camera>();
             UICamera.cullingMask = LayerMask.GetMask("UI");
             UICamera.orthographic = true;
+            UICamera.GetUniversalAdditionalCameraData().renderType = CameraRenderType.Overlay;
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(UICamera);
+
+            //事件系统生成
+            EventSystem = new GameObject("EventSystem", typeof(EventSystem), 
+                typeof(UnityEngine.InputSystem.UI.InputSystemUIInputModule))
+                .GetComponent<EventSystem>();
 
             //根画布设定
             Root.worldCamera = UICamera;
             Root.renderMode = RenderMode.ScreenSpaceCamera;
+            Root.sortingLayerName = "UI";
 
             Root.gameObject.layer = uiLayer;
             ActiveRoot.gameObject.layer = uiLayer;
@@ -68,6 +84,7 @@ namespace GameToolKit
             //设置为持久化物体
             Object.DontDestroyOnLoad(Root.gameObject);
             Object.DontDestroyOnLoad(UICamera);
+            Object.DontDestroyOnLoad(EventSystem);
         }
 
         /// <summary>
@@ -96,6 +113,14 @@ namespace GameToolKit
 
             _openPanelList.Add(panel);
             panel.Open();
+
+            ServiceAP.Instance.GetService<EventManager>()
+                .Broadcast(new PanelOpenEvent()
+                {
+                    Panel = panel,
+                    Index = name
+                });
+
             return panel;
         }
 
@@ -114,6 +139,10 @@ namespace GameToolKit
         /// <param name="panel"></param>
         public void ClosePanel(PanelBase panel)
         {
+            if(panel == null)
+            {
+                return;
+            }
             _openPanelList.Remove(panel);
             panel.Close();
 
@@ -183,5 +212,11 @@ namespace GameToolKit
         {
             panel.transform.SetParent(DeathRoot, false);
         }
+    }
+
+    public class PanelOpenEvent : EventBase
+    {
+        public string Index;
+        public PanelBase Panel;
     }
 }

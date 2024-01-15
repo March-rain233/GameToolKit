@@ -38,6 +38,23 @@ namespace GameToolKit.Dialog
         }
 
         /// <summary>
+        /// 取消对话
+        /// </summary>
+        /// <param name="dialog"></param>
+        public void CancelDialog(DialogTree dialog)
+        {
+            if (RunningList.Contains(dialog))
+            {
+                dialog.Finish();
+            }
+            else if(WaitQueue.Contains(dialog))
+            {
+                WaitQueue = new Queue<DialogTree>(WaitQueue.Where(e => e != dialog));
+            }
+        }
+
+
+        /// <summary>
         /// 刷新数据，检查当前逻辑
         /// </summary>
         private void Refresh()
@@ -57,7 +74,25 @@ namespace GameToolKit.Dialog
                 }
 
                 var dialog = WaitQueue.Dequeue();
+
+                Action onDialogEnd = null;
+                onDialogEnd = () =>
+                {
+                    dialog.OnDialogEnd -= onDialogEnd;
+                    RunningList.Remove(dialog);
+                    ServiceAP.Instance.GetService<EventManager>().Broadcast(new DialogEndEvent()
+                    {
+                        DialogTree = dialog,
+                    });
+                    Refresh();
+                };
+
+                dialog.OnDialogEnd += onDialogEnd;
                 RunningList.Add(dialog);
+                ServiceAP.Instance.GetService<EventManager>().Broadcast(new DialogBeginEvent()
+                {
+                    DialogTree = dialog,
+                });
                 dialog.Play();
             };
 
@@ -79,12 +114,6 @@ namespace GameToolKit.Dialog
         
         void IService.Init()
         {
-            ServiceFactory.Instance.GetService<EventManager>()
-                .RegisterCallback<DialogEndEvent>(e =>
-                {
-                    RunningList.Remove(e.DialogTree);
-                    Refresh();
-                });
         }
     }
 }

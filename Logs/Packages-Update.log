@@ -85,3 +85,53 @@ The following packages were 已更新:
   com.unity.shadergraph 从版本 12.1.4 到 13.1.8
   com.unity.test-framework 从版本 1.1.29 到 1.1.31
   com.unity.timeline 从版本 1.6.3 到 1.7.1
+
+=== Sat Sep 10 17:32:21 2022
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were 已更新:
+  com.unity.2d.animation 从版本 8.0.2 到 8.0.3
+  com.unity.2d.psdimporter 从版本 7.0.1 到 7.0.2
+  com.unity.2d.spriteshape 从版本 8.0.0 到 8.0.1
+  com.unity.collab-proxy 从版本 1.17.1 到 1.17.2
+  com.unity.test-framework 从版本 1.1.31 到 1.1.33
+
+=== Tue Feb 14 22:49:57 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were 已添加:
+  com.unity.ai.navigation@1.1.1
+The following packages were 已更新:
+  com.unity.2d.animation 从版本 8.0.3 到 9.0.1
+  com.unity.2d.pixel-perfect 从版本 5.0.1 到 5.0.3
+  com.unity.2d.psdimporter 从版本 7.0.2 到 8.0.2
+  com.unity.2d.spriteshape 从版本 8.0.1 到 9.0.1
+  com.unity.cinemachine 从版本 2.8.6 到 2.9.4
+  com.unity.collab-proxy 从版本 1.17.2 到 2.0.0
+  com.unity.ide.rider 从版本 3.0.15 到 3.0.18
+  com.unity.ide.visualstudio 从版本 2.0.16 到 2.0.17
+  com.unity.render-pipelines.universal 从版本 13.1.8 到 14.0.6
+  com.unity.shadergraph 从版本 13.1.8 到 14.0.6
+  com.unity.timeline 从版本 1.7.1 到 1.7.2
+
+=== Wed Dec 27 17:22:43 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were 已更新:
+  com.unity.2d.animation 从版本 9.0.1 到 9.0.4
+  com.unity.2d.spriteshape 从版本 9.0.1 到 9.0.2
+  com.unity.ai.navigation 从版本 1.1.1 到 1.1.5
+  com.unity.cinemachine 从版本 2.9.4 到 2.9.5
+  com.unity.collab-proxy 从版本 2.0.0 到 2.2.0
+  com.unity.ide.rider 从版本 3.0.18 到 3.0.26
+  com.unity.ide.visualstudio 从版本 2.0.17 到 2.0.22
+  com.unity.inputsystem 从版本 1.4.4 到 1.7.0
+  com.unity.render-pipelines.universal 从版本 14.0.6 到 14.0.9
+  com.unity.shadergraph 从版本 14.0.6 到 14.0.9
+  com.unity.timeline 从版本 1.7.2 到 1.7.6

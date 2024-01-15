@@ -30,8 +30,9 @@ namespace GameToolKit {
                     UnityEditor.AssetDatabase.CreateAsset(_instance, $@"Assets/Resources/{typeof(TSingleton).Name}.asset");
                     UnityEditor.AssetDatabase.SaveAssets();
                     UnityEditor.AssetDatabase.Refresh();
+                    Debug.Log($"create file at Assets/Resources/{typeof(TSingleton).Name}.asset");
 #else
-                    Debug.LogError($"{typeof(TSingleton)} file miss");
+                    Debug.LogError($"missing {typeof(TSingleton).Name}");
 #endif
                 }
                 return _instance;

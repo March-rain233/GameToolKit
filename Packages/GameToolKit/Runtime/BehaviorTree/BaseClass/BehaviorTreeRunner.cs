@@ -9,6 +9,7 @@ namespace GameToolKit.Behavior.Tree
     /// <summary>
     /// 行为树运行脚本
     /// </summary>
+    [AddComponentMenu("AI/BehaviorTreeRunner")]
     public class BehaviorTreeRunner : SerializedMonoBehaviour
     {
         [OdinSerialize]
@@ -32,12 +33,25 @@ namespace GameToolKit.Behavior.Tree
 
         private void Awake()
         {
-            RunTree = ModelTree.Create(this);
+            RunTree = ModelTree.CreateRunningTree(this);
+        }
+
+        private void OnEnable()
+        {
+            RunTree.Enable();
+        }
+
+        private void OnDisable()
+        {
+            RunTree.Disable();
         }
 
         private void Update()
         {
-            RunTree.Tick();
+            if (RunTree.IsEnable && RunTree.Tick() == ProcessNode.NodeStatus.Success)
+            {
+                enabled = false;
+            }
         }
 
         private void SetModelTree(BehaviorTree tree)
