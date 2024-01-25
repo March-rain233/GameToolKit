@@ -72,7 +72,7 @@ namespace GameToolKit.Behavior.Tree
                 if (_current < 0 && value <= _weights[i].Weight)
                 {
                     _current = i;
-                    if (!_weights[i].IsReset) { _weights[i].Weight = _weights[i].BaseWeight; }
+                    if (!_weights[i].IsReset)  _weights[i].Weight = _weights[i].BaseWeight; 
                     continue;
                 }
                 value -= _weights[i].Weight;
@@ -80,9 +80,7 @@ namespace GameToolKit.Behavior.Tree
             }
         }
 
-        protected override NodeStatus OnUpdate()
-        {
-            return Childrens[_current].Tick();
-        }
+        protected override NodeStatus OnUpdate() =>
+            Childrens[_current].Tick();
     }
 }

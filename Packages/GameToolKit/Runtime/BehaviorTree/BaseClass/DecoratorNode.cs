@@ -19,13 +19,8 @@ namespace GameToolKit.Behavior.Tree
         [HideInGraphInspector]
         public ProcessNode Child;
 
-        protected override void OnAbort()
-        {
-            if (Child.Status == NodeStatus.Running) 
-            {
-                Child.Abort();
-            }
-        }
+        protected override bool OnAbort() =>
+            Child.Abort();
 
         public override ProcessNode[] GetChildren()
         {
@@ -61,7 +56,7 @@ namespace GameToolKit.Behavior.Tree
             
         }
 
-        public override Node Clone()
+        public override BaseNode Clone()
         {
             var n = base.Clone() as DecoratorNode;
             n.Child = null;

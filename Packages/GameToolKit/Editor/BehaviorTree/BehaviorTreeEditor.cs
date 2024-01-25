@@ -13,7 +13,7 @@ namespace GameToolKit.Behavior.Tree.Editor
         public VisualTreeAsset VisualTreeAsset;
         public StyleSheet StyleSheet;
 
-        public TreeView TreeView;
+        public BehaviorTreeView TreeView;
         private Label _filename;
 
         [MenuItem("GameToolKit/BTree Editor")]
@@ -28,7 +28,7 @@ namespace GameToolKit.Behavior.Tree.Editor
             VisualTreeAsset.CloneTree(root);
             root.styleSheets.Add(StyleSheet);
 
-            TreeView = root.Q<TreeView>();
+            TreeView = root.Q<BehaviorTreeView>();
             _filename = root.Q<Label>("filename");
             root.Q("blackboard").RegisterCallback((ChangeEvent<bool> e) =>
             {

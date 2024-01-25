@@ -74,7 +74,7 @@ namespace GameToolKit.Editor
             _input.value = node.Name;
 
             //绑定guid
-            viewDataKey = node.Guid;
+            viewDataKey = node.Id.ToString();
 
             //设置视图坐标
             style.left = node.ViewPosition.x;
@@ -107,7 +107,7 @@ namespace GameToolKit.Editor
                 if (portData.PortDirection == PortDirection.Input)
                 {
                     var port = base.InstantiatePort(Orientation.Horizontal,
-                        UnityEditor.Experimental.GraphView.Direction.Input,
+                        Direction.Input,
                         Port.Capacity.Single,
                         portData.PreferredType);
                     port.portName = portData.NickName;
@@ -119,7 +119,7 @@ namespace GameToolKit.Editor
                 else
                 {
                     var port = base.InstantiatePort(Orientation.Horizontal,
-                        UnityEditor.Experimental.GraphView.Direction.Output,
+                        Direction.Output,
                         Port.Capacity.Multi,
                         portData.PreferredType);
                     port.portName = portData.NickName;
@@ -144,6 +144,9 @@ namespace GameToolKit.Editor
             titleContainer.style.backgroundColor = color;
             ColorUtility.TryParseHtmlString("#000000", out var temp);
             titleContainer.Q<Label>().style.color = temp;
+
+            RefreshExpandedState();
+            RefreshPorts();
         }
 
         /// <summary>

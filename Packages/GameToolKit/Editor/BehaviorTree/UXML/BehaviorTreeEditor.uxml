@@ -7,6 +7,6 @@
         <uie:ToolbarToggle focusable="false" label="Blackboard" name="blackboard" value="true" style="width: 78px; justify-content: flex-start; align-items: stretch; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; -unity-text-align: middle-left;" />
         <uie:ToolbarToggle focusable="false" label="Inspector" name="inspector" value="true" style="width: 67px; flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; -unity-text-align: middle-left;" />
     </uie:Toolbar>
-    <GameToolKit.Behavior.Tree.Editor.TreeView focusable="true" style="flex-grow: 1;" />
+    <GameToolKit.Behavior.Tree.Editor.BehaviorTreeView focusable="true" style="flex-grow: 1;" />
     <ui:Label display-tooltip-when-elided="true" name="filename" style="white-space: nowrap; -unity-text-align: middle-right; flex-direction: row-reverse; background-color: rgb(60, 60, 60); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; min-height: 18px; max-height: 18px;" />
 </ui:UXML>

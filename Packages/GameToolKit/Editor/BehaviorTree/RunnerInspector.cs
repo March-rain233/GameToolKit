@@ -65,8 +65,6 @@ namespace GameToolKit.Behavior.Tree.Editor
                         if(SirenixEditorGUI.IconButton(EditorIcons.X, 15, 15))
                         {
                             _behaviorTreeRunner.Variables.Remove(key);
-                            _behaviorTreeRunner.ModelTree.Blackboard.UnregisterCallback<IBlackboard.ValueRemoveEvent>(key, _behaviorTreeRunner.RemoveItem);
-                            _behaviorTreeRunner.ModelTree.Blackboard.UnregisterCallback<IBlackboard.NameChangedEvent>(key, _behaviorTreeRunner.RenameItem);
                         }
                         EditorGUILayout.EndHorizontal();
                     }
@@ -93,8 +91,6 @@ namespace GameToolKit.Behavior.Tree.Editor
                             {
                                 var variable = (child.Children.Get("Value").ValueEntry.WeakSmartValue as BlackboardVariable).Clone();
                                 _behaviorTreeRunner.Variables.Add(key, variable);
-                                _behaviorTreeRunner.ModelTree.Blackboard.RegisterCallback<IBlackboard.ValueRemoveEvent>(key, _behaviorTreeRunner.RemoveItem);
-                                _behaviorTreeRunner.ModelTree.Blackboard.RegisterCallback<IBlackboard.NameChangedEvent>(key, _behaviorTreeRunner.RenameItem);
 
                             }
                             EditorGUILayout.EndHorizontal();

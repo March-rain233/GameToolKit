@@ -1,0 +1,1657 @@
+Using pre-set license
+Built from '2022.3/china_unity/release' branch; Version is '2022.3.14f1c1 (25540d4d24fc) revision 2446349'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit CoreCountrySpecific' Language: 'zh' Physical Memory: 16204 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.14f1c1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker4
+-projectPath
+D:/Program/unity/GameToolKit
+-logFile
+Logs/AssetImportWorker4.log
+-srvPort
+54130
+Successfully changed project path to: D:/Program/unity/GameToolKit
+D:/Program/unity/GameToolKit
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [8960] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 307376314 [EditorId] 307376314 [Version] 1048832 [Id] WindowsEditor(7,March-rain) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [8960] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 307376314 [EditorId] 307376314 [Version] 1048832 [Id] WindowsEditor(7,March-rain) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
+Refreshing native plugins compatible for Editor in 24.89 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.14f1c1 (25540d4d24fc)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Program/unity/GameToolKit/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2070 Super (ID=0x1e91)
+    Vendor:   NVIDIA
+    VRAM:     8003 MB
+    Driver:   31.0.15.4633
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56260
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.008901 seconds.
+- Loaded All Assemblies, in  0.364 seconds
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.259 seconds
+Domain Reload Profiling: 620ms
+	BeginReloadAssembly (113ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (34ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (58ms)
+	LoadAllAssembliesAndSetupDomain (145ms)
+		LoadAssemblies (110ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (142ms)
+			TypeCache.Refresh (141ms)
+				TypeCache.ScanAssembly (128ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (259ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (201ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (9ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (131ms)
+			ProcessInitializeOnLoadMethodAttributes (49ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+========================================================================
+Worker process is ready to serve import requests
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.728 seconds
+Refreshing native plugins compatible for Editor in 6.57 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.224 seconds
+Domain Reload Profiling: 1947ms
+	BeginReloadAssembly (144ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (20ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (51ms)
+	LoadAllAssembliesAndSetupDomain (484ms)
+		LoadAssemblies (364ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (203ms)
+			TypeCache.Refresh (167ms)
+				TypeCache.ScanAssembly (151ms)
+			ScanForSourceGeneratedMonoScriptInfo (25ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (1224ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1058ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (131ms)
+			ProcessInitializeOnLoadAttributes (620ms)
+			ProcessInitializeOnLoadMethodAttributes (282ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
+Refreshing native plugins compatible for Editor in 7.71 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4724 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 116 unused Assets / (0.8 MB). Loaded Objects now: 5289.
+Memory consumption went from 217.9 MB to 217.1 MB.
+Total: 14.442700 ms (FindLiveObjects: 0.331600 ms CreateObjectMapping: 0.297900 ms MarkObjects: 13.413100 ms  DeleteObjects: 0.399000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1144032.447696 seconds.
+  path: Packages/com.unity.shadergraph/Editor
+  artifactKey: Guid(af35822cb60c9a44cba3e3f0317ac0ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor using Guid(af35822cb60c9a44cba3e3f0317ac0ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61618c141d84b7f19c0531547c1c8d62') in 0.008940 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.735896 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Interface
+  artifactKey: Guid(f7cd1e478bcba4d0f9570597921367a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Interface using Guid(f7cd1e478bcba4d0f9570597921367a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '895c08c0ff2c3bfe636a093cd6594921') in 0.010169 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.877051 seconds.
+  path: Packages/com.unity.shadergraph/Editor/DefaultShaderIncludes.cs
+  artifactKey: Guid(c5c6fed447622d14cabac1b6abcdd8a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/DefaultShaderIncludes.cs using Guid(c5c6fed447622d14cabac1b6abcdd8a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57110ea14320618aefc71ce15656fd25') in 0.009584 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.722422 seconds.
+  path: Packages/com.unity.shadergraph/Editor/AssemblyInfo.cs
+  artifactKey: Guid(d15809863a4410e409c1b23c81a2e5f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/AssemblyInfo.cs using Guid(d15809863a4410e409c1b23c81a2e5f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f83b246cd23beadf6e52231cc4fa4a9e') in 0.007526 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.773823 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Utilities
+  artifactKey: Guid(f09c1bd643b38480bba505d3a9023457) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Utilities using Guid(f09c1bd643b38480bba505d3a9023457) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4273d576100fa9e76bcf86ab231528f9') in 0.008929 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.364714 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Util
+  artifactKey: Guid(e45006b8ac3b76f4aa0df05ea8514cbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Util using Guid(e45006b8ac3b76f4aa0df05ea8514cbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b853ff6230c9ba0fff5f26539aa02b7') in 0.008360 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.185104 seconds.
+  path: Packages/com.unity.shadergraph/Editor/ShaderGUI
+  artifactKey: Guid(c03d0f7d344c4c0a877eea9f1a0168fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/ShaderGUI using Guid(c03d0f7d344c4c0a877eea9f1a0168fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4c9640791c405efdad047c0255aabe9') in 0.009941 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.189656 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Serialization
+  artifactKey: Guid(c495761f69a84f0fba9c9bd2b9cbdf86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Serialization using Guid(c495761f69a84f0fba9c9bd2b9cbdf86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4ee2122a3206b238e0480852723c454') in 0.012759 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.465090 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources
+  artifactKey: Guid(64c9c5df0004c44f0896e816c69c7aa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources using Guid(64c9c5df0004c44f0896e816c69c7aa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc192d7fde5afb950383043b523d1fdf') in 0.007394 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.095402 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/Resizable.uss
+  artifactKey: Guid(419e3929026046a4797ab0c35f33a788) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/Resizable.uss using Guid(419e3929026046a4797ab0c35f33a788) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5eaf0b4b53a031e9b099d4b1cc4f21ed') in 0.034707 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.661655 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/GraphView
+  artifactKey: Guid(80f811e405d64564b1c671c9813ea9a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/GraphView using Guid(80f811e405d64564b1c671c9813ea9a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58f9e1b2b9eed76be18bef4f87fec266') in 0.008216 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.292220 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes
+  artifactKey: Guid(9d93b12df2d043f9876fa00095ab8c99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes using Guid(9d93b12df2d043f9876fa00095ab8c99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ef2131b85a4552153eb79533364d89d') in 0.011461 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.067969 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/BlackboardFieldExposed.png
+  artifactKey: Guid(2e8113252e9a1b245a81dc384ae86446) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/BlackboardFieldExposed.png using Guid(2e8113252e9a1b245a81dc384ae86446) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7cf3ef40585757b66f435f38acccf3e') in 0.057382 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/NodeChevronUp@2x.png
+  artifactKey: Guid(94c5e3f4e8affed4285a0c674a431b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/NodeChevronUp@2x.png using Guid(94c5e3f4e8affed4285a0c674a431b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '356a1b475b0c49f47171f820b315d9ea') in 0.026816 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/PreviewExpand@2x.png
+  artifactKey: Guid(88995b00867befb41adaada22f8abc21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/PreviewExpand@2x.png using Guid(88995b00867befb41adaada22f8abc21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37b0e3d7cb396993e229b5f949bd6d31') in 0.032008 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/NodeChevronLeft.png
+  artifactKey: Guid(fb2ebd29216e958449e2ce6f37fde61d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/GraphView/Nodes/NodeChevronLeft.png using Guid(fb2ebd29216e958449e2ce6f37fde61d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3118d59e83083fd82833a0ebf579dad9') in 0.032431 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 8.085564 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Importers
+  artifactKey: Guid(a1485bce8acd0428fae1525629b9ed8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Importers using Guid(a1485bce8acd0428fae1525629b9ed8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aabbbb182d37bb8cb726c1caabc45435') in 0.009770 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 16.317361 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Importers/ShaderSubGraphImporter.cs
+  artifactKey: Guid(60072b568d64c40a485e0fc55012dc9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Importers/ShaderSubGraphImporter.cs using Guid(60072b568d64c40a485e0fc55012dc9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '771ffcb38050872193ea91ff3d80da9c') in 0.006661 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.909052 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Importers/ShaderSubGraphImporterEditor.cs
+  artifactKey: Guid(ca6b9d3e5c1927e4cb49fc3107f72c1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Importers/ShaderSubGraphImporterEditor.cs using Guid(ca6b9d3e5c1927e4cb49fc3107f72c1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf077fad250f9ecd351e108d4b290b7b') in 0.006312 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.553924 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Importers/ShaderSubGraphMetadata.cs
+  artifactKey: Guid(0169c6aa153625741a0b332e73a43fb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Importers/ShaderSubGraphMetadata.cs using Guid(0169c6aa153625741a0b332e73a43fb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53e91130f326eeb2d35cc1d0f594f36b') in 0.005947 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.133338 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation
+  artifactKey: Guid(e51156e26e632ae4faebae701a3bff82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation using Guid(e51156e26e632ae4faebae701a3bff82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '100b88508bde90c8ac739105b8cb14fb') in 0.007900 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.148875 seconds.
+  path: Packages/com.unity.shadergraph/Editor/AssetCallbacks
+  artifactKey: Guid(4d0b60652dca71b49a137663137e38ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/AssetCallbacks using Guid(4d0b60652dca71b49a137663137e38ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '332749698033c2e64ead5faed6ba9509') in 0.008333 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.705929 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data
+  artifactKey: Guid(f56929b05da66c942ad2e3fe376346fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data using Guid(f56929b05da66c942ad2e3fe376346fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7c85e7a7af3e03d1d0f3c8a258bb16c') in 0.007008 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.941412 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Graphs
+  artifactKey: Guid(f329b5b280b7f6f449659f05937ac2f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Graphs using Guid(f329b5b280b7f6f449659f05937ac2f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aadc6fb638354e092581e7bae59d5662') in 0.005609 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.939981 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Graphs/AbstractShaderProperty.cs
+  artifactKey: Guid(b1411039ed1342fa8efff6fa8a4c179d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Graphs/AbstractShaderProperty.cs using Guid(b1411039ed1342fa8efff6fa8a4c179d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '628512eab56bef56e06d75e735d8e034') in 0.008130 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.090455 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Extensions
+  artifactKey: Guid(f57abe45f65794ead8ea70a427e17eb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Extensions using Guid(f57abe45f65794ead8ea70a427e17eb7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '435a0fc002a1a0b53631ab67cf25513c') in 0.007834 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 5.614220 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Contexts
+  artifactKey: Guid(e7109562d81c04d45be09c804dc1b8ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Contexts using Guid(e7109562d81c04d45be09c804dc1b8ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f946afcebdd8f5313b58fa78524ab3d2') in 0.008037 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.306880 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Contexts/TargetSetupContext.cs
+  artifactKey: Guid(b681d2c61f5433e4e9be20bfb43db249) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Contexts/TargetSetupContext.cs using Guid(b681d2c61f5433e4e9be20bfb43db249) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80cc81c4cdb2003217e493a54f77add0') in 0.005576 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.967253 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Data
+  artifactKey: Guid(f78c50a65bb1b22409719a84b48ff794) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Data using Guid(f78c50a65bb1b22409719a84b48ff794) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a0309357a31c884f5ce5404156122f9') in 0.008336 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.202894 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Descriptors
+  artifactKey: Guid(e5779cc2c32bb4c90b671ed2e6629e3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Descriptors using Guid(e5779cc2c32bb4c90b671ed2e6629e3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59171502a968e058a10f4c1bddbc6301') in 0.006401 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6.674306 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/GraphCode.cs
+  artifactKey: Guid(42ca4dff865ae4400baa8c54d765a82b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/GraphCode.cs using Guid(42ca4dff865ae4400baa8c54d765a82b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c58a177ff22a44e5ebf68767e7c981bc') in 0.006859 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.775779 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/OutputMetadata.cs
+  artifactKey: Guid(fbda7a7e4c939442d97f344f3636c81f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/OutputMetadata.cs using Guid(fbda7a7e4c939442d97f344f3636c81f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a4a02dd714562af1c2cce102d90852d') in 0.006114 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.990047 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Utils
+  artifactKey: Guid(a776ae8783d76794ead8bbefa7461cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Utils using Guid(a776ae8783d76794ead8bbefa7461cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ce59b0383682d7a1f8c39d1fcc849d0') in 0.007345 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.102913 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Templates
+  artifactKey: Guid(52f964a4069524b47bd98441cad69cd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Templates using Guid(52f964a4069524b47bd98441cad69cd3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26786684c9f03a60a1f147cae0141e82') in 0.008108 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.085410 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Templates/BuildSurfaceDescriptionInputs.template.hlsl
+  artifactKey: Guid(d3b47ff860a51904395688d633cb1018) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Templates/BuildSurfaceDescriptionInputs.template.hlsl using Guid(d3b47ff860a51904395688d633cb1018) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '845b338053b856dfb1be0f654031cb9b') in 0.014273 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.507599 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Targets
+  artifactKey: Guid(219feb550e92ac54ebc24e3fd8d5240a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Targets using Guid(219feb550e92ac54ebc24e3fd8d5240a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f7af56a351922580e91844a401c5196') in 0.009908 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.615141 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/TargetResources
+  artifactKey: Guid(45e29c7fe2bbe4bd199f0029b890f5f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/TargetResources using Guid(45e29c7fe2bbe4bd199f0029b890f5f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db2b9eee97a2f8472fe0253d39d5c59f') in 0.009354 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.104967 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/TargetResources/BlockFields.cs
+  artifactKey: Guid(8f2459b0837a8411dbfa2b61fdaca36e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/TargetResources/BlockFields.cs using Guid(8f2459b0837a8411dbfa2b61fdaca36e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f41b8f49a7970cb019d3c9667ca34a5') in 0.006125 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 9.790621 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/TargetResources/StructFields.cs
+  artifactKey: Guid(2ff492f428a2c413e8f423ded9c594c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/TargetResources/StructFields.cs using Guid(2ff492f428a2c413e8f423ded9c594c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2223ee5c5ebf8e2a9ca4dce9a68b14fa') in 0.006868 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.873506 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/TargetResources/Fields.cs
+  artifactKey: Guid(fd5a24307798d714d93cd15c39848043) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/TargetResources/Fields.cs using Guid(fd5a24307798d714d93cd15c39848043) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '552e49df1f40dda8ee9829a3b104b8c4') in 0.006879 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.314560 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Processors
+  artifactKey: Guid(f4a2b3d2dd6f5468a8423947316be163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Processors using Guid(f4a2b3d2dd6f5468a8423947316be163) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5be39bd22b16904fc28feaa734151f12') in 0.007067 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.288531 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Generation/Enumerations
+  artifactKey: Guid(d0cb1fc17ee65684592babcd1dba61b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Generation/Enumerations using Guid(d0cb1fc17ee65684592babcd1dba61b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc7349fd3177e41f0d42b8f8db935f27') in 0.007664 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.462687 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing
+  artifactKey: Guid(628a36608983fbe49bd5b01cc799f525) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing using Guid(628a36608983fbe49bd5b01cc799f525) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b42f5415c063ddf0101dabeac6392402') in 0.006562 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.777034 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views
+  artifactKey: Guid(a24ff57a99e64e33b4f88b1e81d84e97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views using Guid(a24ff57a99e64e33b4f88b1e81d84e97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b99a91825771f6bfad8c9bd99144bb71') in 0.010771 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.025991 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/GraphEditorView.cs
+  artifactKey: Guid(39a37c8d2156b41e182286e521fe51f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/GraphEditorView.cs using Guid(39a37c8d2156b41e182286e521fe51f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6149efd57149a7a860b72e1423801e84') in 0.005751 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.840596 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/GradientEdge.cs
+  artifactKey: Guid(161180898f1d444880080d666ab7be1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/GradientEdge.cs using Guid(161180898f1d444880080d666ab7be1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '135a3e862d0c68d0522722a98e022b5f') in 0.010433 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.764197 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/FloatField.cs
+  artifactKey: Guid(f1ab7cad0fa94639990c801ecf80bff2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/FloatField.cs using Guid(f1ab7cad0fa94639990c801ecf80bff2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faba9ba7be8d04a035bc17d5c8381f69') in 0.008336 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.764705 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/ContextView.cs
+  artifactKey: Guid(86f8ce6f2b8e29c45a3d40f1c0cfd4d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/ContextView.cs using Guid(86f8ce6f2b8e29c45a3d40f1c0cfd4d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d262d779c69bfb680af4723a59b500f') in 0.005512 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.241476 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/GraphSubWindow.cs
+  artifactKey: Guid(275dd8c834214250ac83d2a4eeab3660) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/GraphSubWindow.cs using Guid(275dd8c834214250ac83d2a4eeab3660) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6915a91ca65206a983a369a4d59f7cfb') in 0.011710 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.600946 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/HelpBoxRow.cs
+  artifactKey: Guid(2193a2e210bbc714d9db73d1ba2c6587) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/HelpBoxRow.cs using Guid(2193a2e210bbc714d9db73d1ba2c6587) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cadfaa8a920fcf3291e5721181cd4224') in 0.006146 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.627326 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/HlslFunctionView.cs
+  artifactKey: Guid(6334d158427214af2861c42a0b51f9cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/HlslFunctionView.cs using Guid(6334d158427214af2861c42a0b51f9cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8504e273cee98e2508160c2ce0b008b9') in 0.006530 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.570959 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/IdentifierField.cs
+  artifactKey: Guid(991f68f49473a9d45a1586045c1e649c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/IdentifierField.cs using Guid(991f68f49473a9d45a1586045c1e649c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c3fe62c39349ff9cd37f0b868d0cf1d') in 0.006179 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.522795 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/IShaderNodeView.cs
+  artifactKey: Guid(b03bcd5e49f90634390c43e32abae2f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/IShaderNodeView.cs using Guid(b03bcd5e49f90634390c43e32abae2f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f945b74ef95c413fcf076f4682916f87') in 0.006543 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.883703 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/ReorderableTextListView.cs
+  artifactKey: Guid(cba41fbec6264db1acb8a265a70cc038) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/ReorderableTextListView.cs using Guid(cba41fbec6264db1acb8a265a70cc038) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd88d2e68430a49fe4d16c83b4b670c1f') in 0.011975 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.034979 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/PropertySheet.cs
+  artifactKey: Guid(145d8ce4e0814506803af49f799cdb02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/PropertySheet.cs using Guid(145d8ce4e0814506803af49f799cdb02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca361b1e9dfcc7e6f7fc995b36ad2ce8') in 0.009710 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.638534 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/PropertyRow.cs
+  artifactKey: Guid(917a1d0b14b14ca0861b93792b550f83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/PropertyRow.cs using Guid(917a1d0b14b14ca0861b93792b550f83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd809834f65c4f1f7ab5c647834c1693') in 0.010903 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.408648 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/PropertyNodeView.cs
+  artifactKey: Guid(71056b51439c71e4e9ba450dda30ff20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/PropertyNodeView.cs using Guid(71056b51439c71e4e9ba450dda30ff20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1479b3b44e766bf27488e0595a90151') in 0.005835 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.440157 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/PreviewSceneResources.cs
+  artifactKey: Guid(37873c3b010e40d1ac1e6aace3c0fb10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/PreviewSceneResources.cs using Guid(37873c3b010e40d1ac1e6aace3c0fb10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02e9c05dc94d0d1b5e17eba998d43557') in 0.009856 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 22.304389 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Views/Slots
+  artifactKey: Guid(56e544af973b458ea7e8051cd0848d24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Views/Slots using Guid(56e544af973b458ea7e8051cd0848d24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a97610a004aa58f2827df0127090b264') in 0.011684 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 13.257175 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Runtime/Materials/ArnoldStandardSurface/ArnoldStandardSurface.shadergraph
+  artifactKey: Guid(3739e562a03fc0b4982d8aa66cc50865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Runtime/Materials/ArnoldStandardSurface/ArnoldStandardSurface.shadergraph using Guid(3739e562a03fc0b4982d8aa66cc50865) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f3dea5e4fd79ac44fcefd31fa7de242') in 0.100503 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 2.453973 seconds.
+  path: Packages/com.march_rain.gametoolkit/Runtime/Dialog/Node
+  artifactKey: Guid(a228852be3bc8214b9a64d58f12a9b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Runtime/Dialog/Node using Guid(a228852be3bc8214b9a64d58f12a9b8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b940256c31149f9f97a58a630539c6e1') in 0.007310 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.858225 seconds.
+  path: Packages/com.march_rain.gametoolkit/Runtime/Dialog/Node/Node.cs
+  artifactKey: Guid(bb90b5bf637ccca4a9bbe0cea5ef9d23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Runtime/Dialog/Node/Node.cs using Guid(bb90b5bf637ccca4a9bbe0cea5ef9d23) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dd231f52ec5574adc7cc68f0b2e8006') in 0.004841 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 16.277739 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/2D/ShaderGraph/Nodes
+  artifactKey: Guid(f270bf32cbff4c02ae07004a815c5632) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/2D/ShaderGraph/Nodes using Guid(f270bf32cbff4c02ae07004a815c5632) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2bcfbb0b89c865a5b738ef87e0369de') in 0.012913 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 5.549024 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/2D/ShaderGraph/Nodes/LightTextureNode.cs
+  artifactKey: Guid(e9aa28223a914899adffca20c1ff4226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/2D/ShaderGraph/Nodes/LightTextureNode.cs using Guid(e9aa28223a914899adffca20c1ff4226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bf96cde7fe8b16e9168073dae13031a') in 0.008315 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 9.280943 seconds.
+  path: Assets/Plugins/Demigiant/DemiLib/Core/Editor/Imgs/ico_nodeArrow.png
+  artifactKey: Guid(4aa34055b1d36ef479af3d7b5701b28a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Demigiant/DemiLib/Core/Editor/Imgs/ico_nodeArrow.png using Guid(4aa34055b1d36ef479af3d7b5701b28a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b00287024dea815990a3e969cc360acc') in 0.024003 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 7.893494 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/Styles/MaterialNodeView.uss
+  artifactKey: Guid(c47827ee6a0eadd4288dede8e3993da3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/Styles/MaterialNodeView.uss using Guid(c47827ee6a0eadd4288dede8e3993da3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a940383fc9aadd3fe924b95c80a265d1') in 0.015545 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 3.853189 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Nodes/Math/Advanced/AbsoluteNode.cs
+  artifactKey: Guid(4b496ffd32c22d94bb525897d152da05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Nodes/Math/Advanced/AbsoluteNode.cs using Guid(4b496ffd32c22d94bb525897d152da05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3397fb9c176a8b07d728eb261033f09e') in 0.005504 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.495089 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Nodes/AbstractMaterialNode.cs
+  artifactKey: Guid(a4da4d7c02dcbdd4f9ef2d3b1106879a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Nodes/AbstractMaterialNode.cs using Guid(a4da4d7c02dcbdd4f9ef2d3b1106879a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65cd88fc3e5d80fcf8460b2465d7adf4') in 0.006646 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.572604 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Legacy/AbstractMaterialNode0.cs
+  artifactKey: Guid(36fb54922b1048cea6faba93b33ab02c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Legacy/AbstractMaterialNode0.cs using Guid(36fb54922b1048cea6faba93b33ab02c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '206049e01cadd519283b5c5ae99f2a7c') in 0.010494 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.824394 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Inspector/PropertyDrawers/AbstractMaterialNodePropertyDrawer.cs
+  artifactKey: Guid(6436de6b57634b32a3c95d37c1b9b2c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Inspector/PropertyDrawers/AbstractMaterialNodePropertyDrawer.cs using Guid(6436de6b57634b32a3c95d37c1b9b2c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38c85c9bbbfc4904f8016e452f50f159') in 0.009125 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.102767 seconds.
+  path: Packages/com.march_rain.gametoolkit/Runtime/BehaviorTree/BaseClass/ActionNode.cs
+  artifactKey: Guid(de5c043a4c2a0944b91102ffed30fa35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Runtime/BehaviorTree/BaseClass/ActionNode.cs using Guid(de5c043a4c2a0944b91102ffed30fa35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41723c1d59a41e2c1605e7a4450e7e91') in 0.006958 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6.741900 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Nodes/Utility/Logic/AnyNode.cs
+  artifactKey: Guid(f3d072ddeeee848848f2e59dbb5cf1d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Nodes/Utility/Logic/AnyNode.cs using Guid(f3d072ddeeee848848f2e59dbb5cf1d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4da0151a593a22a77cc3c3d4efd1e026') in 0.007515 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 24.909593 seconds.
+  path: Packages/com.march_rain.gametoolkit/Editor/BehaviorTree/USS/Node.uss
+  artifactKey: Guid(3282c20fe0ec9974abb43a74aaf7db05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Editor/BehaviorTree/USS/Node.uss using Guid(3282c20fe0ec9974abb43a74aaf7db05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6139a69aa73fbe4da54560bf34f534b7') in 0.012046 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.074537 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/Styles/NodeSettings.uss
+  artifactKey: Guid(59bba4c88ab5f464d9a8f51088561c48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/Styles/NodeSettings.uss using Guid(59bba4c88ab5f464d9a8f51088561c48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dcc1bda696c705dcdd8737c5d3fe74c5') in 0.012840 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 3.404355 seconds.
+  path: Packages/com.march_rain.gametoolkit/Runtime/BehaviorTree/BaseClass/Node.cs
+  artifactKey: Guid(d678e736c1e26494480f120d86256022) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Runtime/BehaviorTree/BaseClass/Node.cs using Guid(d678e736c1e26494480f120d86256022) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '616db84a3edcd1e9ec21734838ca7f74') in 0.005978 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 3.257207 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Nodes/Utility/Logic/NandNode.cs
+  artifactKey: Guid(4defde87a9d5e44d8b8900d3f8ef6440) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Nodes/Utility/Logic/NandNode.cs using Guid(4defde87a9d5e44d8b8900d3f8ef6440) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20bb3af27c289de5fee8efe4374c72f7') in 0.005676 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.666498 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Nodes/Math/Advanced/NegateNode.cs
+  artifactKey: Guid(27a3ba76eb1c9a54f8355034489b2e83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Nodes/Math/Advanced/NegateNode.cs using Guid(27a3ba76eb1c9a54f8355034489b2e83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fca1a343008417647c8e4f41208f0725') in 0.005492 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.882383 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/Styles/PropertyNodeView.uss
+  artifactKey: Guid(0620899e56d69964ba2cbda1de01bbe2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/Styles/PropertyNodeView.uss using Guid(0620899e56d69964ba2cbda1de01bbe2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '995b1a306ae7375cc796ef16e8e4caa6') in 0.011732 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.044919 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Resources/Styles/RedirectNode.uss
+  artifactKey: Guid(e1a4e0aa330ca2f43b4625b248a0539e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Resources/Styles/RedirectNode.uss using Guid(e1a4e0aa330ca2f43b4625b248a0539e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c251a5b99ae2fdf3da8a9142a233d82') in 0.012469 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 31.782082 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Manipulators/ResizeSideHandle.cs
+  artifactKey: Guid(b165bcb20989fa2428253e51bc4f440f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Manipulators/ResizeSideHandle.cs using Guid(b165bcb20989fa2428253e51bc4f440f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee98af464c599a12dc3fbd1e5ff3bfa9') in 0.007205 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.964087 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Manipulators/ResizeBorderFrame.cs
+  artifactKey: Guid(1128492b211994d46be4acd2ccac15fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Manipulators/ResizeBorderFrame.cs using Guid(1128492b211994d46be4acd2ccac15fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4a6f4eb79c9048a1db8a1fbaa9da198') in 0.007171 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 23.913905 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/Manipulators/Draggable.cs
+  artifactKey: Guid(ad4cd8fec883e80418e5427585b426db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/Manipulators/Draggable.cs using Guid(ad4cd8fec883e80418e5427585b426db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '365654bd345ee05b830bc41acb370615') in 0.006543 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 318.251377 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Light/Create_Edge.png
+  artifactKey: Guid(1af9d2e44ecf3a2468601c9071df581f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Light/Create_Edge.png using Guid(1af9d2e44ecf3a2468601c9071df581f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d224eab22570c7e329e5bfcd3187711') in 0.047315 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Light/Create_Edge@4x.png
+  artifactKey: Guid(1f21190ca9d1e8540b2a3a2e46002685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Light/Create_Edge@4x.png using Guid(1f21190ca9d1e8540b2a3a2e46002685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a09a410f98bbd5ca772138e890bb2a27') in 0.025035 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Create_Edge@4x.png
+  artifactKey: Guid(62053ed690017d143bd2cfa8e5dc3ff5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Create_Edge@4x.png using Guid(62053ed690017d143bd2cfa8e5dc3ff5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fa46d3eb23d6fb68c167cae53d2d953') in 0.030200 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Split_Edge@4x.png
+  artifactKey: Guid(ed130aac49764ad4f9d35454c297b75a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Split_Edge@4x.png using Guid(ed130aac49764ad4f9d35454c297b75a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '784e986b30d1a5a2368ef896cac85eb9') in 0.029113 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Create_Edge@2x.png
+  artifactKey: Guid(ebaf5b914f751a142b6851d985adf69d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Create_Edge@2x.png using Guid(ebaf5b914f751a142b6851d985adf69d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc6311fce55606c4cf40ccfb63baca5f') in 0.031450 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Create_Edge.png
+  artifactKey: Guid(7a5bb676bcccfea429f2138b6fbd005e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Create_Edge.png using Guid(7a5bb676bcccfea429f2138b6fbd005e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b5cb66f576c600746bb522f3382883c') in 0.029817 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Split_Edge.png
+  artifactKey: Guid(0530bfa18fbf4a140b3a604c988a9a4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Split_Edge.png using Guid(0530bfa18fbf4a140b3a604c988a9a4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fe18d259e8a96a2089b0576cdd2986d') in 0.027943 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Split_Edge@2x.png
+  artifactKey: Guid(22fade1e2426f684a9c315c974f50d18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/EditorIcons/Dark/d_Split_Edge@2x.png using Guid(22fade1e2426f684a9c315c974f50d18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87fe5cabc56d34060f9ab9bbe0590b5c') in 0.033458 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 4.510480 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Drawing/EdgeConnectorListener.cs
+  artifactKey: Guid(36c61698900b42c9a6b5e28c3651249a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Drawing/EdgeConnectorListener.cs using Guid(36c61698900b42c9a6b5e28c3651249a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee2d2dc5a99717f9cc40bf3d83e84ff0') in 0.012219 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.801 seconds
+Refreshing native plugins compatible for Editor in 9.06 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.119 seconds
+Domain Reload Profiling: 2914ms
+	BeginReloadAssembly (220ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (16ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (72ms)
+	RebuildCommonClasses (56ms)
+	RebuildNativeTypeToScriptingClass (23ms)
+	initialDomainReloadingComplete (67ms)
+	LoadAllAssembliesAndSetupDomain (429ms)
+		LoadAssemblies (460ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (62ms)
+			TypeCache.Refresh (13ms)
+				TypeCache.ScanAssembly (3ms)
+			ScanForSourceGeneratedMonoScriptInfo (34ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (2119ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1383ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (13ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (160ms)
+			ProcessInitializeOnLoadAttributes (848ms)
+			ProcessInitializeOnLoadMethodAttributes (337ms)
+			AfterProcessingInitializeOnLoad (15ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (17ms)
+Refreshing native plugins compatible for Editor in 6.80 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4614 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.8 MB). Loaded Objects now: 5351.
+Memory consumption went from 199.5 MB to 198.7 MB.
+Total: 15.242800 ms (FindLiveObjects: 0.343200 ms CreateObjectMapping: 0.339900 ms MarkObjects: 14.242400 ms  DeleteObjects: 0.316500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.770 seconds
+Refreshing native plugins compatible for Editor in 9.31 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.448 seconds
+Domain Reload Profiling: 3212ms
+	BeginReloadAssembly (210ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (55ms)
+	RebuildCommonClasses (43ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (53ms)
+	LoadAllAssembliesAndSetupDomain (442ms)
+		LoadAssemblies (477ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (64ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (40ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (2449ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1572ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (12ms)
+			SetLoadedEditorAssemblies (10ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (191ms)
+			ProcessInitializeOnLoadAttributes (1052ms)
+			ProcessInitializeOnLoadMethodAttributes (293ms)
+			AfterProcessingInitializeOnLoad (13ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (17ms)
+Refreshing native plugins compatible for Editor in 10.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4608 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.8 MB). Loaded Objects now: 5367.
+Memory consumption went from 202.0 MB to 201.2 MB.
+Total: 23.006800 ms (FindLiveObjects: 0.748300 ms CreateObjectMapping: 0.809700 ms MarkObjects: 21.054800 ms  DeleteObjects: 0.392800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 924.698401 seconds.
+  path: Assets/Resources/BehaviorTree/BTree.asset
+  artifactKey: Guid(9597693d68665ff4d989972f82bb922a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/BehaviorTree/BTree.asset using Guid(9597693d68665ff4d989972f82bb922a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd2517321a06e05a0c25db936a1bed69') in 0.181886 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.727 seconds
+Refreshing native plugins compatible for Editor in 10.36 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.664 seconds
+Domain Reload Profiling: 2383ms
+	BeginReloadAssembly (203ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (15ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (56ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (410ms)
+		LoadAssemblies (449ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (57ms)
+			TypeCache.Refresh (16ms)
+				TypeCache.ScanAssembly (6ms)
+			ScanForSourceGeneratedMonoScriptInfo (28ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1664ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1045ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (138ms)
+			ProcessInitializeOnLoadAttributes (678ms)
+			ProcessInitializeOnLoadMethodAttributes (203ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 6.99 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4607 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.8 MB). Loaded Objects now: 5383.
+Memory consumption went from 203.6 MB to 202.9 MB.
+Total: 18.395300 ms (FindLiveObjects: 0.377500 ms CreateObjectMapping: 0.331900 ms MarkObjects: 17.166600 ms  DeleteObjects: 0.517600 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  5.153 seconds
+Refreshing native plugins compatible for Editor in 7.23 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in 13.492 seconds
+Domain Reload Profiling: 18641ms
+	BeginReloadAssembly (961ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (96ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (221ms)
+	RebuildCommonClasses (34ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (49ms)
+	LoadAllAssembliesAndSetupDomain (4090ms)
+		LoadAssemblies (4465ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (136ms)
+			TypeCache.Refresh (30ms)
+				TypeCache.ScanAssembly (7ms)
+			ScanForSourceGeneratedMonoScriptInfo (92ms)
+			ResolveRequiredComponents (14ms)
+	FinalizeReload (13494ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1086ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (9ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (137ms)
+			ProcessInitializeOnLoadAttributes (705ms)
+			ProcessInitializeOnLoadMethodAttributes (217ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (25ms)
+Refreshing native plugins compatible for Editor in 8.62 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4608 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.7 MB). Loaded Objects now: 5401.
+Memory consumption went from 206.0 MB to 205.2 MB.
+Total: 16.674200 ms (FindLiveObjects: 0.388900 ms CreateObjectMapping: 0.361100 ms MarkObjects: 15.581200 ms  DeleteObjects: 0.342000 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 22783.704788 seconds.
+  path: Assets/Resources/Data Set.asset
+  artifactKey: Guid(39546f4c76b9cf146aaed4bbf41d22eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Data Set.asset using Guid(39546f4c76b9cf146aaed4bbf41d22eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2988b0187d271a2aa16a5e1dcb0e314e') in 0.013635 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Resources/DataSetManager.asset
+  artifactKey: Guid(ef08078cdc3495040be6a315941f4d74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/DataSetManager.asset using Guid(ef08078cdc3495040be6a315941f4d74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17ae98a87ede0227bacba3a13ff00b7b') in 0.006097 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.060439 seconds.
+  path: Assets/Resources/FrameSetting.asset
+  artifactKey: Guid(7b46fde64f6dd8c49954bdaaeb61b528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/FrameSetting.asset using Guid(7b46fde64f6dd8c49954bdaaeb61b528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faae9149646a4e26b5865169fd1658a5') in 0.009480 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Resources/DOTweenSettings.asset
+  artifactKey: Guid(525bb364427035f4eaafbac953bc9a8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/DOTweenSettings.asset using Guid(525bb364427035f4eaafbac953bc9a8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50e22ffe59f453c875bcb16140cc78b6') in 0.033857 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000224 seconds.
+  path: Assets/Resources/Data Set Manager.asset
+  artifactKey: Guid(d77a135d6a900234382ad1ba6e5de1c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Data Set Manager.asset using Guid(d77a135d6a900234382ad1ba6e5de1c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '307abdb538a2a1bfbb9932534737deec') in 0.009326 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 9.420375 seconds.
+  path: Assets/UI Toolkit/PanelSettings.asset
+  artifactKey: Guid(c92f1b11381883544b43b786b90e3803) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI Toolkit/PanelSettings.asset using Guid(c92f1b11381883544b43b786b90e3803) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2a8ec289b3759e0bc781b6ed64a91dc') in 0.046051 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 24
+========================================================================
+Received Import Request.
+  Time since last request: 19.174916 seconds.
+  path: Packages/com.march_rain.gametoolkit/package.json
+  artifactKey: Guid(375d7970a91a61a449e07ada72c8e2b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/package.json using Guid(375d7970a91a61a449e07ada72c8e2b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab52419576b939be2a3bf80adcbf646e') in 0.006760 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 18.158515 seconds.
+  path: Packages/com.march_rain.gametoolkit/Editor/BehaviorTree/UXML/BehaviorTreeEditor.uxml
+  artifactKey: Guid(7f83d279002b900419ff6e0a24ce6841) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Editor/BehaviorTree/UXML/BehaviorTreeEditor.uxml using Guid(7f83d279002b900419ff6e0a24ce6841) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dad1e4337694c8310cdbadbe13ce126') in 0.032601 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 2.454872 seconds.
+  path: Assets/NewUXMLTemplate.uxml
+  artifactKey: Guid(c7467702ee06ef84383d1f4e91e0285d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/NewUXMLTemplate.uxml using Guid(c7467702ee06ef84383d1f4e91e0285d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6199582de73dbeaf309f3a735a7eee74') in 0.011872 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.768 seconds
+Refreshing native plugins compatible for Editor in 6.68 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.606 seconds
+Domain Reload Profiling: 2368ms
+	BeginReloadAssembly (219ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (12ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (70ms)
+	RebuildCommonClasses (41ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (44ms)
+	LoadAllAssembliesAndSetupDomain (444ms)
+		LoadAssemblies (492ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (51ms)
+			TypeCache.Refresh (13ms)
+				TypeCache.ScanAssembly (3ms)
+			ScanForSourceGeneratedMonoScriptInfo (25ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1607ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1007ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (14ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (135ms)
+			ProcessInitializeOnLoadAttributes (648ms)
+			ProcessInitializeOnLoadMethodAttributes (191ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 6.70 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4607 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 65 unused Assets / (0.8 MB). Loaded Objects now: 5418.
+Memory consumption went from 207.7 MB to 207.0 MB.
+Total: 14.700000 ms (FindLiveObjects: 0.422500 ms CreateObjectMapping: 0.382600 ms MarkObjects: 13.354600 ms  DeleteObjects: 0.539200 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 195.766877 seconds.
+  path: Packages/com.march_rain.gametoolkit/Editor/BehaviorTree/UXML/BehaviorTreeEditor.uxml
+  artifactKey: Guid(7f83d279002b900419ff6e0a24ce6841) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.march_rain.gametoolkit/Editor/BehaviorTree/UXML/BehaviorTreeEditor.uxml using Guid(7f83d279002b900419ff6e0a24ce6841) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c102b87a7927bdfcc448f3fa0aa5445') in 0.029941 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 274.164113 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Graphs/GraphData.cs
+  artifactKey: Guid(6a2fb414d26e54be1a6cc2b4d6aa4b1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Graphs/GraphData.cs using Guid(6a2fb414d26e54be1a6cc2b4d6aa4b1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53a8adf4026d7f347142434dbff972b4') in 0.005993 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 19.781526 seconds.
+  path: Packages/com.unity.shadergraph/Editor/Data/Implementation/GraphObject.cs
+  artifactKey: Guid(463ff292c8554dc18fb52fb725707a21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.shadergraph/Editor/Data/Implementation/GraphObject.cs using Guid(463ff292c8554dc18fb52fb725707a21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '863e96304320bff3c07950f11c9c3526') in 0.008586 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.682 seconds
+Refreshing native plugins compatible for Editor in 7.01 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.643 seconds
+Domain Reload Profiling: 2319ms
+	BeginReloadAssembly (190ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (50ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (41ms)
+	LoadAllAssembliesAndSetupDomain (396ms)
+		LoadAssemblies (435ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (55ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (5ms)
+			ScanForSourceGeneratedMonoScriptInfo (26ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1643ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1058ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (133ms)
+			ProcessInitializeOnLoadAttributes (708ms)
+			ProcessInitializeOnLoadMethodAttributes (193ms)
+			AfterProcessingInitializeOnLoad (10ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (12ms)
+Refreshing native plugins compatible for Editor in 6.71 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4607 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.7 MB). Loaded Objects now: 5434.
+Memory consumption went from 209.7 MB to 208.9 MB.
+Total: 15.066300 ms (FindLiveObjects: 0.421100 ms CreateObjectMapping: 0.429600 ms MarkObjects: 13.875400 ms  DeleteObjects: 0.339100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.715 seconds
+Refreshing native plugins compatible for Editor in 6.75 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.634 seconds
+Domain Reload Profiling: 2343ms
+	BeginReloadAssembly (226ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (61ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (38ms)
+	LoadAllAssembliesAndSetupDomain (400ms)
+		LoadAssemblies (457ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (54ms)
+			TypeCache.Refresh (17ms)
+				TypeCache.ScanAssembly (5ms)
+			ScanForSourceGeneratedMonoScriptInfo (26ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (1634ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1057ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (13ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (132ms)
+			ProcessInitializeOnLoadAttributes (688ms)
+			ProcessInitializeOnLoadMethodAttributes (205ms)
+			AfterProcessingInitializeOnLoad (11ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (12ms)
+Refreshing native plugins compatible for Editor in 6.98 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4608 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.8 MB). Loaded Objects now: 5450.
+Memory consumption went from 211.9 MB to 211.1 MB.
+Total: 16.737500 ms (FindLiveObjects: 0.513700 ms CreateObjectMapping: 0.526800 ms MarkObjects: 15.347700 ms  DeleteObjects: 0.347100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.692 seconds
+Refreshing native plugins compatible for Editor in 7.95 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.814 seconds
+Domain Reload Profiling: 2500ms
+	BeginReloadAssembly (185ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (47ms)
+	RebuildCommonClasses (44ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (46ms)
+	LoadAllAssembliesAndSetupDomain (393ms)
+		LoadAssemblies (431ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (55ms)
+			TypeCache.Refresh (16ms)
+				TypeCache.ScanAssembly (6ms)
+			ScanForSourceGeneratedMonoScriptInfo (26ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1815ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1187ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (138ms)
+			ProcessInitializeOnLoadAttributes (809ms)
+			ProcessInitializeOnLoadMethodAttributes (215ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 7.28 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4608 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.8 MB). Loaded Objects now: 5466.
+Memory consumption went from 213.8 MB to 213.1 MB.
+Total: 17.289700 ms (FindLiveObjects: 0.478000 ms CreateObjectMapping: 0.448600 ms MarkObjects: 15.946100 ms  DeleteObjects: 0.415100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.698 seconds
+Refreshing native plugins compatible for Editor in 7.03 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.737 seconds
+Domain Reload Profiling: 2427ms
+	BeginReloadAssembly (198ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (52ms)
+	RebuildCommonClasses (47ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (51ms)
+	LoadAllAssembliesAndSetupDomain (382ms)
+		LoadAssemblies (428ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (53ms)
+			TypeCache.Refresh (13ms)
+				TypeCache.ScanAssembly (3ms)
+			ScanForSourceGeneratedMonoScriptInfo (26ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1738ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1139ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (148ms)
+			ProcessInitializeOnLoadAttributes (756ms)
+			ProcessInitializeOnLoadMethodAttributes (203ms)
+			AfterProcessingInitializeOnLoad (18ms)
+			EditorAssembliesLoaded (1ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (32ms)
+Refreshing native plugins compatible for Editor in 9.38 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4608 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 64 unused Assets / (0.7 MB). Loaded Objects now: 5482.
+Memory consumption went from 215.7 MB to 215.0 MB.
+Total: 17.154400 ms (FindLiveObjects: 0.405100 ms CreateObjectMapping: 0.448700 ms MarkObjects: 15.922700 ms  DeleteObjects: 0.377000 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: a3ef5dd2817f97addfee359851a9dba5 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

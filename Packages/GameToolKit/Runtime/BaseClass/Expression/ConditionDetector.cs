@@ -27,6 +27,8 @@ namespace GameToolKit
         /// </remarks>
         List<(BlackboardVariable, BlackboardVariable.VariableChangedHandler)> _listeners;
         ExpressionTree _expressionTree;
+        IBlackboard _blackboard;
+        private bool _disposedValue;
 
         /// <summary>
         /// 条件达成事件
@@ -89,9 +91,16 @@ namespace GameToolKit
             _converter = new PostfixConverter(opMatcher, paMatcher);
         }
 
-        public ConditionDetector(string conditionContext)
+        /// <summary>
+        /// 生成条件检测器
+        /// </summary>
+        /// <param name="conditionContext">条件文本</param>
+        /// <param name="blackboard">黑板</param>
+        /// <exception cref="Exception"></exception>
+        public ConditionDetector(string conditionContext, IBlackboard blackboard)
         {
             _listeners = new List<(BlackboardVariable, BlackboardVariable.VariableChangedHandler)>();
+            _blackboard = blackboard;
 
             // 生成委托
             // eg：%level >= 10 &&% coin < 2 || $123546222 > 0
@@ -99,24 +108,24 @@ namespace GameToolKit
             // $表示uid %表示名称
 
             //把表达式内名称重定位为uid
-            string exp = _nameRegex.Replace(conditionContext, m => "$" + UIDManager.Instance.Name2UID(m.Value[1..]));
+            string exp = _nameRegex.Replace(conditionContext, m => "$" + _blackboard.GUIDManager.Name2ID(m.Value[1..]));
             //构造后缀表达式
             var words = _converter.Convert(exp);
             //获取数据
             var valueStrings = from word in words where !word.IsOperation select word.Context;
             var values = new Dictionary<string, (Type, object)>();
             var blackboardIndexs = new HashSet<string>();
-            foreach(var word in valueStrings)
+            foreach (var word in valueStrings)
             {
-                if(word[0] == '$')
+                if (word[0] == '$')
                 {
-                    var value = ServiceAP.Instance.GlobalVariable[word[1..]];
+                    var value = _blackboard[word[1..]];
                     blackboardIndexs.Add(word[1..]);
                     values[word] = (value.TypeOfValue, value.Value);
                 }
                 else
                 {
-                    if(word[0] == '"' && word[^1] == '"') values[word] = (typeof(string), word[1..^1]);
+                    if (word[0] == '"' && word[^1] == '"') values[word] = (typeof(string), word[1..^1]);
                     else if (int.TryParse(word, out var ivalue)) values[word] = (typeof(int), ivalue);
                     else if (float.TryParse(word, out var fvalue)) values[word] = (typeof(float), fvalue);
                     else if (double.TryParse(word, out var dvalue)) values[word] = (typeof(double), dvalue);
@@ -125,12 +134,12 @@ namespace GameToolKit
                 }
             };
             _expressionTree = new ExpressionTree(words, values);
-            foreach(var index in blackboardIndexs)
+            foreach (var index in blackboardIndexs)
             {
-                var variable = ServiceAP.Instance.GlobalVariable[index];
-                BlackboardVariable.VariableChangedHandler handler = (BlackboardVariable sender, object newValue, object oldValue) =>
+                var variable = _blackboard[index];
+                BlackboardVariable.VariableChangedHandler handler = () =>
                 {
-                    _expressionTree.SetValue(index, newValue);
+                    _expressionTree.SetValue(index, variable.Value);
                     NeedRefresh?.Invoke(this);
                 };
                 variable.ValueChanged += handler;
@@ -138,29 +147,45 @@ namespace GameToolKit
             }
         }
 
+        /// <summary>
+        /// 刷新检测值
+        /// </summary>
         public void Refresh()
         {
             _expressionTree.Refresh();
             if ((bool)_expressionTree.FinalValue) Complete?.Invoke();
         }
 
-        public void Dispose()
+        protected virtual void Dispose(bool disposing)
         {
-            if (_listeners != null)
+            if (!_disposedValue)
             {
-                ServiceAP ap = ServiceAP.Instance;
-                foreach (var (uid, func) in _listeners)
+                if (disposing)
                 {
-                    ap.GlobalVariable[uid].ValueChanged -= func;
+                    // TODO: 释放托管状态(托管对象)
+                    foreach(var pair in _listeners) pair.Item1.ValueChanged -= pair.Item2;
+                    _listeners = null;
+                    _expressionTree = null;
                 }
-                _listeners.Clear();
+
+                // TODO: 释放未托管的资源(未托管的对象)并重写终结器
+                // TODO: 将大型字段设置为 null
+                _disposedValue = true;
             }
-            GC.SuppressFinalize(this);
         }
 
-        ~ConditionDetector()
+        // // TODO: 仅当“Dispose(bool disposing)”拥有用于释放未托管资源的代码时才替代终结器
+        // ~ConditionDetector()
+        // {
+        //     // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
         {
-            Dispose();
+            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
         #region 生成函数

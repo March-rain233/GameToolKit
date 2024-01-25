@@ -6,10 +6,5 @@ namespace GameToolKit.Behavior.Tree
     [NodeCategory("Logic/Input")]
     public abstract class SourceNode : LogicNode
     {
-        protected override void OnInit()
-        {
-            base.OnInit();
-            InitOutputData();
-        }
     }
 }

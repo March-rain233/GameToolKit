@@ -15,7 +15,7 @@ D:/Program/unity/GameToolKit
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-54408
+54130
 Successfully changed project path to: D:/Program/unity/GameToolKit
 D:/Program/unity/GameToolKit
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,12 +49,12 @@ D:/Program/unity/GameToolKit
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [1420] Host "[IP] 2.0.0.1 [Port] 0 [Flags] 2 [Guid] 3214210732 [EditorId] 3214210732 [Version] 1048832 [Id] WindowsEditor(7,March-rain) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [11168] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1579280906 [EditorId] 1579280906 [Version] 1048832 [Id] WindowsEditor(7,March-rain) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [1420] Host "[IP] 2.0.0.1 [Port] 0 [Flags] 2 [Guid] 3214210732 [EditorId] 3214210732 [Version] 1048832 [Id] WindowsEditor(7,March-rain) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [11168] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1579280906 [EditorId] 1579280906 [Version] 1048832 [Id] WindowsEditor(7,March-rain) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
-Refreshing native plugins compatible for Editor in 40.22 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 33.88 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.14f1c1 (25540d4d24fc)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/Resources/UnitySubsystems
@@ -70,44 +70,44 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56544
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56932
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.14f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.017576 seconds.
-- Loaded All Assemblies, in  0.672 seconds
+Registered in 0.011975 seconds.
+- Loaded All Assemblies, in  0.497 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.555 seconds
-Domain Reload Profiling: 1222ms
-	BeginReloadAssembly (166ms)
+- Finished resetting the current domain, in  0.308 seconds
+Domain Reload Profiling: 802ms
+	BeginReloadAssembly (170ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (86ms)
-	RebuildNativeTypeToScriptingClass (20ms)
-	initialDomainReloadingComplete (116ms)
-	LoadAllAssembliesAndSetupDomain (278ms)
-		LoadAssemblies (161ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (71ms)
+	LoadAllAssembliesAndSetupDomain (206ms)
+		LoadAssemblies (165ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (275ms)
-			TypeCache.Refresh (272ms)
-				TypeCache.ScanAssembly (245ms)
+		AnalyzeDomain (203ms)
+			TypeCache.Refresh (201ms)
+				TypeCache.ScanAssembly (184ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (556ms)
+	FinalizeReload (308ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (370ms)
+		SetupLoadedEditorAssemblies (234ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (20ms)
-			SetLoadedEditorAssemblies (23ms)
+			InitializePlatformSupportModulesInManaged (12ms)
+			SetLoadedEditorAssemblies (10ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (6ms)
-			ProcessInitializeOnLoadAttributes (233ms)
-			ProcessInitializeOnLoadMethodAttributes (88ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (153ms)
+			ProcessInitializeOnLoadMethodAttributes (56ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -119,8 +119,8 @@ Worker process is ready to serve import requests
 Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.245 seconds
-Refreshing native plugins compatible for Editor in 8.08 ms, found 3 plugins.
+- Loaded All Assemblies, in  1.229 seconds
+Refreshing native plugins compatible for Editor in 11.25 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Script 'Packages/com.march_rain.gametoolkit/Sample/MainDialog.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 Script 'Packages/com.march_rain.gametoolkit/Sample/OptionPanel.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
@@ -128,48 +128,48 @@ Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.660 seconds
-Domain Reload Profiling: 3897ms
-	BeginReloadAssembly (240ms)
+- Finished resetting the current domain, in  1.812 seconds
+Domain Reload Profiling: 3033ms
+	BeginReloadAssembly (197ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (10ms)
+		DisableScriptedObjects (8ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (32ms)
-	RebuildCommonClasses (50ms)
+		CreateAndSetChildDomain (27ms)
+	RebuildCommonClasses (56ms)
 	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (70ms)
-	LoadAllAssembliesAndSetupDomain (863ms)
-		LoadAssemblies (564ms)
+	initialDomainReloadingComplete (63ms)
+	LoadAllAssembliesAndSetupDomain (890ms)
+		LoadAssemblies (710ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (422ms)
-			TypeCache.Refresh (337ms)
-				TypeCache.ScanAssembly (307ms)
-			ScanForSourceGeneratedMonoScriptInfo (71ms)
-			ResolveRequiredComponents (13ms)
-	FinalizeReload (2661ms)
+		AnalyzeDomain (295ms)
+			TypeCache.Refresh (240ms)
+				TypeCache.ScanAssembly (215ms)
+			ScanForSourceGeneratedMonoScriptInfo (37ms)
+			ResolveRequiredComponents (16ms)
+	FinalizeReload (1813ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (2372ms)
+		SetupLoadedEditorAssemblies (1570ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (13ms)
+			InitializePlatformSupportModulesInManaged (11ms)
 			SetLoadedEditorAssemblies (12ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (209ms)
-			ProcessInitializeOnLoadAttributes (1747ms)
-			ProcessInitializeOnLoadMethodAttributes (378ms)
-			AfterProcessingInitializeOnLoad (12ms)
-			EditorAssembliesLoaded (0ms)
+			BeforeProcessingInitializeOnLoad (173ms)
+			ProcessInitializeOnLoadAttributes (940ms)
+			ProcessInitializeOnLoadMethodAttributes (419ms)
+			AfterProcessingInitializeOnLoad (15ms)
+			EditorAssembliesLoaded (1ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 12.16 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (7ms)
+Refreshing native plugins compatible for Editor in 9.25 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4735 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 115 unused Assets / (0.8 MB). Loaded Objects now: 5300.
-Memory consumption went from 218.9 MB to 218.2 MB.
-Total: 44.151600 ms (FindLiveObjects: 0.472700 ms CreateObjectMapping: 0.626600 ms MarkObjects: 42.083900 ms  DeleteObjects: 0.967000 ms)
+Unloading 4724 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 116 unused Assets / (0.8 MB). Loaded Objects now: 5289.
+Memory consumption went from 217.9 MB to 217.1 MB.
+Total: 26.060500 ms (FindLiveObjects: 0.628100 ms CreateObjectMapping: 0.443700 ms MarkObjects: 24.530400 ms  DeleteObjects: 0.456800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -178,106 +178,59 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
   custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
   custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 1265970.964632 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/Maze/GameToolKit.Maze.asmdef
-  artifactKey: Guid(e159ccba77bbb6a4ea5bcc0ddbfb08eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/Maze/GameToolKit.Maze.asmdef using Guid(e159ccba77bbb6a4ea5bcc0ddbfb08eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3923b5ce6ccd2f7790784ac3c7f5bfe3') in 0.010760 seconds
+  Time since last request: 1143512.702572 seconds.
+  path: Packages/com.unity.render-pipelines.universal/ShaderLibrary
+  artifactKey: Guid(2de5b472450204ae2853db2cb6a2540a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/ShaderLibrary using Guid(2de5b472450204ae2853db2cb6a2540a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53542a1cb40896a2de104896746dd9da') in 0.009100 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Packages/com.march_rain.gametoolkit/Editor/GameToolKit.Editor.asmdef
-  artifactKey: Guid(69a51de75a58bb94ba4509e9571f9a26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Editor/GameToolKit.Editor.asmdef using Guid(69a51de75a58bb94ba4509e9571f9a26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3463311617c43d1848f477339f8eca9d') in 0.008081 seconds
+  Time since last request: 0.000025 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Shaders
+  artifactKey: Guid(248877dd7078443d6b51abf21ee7d52a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Shaders using Guid(248877dd7078443d6b51abf21ee7d52a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0bc2d3c254ac56584f2687fa2a8a174e') in 0.008112 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000065 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/BaseClass/GameToolKit.BaseClass.asmdef
-  artifactKey: Guid(a60b80b77ae1e954e825769c9a0c6657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/BaseClass/GameToolKit.BaseClass.asmdef using Guid(a60b80b77ae1e954e825769c9a0c6657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e083affd8c72495a0a921178654ce679') in 0.008169 seconds
+  Time since last request: 0.000102 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Textures
+  artifactKey: Guid(6970e3730c799f44ab472c8aa6c4b431) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Textures using Guid(6970e3730c799f44ab472c8aa6c4b431) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d3af6793907ae0811f9ab837a464e75') in 0.008232 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/GameToolKit.Runtime.asmdef
-  artifactKey: Guid(a2e27fe05bf58c74cacd3b1822ccc57d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/GameToolKit.Runtime.asmdef using Guid(a2e27fe05bf58c74cacd3b1822ccc57d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53125eb21555ab6c5526e1b856b7dc32') in 0.009222 seconds
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/VFXGraph
+  artifactKey: Guid(44a46d70e436db941b2b861eaebed089) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/VFXGraph using Guid(44a46d70e436db941b2b861eaebed089) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae3abcd356a031b6020251c802b3d729') in 0.007157 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.788753 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/AutomaticProcessor/GameToolKit.AutomaticProcessor.asmdef
-  artifactKey: Guid(b1970e5a46c1040449845540049c9415) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/AutomaticProcessor/GameToolKit.AutomaticProcessor.asmdef using Guid(b1970e5a46c1040449845540049c9415) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6454bfbaca90af978e4265228e88a88d') in 0.006257 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 2.890498 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/BehaviorTree/GameToolKit.BehaviorTree.asmdef
-  artifactKey: Guid(254dc75d4e13cd8458e7c65b6223d70a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/BehaviorTree/GameToolKit.BehaviorTree.asmdef using Guid(254dc75d4e13cd8458e7c65b6223d70a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d7651612899c98936f7971557383337') in 0.006175 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 1.144077 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/Dialog/GameToolKit.Dialog.asmdef
-  artifactKey: Guid(f905bba8509478d4eb870285b3d271b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/Dialog/GameToolKit.Dialog.asmdef using Guid(f905bba8509478d4eb870285b3d271b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05ddc356457595f30757d1db72337aa8') in 0.006856 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 6.193145 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/UI/GameToolKit.UI.asmdef
-  artifactKey: Guid(6623caed43af7aa4caddb5e1234a283c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/UI/GameToolKit.UI.asmdef using Guid(6623caed43af7aa4caddb5e1234a283c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73bd549d71f65b427a1a7fc49beb4f09') in 0.006301 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 5.475629 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/BaseClass
-  artifactKey: Guid(b9e98bdb678e45646b4fd3867ce767c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/BaseClass using Guid(b9e98bdb678e45646b4fd3867ce767c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3335569429bd2ff4a9c9a8feac874da') in 0.005285 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 10.818224 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/BaseClass/Attribute
-  artifactKey: Guid(19d66c5d994c5974fa5a7d1c522fdcbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/BaseClass/Attribute using Guid(19d66c5d994c5974fa5a7d1c522fdcbf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51f14a1fe79bfd90125f042d615ff778') in 0.007221 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 3.704093 seconds.
-  path: Packages/com.march_rain.gametoolkit/Runtime/BaseClass/Events.cs
-  artifactKey: Guid(9f84d0f8c24293844864ebd8f74b5c00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.march_rain.gametoolkit/Runtime/BaseClass/Events.cs using Guid(9f84d0f8c24293844864ebd8f74b5c00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b10c540603cdd8ecde64a875429eb92') in 0.005326 seconds
+  Time since last request: 0.982255 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph
+  artifactKey: Guid(ae1e56b12b01f3b4d9c9bb9d7154d97f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph using Guid(ae1e56b12b01f3b4d9c9bb9d7154d97f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48e144be4cc3bdea0c0e694142f8b3f0') in 0.006803 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
 ========================================================================
 Received Prepare
-Refreshing native plugins compatible for Editor in 97.34 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 6.87 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6 unused Assets / (0.7 MB). Loaded Objects now: 5300.
-Memory consumption went from 122.7 MB to 122.0 MB.
-Total: 157.891000 ms (FindLiveObjects: 7.372800 ms CreateObjectMapping: 3.532800 ms MarkObjects: 134.351500 ms  DeleteObjects: 12.631200 ms)
+Unloading 6 unused Assets / (0.7 MB). Loaded Objects now: 5289.
+Memory consumption went from 121.6 MB to 120.8 MB.
+Total: 15.059100 ms (FindLiveObjects: 0.336400 ms CreateObjectMapping: 0.360900 ms MarkObjects: 14.033400 ms  DeleteObjects: 0.327400 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -293,3 +246,64 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 173.565814 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/DepthNormalsOnlyPass.hlsl
+  artifactKey: Guid(9ebb19659794b47c59986fcc45692a0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/DepthNormalsOnlyPass.hlsl using Guid(9ebb19659794b47c59986fcc45692a0d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd154ef2585d11dbdfef1d29ebe4cd21d') in 0.028368 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRForwardPass.hlsl
+  artifactKey: Guid(2774e65a956f7428a9ba09fe1098e1eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRForwardPass.hlsl using Guid(2774e65a956f7428a9ba09fe1098e1eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f10efdc681b93978427230e0084b126b') in 0.011505 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRGBufferPass.hlsl
+  artifactKey: Guid(f562fc45f8fc5434a96065e20892eff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/PBRGBufferPass.hlsl using Guid(f562fc45f8fc5434a96065e20892eff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da6686ddd06d2d157f0297159f47969c') in 0.012813 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPassDecal.hlsl
+  artifactKey: Guid(131f64991fbd3cb4286f7fbc05dcf29e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPassDecal.hlsl using Guid(131f64991fbd3cb4286f7fbc05dcf29e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a2fb316c9918e8e179f5ff46e1a21cf') in 0.014841 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/UnlitPass.hlsl
+  artifactKey: Guid(07da8e9cacb587246ade02755c273666) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/UnlitPass.hlsl using Guid(07da8e9cacb587246ade02755c273666) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '807679e700f234a1c5032e6e0aedda2a') in 0.015758 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl
+  artifactKey: Guid(ba78d2682f9fed14fb0827a24fb5a1f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl using Guid(ba78d2682f9fed14fb0827a24fb5a1f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a79e4cbbd9500f73f308475dd4fd9fa0') in 0.014893 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/DepthOnlyPass.hlsl
+  artifactKey: Guid(8f266648f26372548b2ae696d6db739e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/DepthOnlyPass.hlsl using Guid(8f266648f26372548b2ae696d6db739e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '128fd33632bc3684e65d7aef205f3442') in 0.017301 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: 由于线程退出或应用程序请求，已中止 I/O 操作。
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -12,10 +12,10 @@ namespace GameToolKit.Editor
     {
         private class Assist : SerializedScriptableObject
         {
-            public SourceInfo info;
+            public SourceEdge info;
             [EnumToggleButtons]
             public SyncType syncType;
-            public System.Action<SourceInfo, SyncType> callback;
+            public System.Action<SourceEdge, SyncType> callback;
         }
         [CustomEditor(typeof(Assist))]
         private class AssistEditor : Sirenix.OdinInspector.Editor.OdinEditor
@@ -41,8 +41,8 @@ namespace GameToolKit.Editor
             }
         }
 
-        private SourceInfo _instance;
-        public EdgeField(SourceInfo info, SyncType type, System.Action<SourceInfo, SyncType> callback)
+        private SourceEdge _instance;
+        public EdgeField(SourceEdge info, SyncType type, System.Action<SourceEdge, SyncType> callback)
         {
             _instance = info;
             Assist test = ScriptableObject.CreateInstance<Assist>();

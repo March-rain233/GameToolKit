@@ -21,33 +21,33 @@ namespace GameToolKit.Behavior.Tree
             set 
             { 
                 _value = value;
+                if (!HasInitialized) return;
                 InitOutputData();
             }
         }
+
         protected override void OnValueUpdate()
         {
             
         }
 
-        protected override object GetValue(string name)
-        {
-            return _value;
-        }
+        protected override object GetValue(string name) =>
+            _value;
     }
-    public class IntegerNode : InputNode<int> { }
-    public class FloatNode : InputNode<float> { }
-    public class DoubleNode : InputNode<double> { }
-    public class StringNode : InputNode<string> { }
-    public class BooleanNode : InputNode<bool> { }
-    public class ObjectNode : InputNode<object> { }
-    public class Vector2Node : InputNode<Vector2> { }
-    public class Vector3Node : InputNode<Vector3> { }
-    public class Vector4Node : InputNode<Vector4> { } 
-    public class QuaternionNode : InputNode<Quaternion> { }
-    public class RectNode : InputNode<Rect> { }
-    public class BoundsNode : InputNode<Bounds> { }
-    public class ColorNode : InputNode<Color> { }
-    public class GameObjectNode : InputNode<GameObject> { }
-    public class ComponentNode : InputNode<Component> { }
-    public class CurveNode : InputNode<AnimationCurve> { }
+    public sealed class IntegerNode : InputNode<int> { }
+    public sealed class FloatNode : InputNode<float> { }
+    public sealed class DoubleNode : InputNode<double> { }
+    public sealed class StringNode : InputNode<string> { }
+    public sealed class BooleanNode : InputNode<bool> { }
+    public sealed class ObjectNode : InputNode<object> { }
+    public sealed class Vector2Node : InputNode<Vector2> { }
+    public sealed class Vector3Node : InputNode<Vector3> { }
+    public sealed class Vector4Node : InputNode<Vector4> { } 
+    public sealed class QuaternionNode : InputNode<Quaternion> { }
+    public sealed class RectNode : InputNode<Rect> { }
+    public sealed class BoundsNode : InputNode<Bounds> { }
+    public sealed class ColorNode : InputNode<Color> { }
+    public sealed class GameObjectNode : InputNode<GameObject> { }
+    public sealed class ComponentNode : InputNode<Component> { }
+    public sealed class CurveNode : InputNode<AnimationCurve> { }
 }

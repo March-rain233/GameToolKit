@@ -1,39 +1,27 @@
-using System.Collections;
+锘縰sing System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GameToolKit.Dialog
 {
     /// <summary>
-    /// 对话参数基类
+    /// 瀵硅瘽鍙傛暟
     /// </summary>
-    public abstract class DialogArgument
-    {
-    }
-    /// <summary>
-    /// 文本参数
-    /// </summary>
-    public class TextArgument : DialogArgument 
+    public struct DialogArgument
     {
         /// <summary>
-        /// 正文
+        /// 瀵硅瘽姝ｆ枃
         /// </summary>
-        [TextArea]
         public string Text;
-    }
-    /// <summary>
-    /// 选择项参数
-    /// </summary>
-    public class OptionArgument : DialogArgument 
-    {
         /// <summary>
-        /// 正文
+        /// 瀵硅瘽瑙掕壊id
         /// </summary>
-        [TextArea]
-        public string Option;
+        public string RoleId;
         /// <summary>
-        /// 该选项是否启用
+        /// 棰濆鎺у埗鍙傛暟
         /// </summary>
-        public bool IsEnable = true;
+        public object[] ExtendedArguments;
     }
 }

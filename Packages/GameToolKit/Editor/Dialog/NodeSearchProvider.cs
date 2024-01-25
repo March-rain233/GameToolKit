@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameToolKit.Editor;
 
-namespace GameToolKit.Dialog
+namespace GameToolKit.Dialog.Editor
 {
-    public class NodeSearchProvider : NodeSearchProvider<Node>
+    public class NodeSearchProvider : NodeSearchProvider<DialogTree, Node>
     {
     }
 }

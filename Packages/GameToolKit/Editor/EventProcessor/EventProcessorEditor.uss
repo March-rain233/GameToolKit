@@ -1,4 +1,0 @@
-#processor-list > label {
-    padding-left: 10px;
-    -unity-text-align: middle-left;
-}

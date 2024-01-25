@@ -8,7 +8,7 @@ using TMPro;
 namespace GameToolKit.Dialog
 {
     [CreateAssetMenu(fileName = "DialogTree", menuName = "Dialog/Dialog Tree")]
-    public class DialogTree : CustomGraph<Node>
+    public class DialogTree : DataFlowGraph<DialogTree ,Node>
     {
         public enum DialogMode
         {
@@ -44,6 +44,11 @@ namespace GameToolKit.Dialog
         public ExitNode ExitNode;
 
         /// <summary>
+        /// 运行中的节点列表
+        /// </summary>
+        public List<ProcessNode> RunningNodes = new List<ProcessNode>();
+
+        /// <summary>
         /// 当对话结束
         /// </summary>
         public event Action OnDialogEnd;
@@ -59,15 +64,20 @@ namespace GameToolKit.Dialog
         /// </summary>
         public void Play()
         {
-            ServiceAP.Instance.GetService<EventManager>().Broadcast(new DialogBeginEvent()
-            {
-                DialogTree = this
-            });
             foreach(var node in Nodes)
-            {
                 node.Init();
-            }
-            EntryNode.Play();
+            foreach (var node in Nodes)
+                node.Refresh();
+            EntryNode.Start(null);
+        }
+
+        /// <summary>
+        /// 中断对话
+        /// </summary>
+        public void Abort()
+        {
+            foreach(var node in RunningNodes)
+                node.Abort();
         }
 
         /// <summary>

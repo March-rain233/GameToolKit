@@ -12,45 +12,8 @@ namespace GameToolKit
     /// </summary>
     public abstract class DialogPanelBase : PanelBase, IDialogBox
     {
-        /// <summary>
-        /// 等待的对话树列表
-        /// </summary>
-        protected HashSet<DialogTree> _waitingList = new HashSet<DialogTree>();
-
+        public abstract void CloseDialogBox();
         [Button]
-        public abstract void PlayDialog(TextArgument argument, Action onDialogEnd = null);
-
-        public void Rigister(DialogTree dialogTree)
-        {
-            _waitingList.Add(dialogTree);
-        }
-
-        public void Unrigister(DialogTree dialogTree)
-        {
-            _waitingList.Remove(dialogTree);
-            if(_waitingList.Count == 0)
-            {
-                OnWaitingListEmpty();
-            }
-        }
-
-        protected abstract void OnWaitingListEmpty();
-
-        protected override void OnInit()
-        {
-            ServiceAP.Instance.GetService<EventManager>()
-                .RegisterCallback<DialogEndEvent>(DialogEndHandler);
-        }
-
-        protected override void OnDispose()
-        {
-            ServiceAP.Instance.GetService<EventManager>()
-                .UnregisterCallback<DialogEndEvent>(DialogEndHandler);
-        }
-
-        void DialogEndHandler(DialogEndEvent context)
-        {
-            Unrigister(context.DialogTree);
-        }
+        public abstract void PlayDialog(DialogArgument argument, Action onDialogEnd = null);
     }
 }

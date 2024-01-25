@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameToolKit.Behavior.Tree.Editor
 {
-    public class NodeSearchProvider : GameToolKit.Editor.NodeSearchProvider<Node>
+    public class NodeSearchProvider : GameToolKit.Editor.NodeSearchProvider<BehaviorTree, Node>
     {
     }
 }

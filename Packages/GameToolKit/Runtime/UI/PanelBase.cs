@@ -16,7 +16,7 @@ namespace GameToolKit
         /// 是否在关闭的时候摧毁
         /// </summary>
         [ReadOnly, ShowInInspector]
-        public virtual bool IsDestoryOnClosed => true;
+        public virtual bool DestoryOnClosed => true;
 
         [ReadOnly, ShowInInspector]
         public virtual PanelShowType ShowType => PanelShowType.Normal;
@@ -61,13 +61,15 @@ namespace GameToolKit
         /// <summary>
         /// 当面板被打开时
         /// </summary>
-        protected virtual void OnOpen() { gameObject.SetActive(true); }
+        protected virtual void OnOpen() =>
+            gameObject.SetActive(true); 
 
         internal void Open()
         {
             IsShowing = true;
             OnInit();
             OnOpen();
+            Show();
         }
 
         /// <summary>
@@ -85,13 +87,13 @@ namespace GameToolKit
         internal void Close()
         {
             IsShowing = false;
-            OnClose();
         }
 
         /// <summary>
         /// 当面板显示时
         /// </summary>
-        protected virtual void OnShow() { gameObject.SetActive(true);}
+        protected virtual void OnShow() => 
+            gameObject.SetActive(true);
 
         internal void Show()
         {
@@ -105,7 +107,8 @@ namespace GameToolKit
         /// <summary>
         /// 当面板隐藏时
         /// </summary>
-        protected virtual void OnHide() { gameObject?.SetActive(false); }
+        protected virtual void OnHide() => 
+            gameObject?.SetActive(false); 
 
         internal void Hide()
         {
@@ -130,37 +133,8 @@ namespace GameToolKit
         public void Dispose()
         {
             OnDispose();
-            if (IsDestoryOnClosed)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                ServiceAP.Instance.GetService<PanelManager>().RecyclePanel(this);
-            }
+            if (DestoryOnClosed) Destroy(gameObject);
+            else ServiceAP.Instance.PanelManager.RecyclePanel(this);
         }
-    }
-
-    [Flags]
-    public enum PanelShowType
-    {
-        /// <summary>
-        /// 与多个面板叠加
-        /// </summary>
-        Normal = 0,
-        /// <summary>
-        /// 反向切换
-        /// </summary>
-        /// <remarks>
-        /// 将在开启时隐藏上一个拥有该标签的面板，在关闭时恢复上一个拥有该标签的面板
-        /// </remarks>
-        ReverseChange = 1,
-        /// <summary>
-        /// 隐藏所有
-        /// </summary>
-        /// <remarks>
-        /// 在开启时将隐藏从此面板到上一个拥有该标签的面板之间的所有面板，关闭时反向
-        /// </remarks>
-        HideOther = ReverseChange << 1,
     }
 }

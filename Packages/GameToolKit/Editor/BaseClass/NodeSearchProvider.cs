@@ -8,12 +8,13 @@ using UnityEngine.UIElements;
 
 namespace GameToolKit.Editor
 {
-    public class NodeSearchProvider<TNode> : NodeSearchProviderBase 
+    public class NodeSearchProvider<TGraph, TNode> : NodeSearchProviderBase 
         where TNode : BaseNode
+        where TGraph : DataFlowGraph<TGraph, TNode>
     {
-        CustomGraphView<TNode> _graphView;
+        DataFlowGraphView<TGraph, TNode> _graphView;
         EditorWindow _window;
-        public void Init(CustomGraphView<TNode> graphView, EditorWindow editor)
+        public void Init(DataFlowGraphView<TGraph, TNode> graphView, EditorWindow editor)
         {
             _graphView = graphView;
             _window = editor;

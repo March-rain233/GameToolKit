@@ -37,35 +37,6 @@ namespace GameToolKit.Behavior.Tree {
         }
 
         /// <summary>
-        /// 该节点运行是否还未结束
-        /// </summary>
-        public bool IsWorking => Status == NodeStatus.Running || Status == NodeStatus.Aborting;
-
-        /// <summary>
-        /// 添加子节点
-        /// </summary>
-        /// <param name="node"></param>
-        public abstract void AddChild(ProcessNode node);
-
-        /// <summary>
-        /// 移除子节点
-        /// </summary>
-        /// <param name="node"></param>
-        public abstract void RemoveChild(ProcessNode node);
-
-        /// <summary>
-        /// 更改子节点次序
-        /// </summary>
-        /// <param name="func"></param>
-        public abstract void OrderChildren(Func<ProcessNode, ProcessNode, bool> func);
-
-        /// <summary>
-        /// 获取后继的行为节点
-        /// </summary>
-        /// <returns></returns>
-        public abstract ProcessNode[] GetChildren();
-
-        /// <summary>
         /// 当前状态
         /// </summary>
         public NodeStatus Status
@@ -99,6 +70,35 @@ namespace GameToolKit.Behavior.Tree {
         NodeStatus _status = NodeStatus.None;
 
         /// <summary>
+        /// 该节点运行是否还未结束
+        /// </summary>
+        public bool IsWorking => Status == NodeStatus.Running || Status == NodeStatus.Aborting;
+
+        /// <summary>
+        /// 添加子节点
+        /// </summary>
+        /// <param name="node"></param>
+        public abstract void AddChild(ProcessNode node);
+
+        /// <summary>
+        /// 移除子节点
+        /// </summary>
+        /// <param name="node"></param>
+        public abstract void RemoveChild(ProcessNode node);
+
+        /// <summary>
+        /// 更改子节点次序
+        /// </summary>
+        /// <param name="func"></param>
+        public abstract void OrderChildren(Func<ProcessNode, ProcessNode, bool> func);
+
+        /// <summary>
+        /// 获取后继的行为节点
+        /// </summary>
+        /// <returns></returns>
+        public abstract ProcessNode[] GetChildren();
+
+        /// <summary>
         /// 外界调用更新
         /// </summary>
         /// <returns>该节点更新后的状态</returns>
@@ -116,11 +116,9 @@ namespace GameToolKit.Behavior.Tree {
             }
             Status = OnUpdate();
             //当节点运行结束后，进行退出状态处理
-            if (Status != NodeStatus.Running) 
-                OnExit();
+            if (Status == NodeStatus.Success || Status == NodeStatus.Failure) OnExit();
             //更新后继节点的数据
             InitOutputData();
-            LastDataUpdataTime = Time.time;
             return Status;
         }
 
@@ -137,7 +135,8 @@ namespace GameToolKit.Behavior.Tree {
         /// <summary>
         /// 当该节点被打断时调用
         /// </summary>
-        protected virtual void OnAbort() { }
+        /// <returns>True：打断后进入打断状态<br>False：打断后进入失败状态</br></returns>
+        protected virtual bool OnAbort() => false;
 
         /// <summary>
         /// 当该节点恢复运行时调用
@@ -147,16 +146,24 @@ namespace GameToolKit.Behavior.Tree {
         /// <summary>
         /// 打断当前节点的运行状态
         /// </summary>
-        public void Abort()
+        public bool Abort()
         {
             //当节点未在运行时被打断输出错误信息
             if (Status != NodeStatus.Running)
             {
                 Debug.Log($"{BehaviorTree}尝试打断{this}节点，但节点处于{Status}状态");
-                return;
+                return false;
             }
-            OnAbort();
-            Status = NodeStatus.Aborting;
+            if (OnAbort())
+            {
+                Status = NodeStatus.Aborting;
+                return true;
+            }
+            else
+            {
+                Status = NodeStatus.Failure;
+                return false;
+            }
         }
 
         /// <summary>
@@ -165,23 +172,12 @@ namespace GameToolKit.Behavior.Tree {
         /// <returns>本次运行的结果</returns>
         protected abstract NodeStatus OnUpdate();
 
-        protected override sealed void OnValueUpdate()
-        {
-            throw new ProcessException(this, "It should not have happened, but it did.");
-        }
+        protected override sealed void OnValueUpdate() { }
 
-        protected override sealed object PullValue(string fieldName)
-        {
-            if (LastDataUpdataTime != Time.time)
-            {
-                throw new ProcessException(this, "Invalid call order");
-            }
-            return GetValue(fieldName);
-        }
+        protected override sealed object PullValue(string fieldName) => 
+            GetValue(fieldName); //流程节点仅在Tick中进行刷新
 
-        protected override sealed void PushValue(string fieldName, object value)
-        {
-            SetValue(fieldName, value);
-        }
+        protected override sealed void PushValue(string fieldName, object value) =>
+            SetValue(fieldName, value); //流程节点仅在Tick中进行刷新
     }
 }

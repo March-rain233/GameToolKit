@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameToolKit
 {
-    public abstract class OptionPanelBase : PanelBase, IOptionalView
+    public abstract class OptionPanelBase : PanelBase, IOptionView
     {
         public abstract void ShowOptions(List<OptionArgument> options, Action<int> onSelected);
     }

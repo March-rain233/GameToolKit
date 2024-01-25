@@ -56,28 +56,9 @@ namespace GameToolKit.Behavior.Tree
 
         private void SetModelTree(BehaviorTree tree)
         {
-            if (_modelTree)
-            {
-                foreach(var variable in Variables)
-                {
-                    _modelTree.Blackboard.UnregisterCallback<IBlackboard.ValueRemoveEvent>(variable.Key, RemoveItem);
-                    _modelTree.Blackboard.UnregisterCallback<IBlackboard.NameChangedEvent>(variable.Key, RenameItem);
-                }
-            }
+            if (_modelTree == tree) return;
             Variables.Clear();
             _modelTree = tree;
-        }
-
-        public void RemoveItem(IBlackboard.ValueRemoveEvent e)
-        {
-            Variables.Remove(e.Name);
-        }
-
-        public void RenameItem(IBlackboard.NameChangedEvent e)
-        {
-            var temp = Variables[e.OldName];
-            Variables.Remove(e.OldName);
-            Variables[e.Name] = temp;
         }
     }
 }

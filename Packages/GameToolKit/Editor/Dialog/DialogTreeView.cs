@@ -10,7 +10,7 @@ using UnityEditor.Experimental.GraphView;
 
 namespace GameToolKit.Dialog.Editor
 {
-    public class DialogTreeView : CustomGraphView<Node>
+    public class DialogTreeView : DataFlowGraphView<DialogTree, Node>
     {
         public new class UxmlFactory : UxmlFactory<DialogTreeView, UxmlTraits> { }
         protected override NodeSearchProviderBase GetSearchWindowProvider()
@@ -60,20 +60,15 @@ namespace GameToolKit.Dialog.Editor
                         }
                         else
                         {
-                            if (((SyncType)edge.userData & SyncType.Pull) != 0)
-                                childView.Node.InputEdges.RemoveAll(
-                                    e => e.SourceNode == parentView.Node
-                                    && e.TargetNode == childView.Node
-                                    && e.SourceField == edge.output.name
-                                    && e.TargetField == edge.input.name
-                                    );
-                            if (((SyncType)edge.userData & SyncType.Push) != 0)
-                                parentView.Node.OutputEdges.RemoveAll(
-                                    e => e.SourceNode == parentView.Node
-                                    && e.TargetNode == childView.Node
-                                    && e.SourceField == edge.output.name
-                                    && e.TargetField == edge.input.name
-                                    );
+                            switch (((SyncType)edge.userData))
+                            {
+                                case SyncType.Pull:
+                                    childView.Node.RemoveInputEdge(parentView.Node, edge.output.name, edge.input.name);
+                                    break;
+                                case SyncType.Push:
+                                    parentView.Node.RemoveOutputEdge(childView.Node, edge.output.name, edge.input.name);
+                                    break;
+                            }
                         }
                     }
                 });
@@ -93,14 +88,14 @@ namespace GameToolKit.Dialog.Editor
                     }
                     else
                     {
-                        childView.Node.InputEdges.Add(new SourceInfo(parentView.Node, childView.Node, edge.output.name, edge.input.name));
+                        childView.Node.AddInputEdge(parentView.Node, edge.output.name, edge.input.name);
                     }
                 });
             }
             return graphViewChange;
         }
 
-        public override void PopulateView(CustomGraph<Node> graph)
+        public override void PopulateView(DataFlowGraph<DialogTree, Node> graph)
         {
             base.PopulateView(graph);
             //为传入的树的边生成视图
@@ -125,18 +120,18 @@ namespace GameToolKit.Dialog.Editor
             }
         }
 
-        protected override void OnAddField(ISelectable selectable)
+        protected override void OnAddFieldToInspector(ISelectable selectable)
         {
             switch (selectable)
             {
                 case Edge edge:
                     if (edge.input.name != "Prev" || edge.output.name != "Next")
                     {
-                        base.OnAddField(selectable);
+                        base.OnAddFieldToInspector(selectable);
                     }
                     return;
                 default:
-                    base.OnAddField(selectable);
+                    base.OnAddFieldToInspector(selectable);
                     return;
             }
         }

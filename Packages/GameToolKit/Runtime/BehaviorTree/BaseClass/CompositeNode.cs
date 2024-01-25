@@ -25,10 +25,8 @@ namespace GameToolKit.Behavior.Tree
         [HideInGraphInspector]
         public List<ProcessNode> Childrens = new List<ProcessNode>();
 
-        public override void AddChild(ProcessNode node)
-        {
+        public override void AddChild(ProcessNode node) =>
             Childrens.Add(node);
-        }
 
         public override void RemoveChild(ProcessNode node)
         {
@@ -58,44 +56,27 @@ namespace GameToolKit.Behavior.Tree
                             Childrens[end + gap] = Childrens[end];
                             end -= gap;
                         }
-                        else
-                        {
-                            break;
-                        }
+                        else break;
                     }
                     Childrens[end + gap] = tem;
                 }
             }
         }
 
-        protected override void OnAbort()
-        {
+        protected override bool OnAbort() =>
             Childrens.Find(node => node.Status == NodeStatus.Running).Abort();
-        }
 
-        public override ProcessNode[] GetChildren()
-        {
-            return Childrens.ToArray();
-        }
+        public override ProcessNode[] GetChildren() =>
+            Childrens.ToArray();
 
-        protected void AbortAllRunningNode(List<ProcessNode> except)
-        {
-            Childrens.ForEach(child =>
-            {
-                if (child.Status == NodeStatus.Running && !except.Contains(child))
-                {
-                    child.Abort();
-                }
-            });
-        }
-
-        public override Node Clone()
+        public override BaseNode Clone()
         {
             var n = base.Clone() as CompositeNode;
             n.Childrens = new List<ProcessNode>();
             return n;
         }
     }
+
     /// <summary>
     /// ´ò¶Ï·½Ê½
     /// </summary>

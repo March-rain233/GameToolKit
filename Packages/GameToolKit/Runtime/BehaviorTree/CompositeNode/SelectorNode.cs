@@ -15,10 +15,8 @@ namespace GameToolKit.Behavior.Tree
         /// </summary>
         private int _current = 0;
 
-        protected override void OnEnter()
-        {
+        protected override void OnEnter() =>
             _current = 0;
-        }
 
         protected override NodeStatus OnUpdate()
         {
@@ -31,8 +29,8 @@ namespace GameToolKit.Behavior.Tree
                     var condition = Childrens[i] as ConditionNode;
                     if (condition != null && condition.Tick() == NodeStatus.Success)
                     {
-                        Childrens[_current].Abort();
-                        return NodeStatus.Aborting;
+                        if(Childrens[_current].Abort()) return NodeStatus.Aborting;
+                        else return NodeStatus.Success;
                     }
                     continue;
                 }
@@ -68,10 +66,7 @@ namespace GameToolKit.Behavior.Tree
                 base.OrderChildren(func);
                 _current = Childrens.IndexOf(cur);
             }
-            else
-            {
-                base.OrderChildren(func);
-            }
+            else base.OrderChildren(func);
         }
         public override void RemoveChild(ProcessNode node)
         {
@@ -79,19 +74,10 @@ namespace GameToolKit.Behavior.Tree
             {
                 var cur = Childrens[_current];
                 base.RemoveChild(node);
-                if(cur == node)
-                {
-                    _current = 0;
-                }
-                else
-                {
-                    _current = Childrens.IndexOf(cur);
-                }
+                if(cur == node) _current = 0;
+                else  _current = Childrens.IndexOf(cur);
             }
-            else
-            {
-                base.RemoveChild(node);
-            }
+            else base.RemoveChild(node);
         }
     }
 }

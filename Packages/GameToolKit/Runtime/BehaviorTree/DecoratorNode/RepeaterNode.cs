@@ -33,11 +33,8 @@ namespace GameToolKit.Behavior.Tree
         {
             Child.Tick();
             ++_add;
-            if (IsForever || _add < Times)
-            {
-                return NodeStatus.Running;
-            }
-            return NodeStatus.Success;
+            if (IsForever || _add < Times) return NodeStatus.Running;
+            else return NodeStatus.Success;
         }
     }
 }

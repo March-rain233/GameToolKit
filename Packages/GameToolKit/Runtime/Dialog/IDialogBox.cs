@@ -14,19 +14,16 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 播放对话
         /// </summary>
-        /// <param name="argument"></param>
-        public void PlayDialog(TextArgument argument, Action onDialogEnd = null);
+        /// <param name="argument">对话参数</param>
+        /// <param name="onDialogEnd">对话执行完毕回调</param>
+        public void PlayDialog(DialogArgument argument, Action onDialogEnd);
 
         /// <summary>
-        /// 注册等待列表
+        /// 关闭对话框
         /// </summary>
-        /// <param name="dialogTree"></param>
-        public void Rigister(DialogTree dialogTree);
-
-        /// <summary>
-        /// 注销等待列表
-        /// </summary>
-        /// <param name="dialogTree"></param>
-        public void Unrigister(DialogTree dialogTree);
+        /// <remarks>
+        /// 当对话框无对话树占用时，由系统调用
+        /// </remarks>
+        public void CloseDialogBox();
     }
 }

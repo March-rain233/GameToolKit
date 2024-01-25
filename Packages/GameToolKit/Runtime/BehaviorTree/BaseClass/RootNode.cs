@@ -31,7 +31,7 @@ namespace GameToolKit.Behavior.Tree
             return Child.Tick();
         }
 
-        public override Node Clone()
+        public override BaseNode Clone()
         {
             var n = base.Clone() as RootNode;
             n.Child = null;

@@ -51,31 +51,15 @@ namespace GameToolKit.Behavior.Tree
         /// <remarks>
         /// 默认为浅拷贝，需要深拷贝时请进行重载
         /// </remarks>
-        public virtual Node Clone()
-        {
-            var node = MemberwiseClone() as Node;
-            node.Guid = Guid;
-            node.InputEdges = new List<SourceInfo>();
-            node.OutputEdges = new List<SourceInfo>();
-            node.LastDataUpdataTime = 0;
-            return node;
-        }
 
         /// <summary>
-        /// 初始化节点
+        /// 设置行为树
         /// </summary>
         /// <param name="tree"></param>
-        internal void Init(BehaviorTree tree)
+        internal void SetTree(BehaviorTree tree)
         {
             BehaviorTree = tree;
-            OnInit();
         }
-
-        /// <summary>
-        /// 当节点初始化时
-        /// </summary>
-        /// <param name="tree"></param>
-        protected virtual void OnInit() { }
 
         /// <summary>
         /// 当行为树启用时

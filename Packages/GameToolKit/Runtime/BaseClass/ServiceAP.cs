@@ -16,12 +16,15 @@ namespace GameToolKit
         /// <summary>
         /// 全局变量库
         /// </summary>
-        public Dictionary<string, BlackboardVariable> GlobalVariable;
+        public GlobalBlackboard GlobalBlackboard;
+        public Dialog.DialogManager DialogManager;
+        public PanelManager PanelManager;
 
         ServiceAP()
         {
-            GlobalVariable = new Dictionary<string, BlackboardVariable>();
-            
+            GlobalBlackboard = GlobalBlackboard.Instance;
+            DialogManager = new Dialog.DialogManager();
+            PanelManager = new PanelManager();
         }
     }
 }

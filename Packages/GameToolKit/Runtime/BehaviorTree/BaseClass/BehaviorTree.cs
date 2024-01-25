@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Cinemachine;
 using Sirenix.Serialization;
 using System.Linq;
 
@@ -12,267 +11,8 @@ namespace GameToolKit.Behavior.Tree
     /// 行为树
     /// </summary>
     [CreateAssetMenu(fileName = "BTree", menuName = "Behavior/Behavior Tree")]
-    public class BehaviorTree : CustomGraph<Node>
+    public class BehaviorTree : DataFlowGraph<BehaviorTree, Node>
     {
-        #region 黑板定义
-        [Serializable]
-        public class TreeBlackboard : IBlackboard
-        {
-            public class ChangeDomainEvent : IBlackboard.BlackboardEventBase
-            {
-                public enum Domain
-                {
-                    Prototype,
-                    Local
-                }
-                public Domain NewDomain;
-                public Domain OldDomain;
-                public ChangeDomainEvent(Domain newDomain, Domain oldDomain, IBlackboard target, string name) : base(target, name)
-                {
-                    NewDomain = newDomain;
-                    OldDomain = oldDomain;
-                }
-            }
-            [OdinSerialize]
-            IBlackboard.CallBackList _callBackList = new IBlackboard.CallBackList();
-            /// <summary>
-            /// 本地域
-            /// </summary>
-            /// <remarks>
-            /// 每一个创建的实例独享该变量库
-            /// </remarks>
-            [OdinSerialize]
-            Dictionary<string, BlackboardVariable> _local = new Dictionary<string, BlackboardVariable>();
-            /// <summary>
-            /// 树域
-            /// </summary>
-            /// <remarks>
-            /// 所有由同一棵树为模板创建的实例共享该变量库
-            /// </remarks>
-            [OdinSerialize]
-            Dictionary<string, BlackboardVariable> _prototype = new Dictionary<string, BlackboardVariable>();
-
-            #region 事件注册
-            public void RegisterCallback<T>(string name, Action<T> callback) where T : IBlackboard.BlackboardEventBase
-            {                    
-                if (HasValue(name))
-                {
-
-                    _callBackList.RegisterCallback(name, callback);
-                }
-            }
-
-            public void UnregisterCallback<TEventType>(string name, Action<TEventType> callback) where TEventType : IBlackboard.BlackboardEventBase
-            {
-                if (HasValue(name))
-                {
-                    _callBackList.UnregisterCallback(name, callback);
-                }
-            }
-
-            #endregion
-
-            #region 变量增删查改
-            public void RemoveValue(string name)
-            {
-                Dictionary<string, BlackboardVariable> target;
-                if (_local.ContainsKey(name))
-                {
-                    target = _local;
-                }
-                else if (_prototype.ContainsKey(name))
-                {
-                    target = _prototype;
-                }
-                else
-                {
-                    return;
-                }
-                target[name].ValueChanged -= Variable_ValueChanged;
-                target.Remove(name);
-                var e = new IBlackboard.ValueRemoveEvent(this, name);
-                _callBackList.Invoke(name, e);
-                _callBackList.RemoveItem(name);
-            }
-
-            public void RenameValue(string oldName, string newName)
-            {
-                Dictionary<string, BlackboardVariable> target;
-                if (_local.ContainsKey(oldName))
-                {
-                    target = _local;
-                }
-                else if (_prototype.ContainsKey(oldName))
-                {
-                    target = _prototype;
-                }
-                else
-                {
-                    return;
-                }
-                {
-                    var temp = target[oldName];
-                    target.Remove(oldName);
-                    target.Add(newName, temp);
-                }
-                var e = new IBlackboard.NameChangedEvent(this, newName, oldName);
-                _callBackList.RenameItem(oldName, newName);
-                _callBackList.Invoke(newName, e);
-            }
-
-            public BlackboardVariable GetVariable(string name)
-            {
-                if (_local.ContainsKey(name))
-                {
-                    return _local[name];
-                }
-                else if (_prototype.ContainsKey(name))
-                {
-                    return _prototype[name];
-                }
-                return null;
-            }
-
-            public Dictionary<string, BlackboardVariable> GetLocalVariables()
-            {
-                return new Dictionary<string, BlackboardVariable>(_local);
-            }
-
-            public Dictionary<string, BlackboardVariable> GetPrototypeVariables()
-            {
-                return new Dictionary<string, BlackboardVariable>(_prototype);
-            }
-
-            public T GetValue<T>(string name)
-            {
-                if (_local.ContainsKey(name))
-                {
-                    return (T)_local[name].Value;
-                }
-                else if (_prototype.ContainsKey(name))
-                {
-                    return (T)_prototype[name].Value;
-                }
-                return default;
-            }
-
-            public bool HasValue(string name)
-            {
-                return _local.ContainsKey(name) || _prototype.ContainsKey(name);
-            }
-
-            public void SetValue(string name, object value)
-            {
-                Dictionary<string, BlackboardVariable> target;
-                if (_local.ContainsKey(name))
-                {
-                    target = _local;
-                }
-                else if (_prototype.ContainsKey(name))
-                {
-                    target = _prototype;
-                }
-                else
-                {
-                    return;
-                }
-                target[name].Value = value;
-            }
-
-            /// <summary>
-            /// 添加本地域的变量
-            /// </summary>
-            /// <param name="name"></param>
-            /// <param name="variable"></param>
-            public void AddLocalVariable(string name, BlackboardVariable variable)
-            {
-                _local.Add(name, variable);
-                variable.ValueChanged += Variable_ValueChanged;
-            }
-
-            /// <summary>
-            /// 添加树域的变量
-            /// </summary>
-            /// <param name="name"></param>
-            /// <param name="variable"></param>
-            public void AddPrototypeVariable(string name, BlackboardVariable variable)
-            {
-                _prototype.Add(name, variable);
-                variable.ValueChanged += Variable_ValueChanged;
-            }
-
-            /// <summary>
-            /// 默认添加入本地域
-            /// </summary>
-            /// <param name="name"></param>
-            /// <param name="variable"></param>
-            /// <exception cref="NotImplementedException"></exception>
-            public void AddVariable(string name, BlackboardVariable variable)
-            {
-                AddLocalVariable(name, variable);
-            }
-            /// <summary>
-            /// 将变量移入树域
-            /// </summary>
-            /// <param name="name"></param>
-            public void MoveToPrototype(string name)
-            {
-                if(_local.TryGetValue(name, out var variable))
-                {
-                    _prototype[name] = variable;
-                    _local.Remove(name);
-                    _callBackList.Invoke(name, new ChangeDomainEvent(ChangeDomainEvent.Domain.Prototype, ChangeDomainEvent.Domain.Local, this, name));
-                }
-            }
-            /// <summary>
-            /// 将变量移入本地域
-            /// </summary>
-            /// <param name="name"></param>
-            public void MoveToLocal(string name)
-            {
-                if (_prototype.TryGetValue(name, out var variable))
-                {
-                    _local[name] = variable;
-                    _prototype.Remove(name);
-                    _callBackList.Invoke(name, new ChangeDomainEvent(ChangeDomainEvent.Domain.Local, ChangeDomainEvent.Domain.Prototype, this, name));
-                }
-            }
-            private void Variable_ValueChanged(BlackboardVariable sender, object newValue, object oldValue)
-            {
-                foreach (var variable in _local)
-                {
-                    if (variable.Value == sender)
-                    {
-                        var e = new IBlackboard.ValueChangeEvent(this, variable.Key, newValue, oldValue);
-                        _callBackList.Invoke(variable.Key, e);
-                        return;
-                    }
-                }
-                foreach (var variable in _prototype)
-                {
-                    if (variable.Value == sender)
-                    {
-                        var e = new IBlackboard.ValueChangeEvent(this, variable.Key, newValue, oldValue);
-                        _callBackList.Invoke(variable.Key, e);
-                        return;
-                    }
-                }
-            }
-            #endregion
-
-            public TreeBlackboard Clone()
-            {
-                var bb = new TreeBlackboard();
-                foreach(var item in _local)
-                {
-                    bb.AddLocalVariable(item.Key, item.Value.Clone());
-                }
-                bb._prototype = _prototype;
-                return bb;
-            }
-        }
-        #endregion
-
         /// <summary>
         /// 根节点
         /// </summary>
@@ -283,7 +23,6 @@ namespace GameToolKit.Behavior.Tree
         /// 变量字典
         /// </summary>
         [NonSerialized, OdinSerialize]
-        [NoSaveDuringPlay]
         public TreeBlackboard Blackboard = new TreeBlackboard();
         /// <summary>
         /// 当前树的运行对象
@@ -321,56 +60,33 @@ namespace GameToolKit.Behavior.Tree
         /// <returns></returns>
         internal BehaviorTree CreateRunningTree(BehaviorTreeRunner runner)
         {
-            var tree = CreateInstance<BehaviorTree>();
+            var tree = Clone();
             tree.Runner = runner;
-            tree.Nodes.Clear();
+
             //复制黑板
-            tree.Blackboard = Blackboard.Clone();
-            foreach(var var in runner.Variables)
-            {
-                tree.Blackboard.RemoveValue(var.Key);
-                tree.Blackboard.AddLocalVariable(var.Key, var.Value);
-            }
-            //复制全部节点
-            foreach(var node in Nodes)
-            {
-                var n = node.Clone();
-                tree.Nodes.Add(n);
-                var r = n as RootNode;
-                if (r != null)
-                {
-                    tree._rootNode = r;
-                }
-            }
-            //连接节点
-            foreach(var node in Nodes)
-            {
-                var clone = tree.FindNode(node.Guid);
-                //连接输入/出边
-                foreach(var edge in node.InputEdges)
-                {
-                    clone.InputEdges.Add(new SourceInfo(tree.FindNode(edge.SourceNode.Guid), clone, edge.SourceField, edge.TargetField));
-                }
-                foreach (var edge in node.OutputEdges)
-                {
-                    clone.OutputEdges.Add(new SourceInfo(clone, tree.FindNode(edge.TargetNode.Guid), edge.SourceField, edge.TargetField));
-                } 
-                //连接行为链
-                var ori = node as ProcessNode;
-                if (ori != null)
-                {
-                    var cn = clone as ProcessNode;
-                    foreach (var child in ori.GetChildren())
-                    {
-                        cn.AddChild(tree.FindNode(child.Guid) as ProcessNode);
-                    }
-                }
-            }
+            foreach(var(id, value) in runner.Variables) 
+                tree.Blackboard[id, Domain.Local].Value = value.Value;
+
             //初始化节点
-            foreach(var node in tree.Nodes)
+            foreach (var node in tree.Nodes)
             {
-                node.Init(tree);
+                node.SetTree(tree);
+                node.Init();
             }
+            foreach (var node in tree.Nodes)
+                node.Refresh();
+            return tree;
+        }
+
+        public override BehaviorTree Clone()
+        {
+            var tree = base.Clone();
+            tree.Blackboard = Blackboard.Clone();
+            tree._rootNode = tree.Nodes.First(node => node is RootNode) as RootNode;
+            //连接行为边
+            foreach(var node in tree.Nodes.OfType<ProcessNode>())
+                foreach(var child in (FindNode(node.Id) as ProcessNode).GetChildren())
+                    node.AddChild(tree.FindNode(child.Id) as ProcessNode);
             return tree;
         }
 
@@ -379,15 +95,10 @@ namespace GameToolKit.Behavior.Tree
         /// </summary>
         internal void Enable()
         {
-            if (IsEnable)
-            {
-                return;
-            }
+            if (IsEnable) return;
             IsEnable = true;
             foreach (var node in Nodes)
-            {
                 node.OnEnable();
-            }
         }
 
         /// <summary>
@@ -395,15 +106,10 @@ namespace GameToolKit.Behavior.Tree
         /// </summary>
         internal void Disable()
         {
-            if (!IsEnable)
-            {
-                return;
-            }
+            if (!IsEnable) return;
             IsEnable = false;
             foreach (var node in Nodes)
-            {
                 node.OnDiable();
-            }
         }
 
         /// <summary>
@@ -412,7 +118,6 @@ namespace GameToolKit.Behavior.Tree
         /// <param name="node"></param>
         public override void RemoveNode(Node node)
         {
-            base.RemoveNode(node);
             //移除与父节点的连接
             var n = node as ProcessNode;
             if (n != null)
@@ -423,13 +128,11 @@ namespace GameToolKit.Behavior.Tree
                     if (p != null)
                     {
                         var children = p.GetChildren();
-                        if (children.Contains(node))
-                        {
-                            p.RemoveChild(n);
-                        }
+                        if (children.Contains(node)) p.RemoveChild(n);
                     }
                 }
             }
+            base.RemoveNode(node);
         }
 
         public override Node CreateNode(Type type)

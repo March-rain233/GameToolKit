@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 
 namespace GameToolKit
 {
-    public class PanelManager : IService
+    public class PanelManager
     {
         /// <summary>
         /// UI根节点
@@ -43,7 +43,7 @@ namespace GameToolKit
         [ShowInInspector, ReadOnly]
         List<PanelBase> _openPanelList = new List<PanelBase>();
 
-        void IService.Init()
+        void Init()
         {
             int uiLayer = LayerMask.NameToLayer("UI");
             //根节点生成
@@ -99,27 +99,15 @@ namespace GameToolKit
 
             //如果存在ReverseChange，则查找到距离最近的拥有该标签的窗面板并关闭
             if (panel.ShowType.HasFlag(PanelShowType.ReverseChange))
-            {
                 _openPanelList.FindLast(e=>e.ShowType.HasFlag(PanelShowType.ReverseChange))?.Hide();
-            }
+
             //如果存在HideOther，则关闭到上一个拥有该标签的面板为止的所有面板
             if (panel.ShowType.HasFlag(PanelShowType.HideOther))
-            {
                 foreach(var p in _openPanelList.Reverse<PanelBase>().TakeWhile(e => !e.ShowType.HasFlag(PanelShowType.HideOther)))
-                {
                     p.Hide();
-                }
-            }
 
             _openPanelList.Add(panel);
             panel.Open();
-
-            ServiceAP.Instance.GetService<EventManager>()
-                .Broadcast(new PanelOpenEvent()
-                {
-                    Panel = panel,
-                    Index = name
-                });
 
             return panel;
         }
@@ -128,10 +116,8 @@ namespace GameToolKit
         /// 关闭最新生成的同名面板
         /// </summary>
         /// <param name="name"></param>
-        public void ClosePanel(string name)
-        {
+        public void ClosePanel(string name) =>
             ClosePanel(_openPanelList.FindLast(e=>e.name == name));
-        }
 
         /// <summary>
         /// 关闭指定面板
@@ -139,26 +125,19 @@ namespace GameToolKit
         /// <param name="panel"></param>
         public void ClosePanel(PanelBase panel)
         {
-            if(panel == null)
-            {
-                return;
-            }
+            if (panel == null) return;
+
             _openPanelList.Remove(panel);
             panel.Close();
 
             //如果存在ReverseChange，则查找到距离最近的拥有该标签的窗面板开启
             if (panel.ShowType.HasFlag(PanelShowType.ReverseChange))
-            {
                 _openPanelList.FindLast(e => e.ShowType.HasFlag(PanelShowType.ReverseChange)).Show();
-            }
+
             //如果存在HideOther，则开启到上一个拥有该标签的面板为止的所有面板
             if (panel.ShowType.HasFlag(PanelShowType.HideOther))
-            {
                 foreach (var p in _openPanelList.Reverse<PanelBase>().TakeWhile(e => !e.ShowType.HasFlag(PanelShowType.HideOther)))
-                {
                     p.Show();
-                }
-            }
         }
 
         /// <summary>
@@ -212,11 +191,5 @@ namespace GameToolKit
         {
             panel.transform.SetParent(DeathRoot, false);
         }
-    }
-
-    public class PanelOpenEvent : EventBase
-    {
-        public string Index;
-        public PanelBase Panel;
     }
 }
