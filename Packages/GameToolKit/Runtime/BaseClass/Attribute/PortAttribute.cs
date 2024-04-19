@@ -1,59 +1,75 @@
-using System.Collections;
+锘縰sing System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace GameToolKit
 {
     /// <summary>
-    /// 定义显示端口的类型
+    /// 绔彛鍩虹被
     /// </summary>
-    /// <remarks>
-    /// 如果不填写extendporttypes参数，则默认为变量的类型
-    /// </remarks>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
-    public class PortAttribute : Attribute
+    public abstract class PortAttribute : Attribute
     {
-        string _name;
-        PortDirection _direction;
-        Type[] _extendPortTypes;
-        bool _isMemberFields;
-
-        public string Name => _name;
-        public PortDirection Direction => _direction; 
-        public Type[] ExtendPortTypes => _extendPortTypes;
-
-        public bool IsMemberFields => _isMemberFields;
+        /// <summary>
+        /// 绔彛鏂瑰悜
+        /// </summary>
+        public PortDirection Direction { get; private set; }
+        /// <summary>
+        /// 杩囨护绫诲瀷
+        /// </summary>
+        public PortFilterType FilterType { get; private set; }
 
         /// <summary>
-        /// 端口类型
+        /// 绔彛棰濆鍒嗙粍娓呭崟
         /// </summary>
-        /// <param name="name">端口显示的名字</param>
-        /// <param name="direction">端口输入输出方向</param>
-        /// <param name="extendPortTypes">额外的端口可匹配的数据类型</param>
-        public PortAttribute(string name, PortDirection direction, Type[] extendPortTypes = null)
-        {
-            _name = name;
-            _direction = direction;
-            _extendPortTypes = extendPortTypes;
-            _isMemberFields = false;
-        }
+        public string[] GroupList { get; private set; }
+
         /// <summary>
-        /// 端口类型
+        /// 绔彛鏄剧ず鍚嶇О
         /// </summary>
-        /// <param name="name">端口显示的名字</param>
-        /// <param name="direction">端口输入输出方向</param>
-        /// <param name="isMemberFields">是否是暴露内部字段而不是对象本身</param>
-        public PortAttribute(string name, PortDirection direction, bool isMemberFields)
+        public string PortName { get; private set; }
+
+        /// <summary>
+        /// 绔彛瀹归噺
+        /// </summary>
+        public PortCapacity Capacity { get; private set; }
+
+        protected PortAttribute(string portName, PortDirection direction, PortCapacity capacity, PortFilterType filterType, string[] groupList)
         {
-            _name = name;
-            _direction = direction;
-            _extendPortTypes = null;
-            _isMemberFields = isMemberFields;
+            Direction = direction;
+            FilterType = filterType;
+            Capacity = capacity;
+            GroupList = groupList;
+            PortName = portName;
         }
     }
+
+    /// <summary>
+    /// 绔彛杩囨护绫诲瀷
+    /// </summary>
+    public enum PortFilterType
+    {
+        Whitelist,
+        Blacklist
+    }
+
+    /// <summary>
+    /// 绔彛鏂瑰悜
+    /// </summary>
     public enum PortDirection
     {
         Input,
         Output,
+    }
+
+    /// <summary>
+    /// 绔彛瀹归噺
+    /// </summary>
+    public enum PortCapacity
+    {
+        Single,
+        Multi,
+        None,
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace GameToolKit.Behavior.Tree
 {
@@ -17,7 +18,7 @@ namespace GameToolKit.Behavior.Tree
         /// <summary>
         /// вс╫з╣Ц
         /// </summary>
-        [HideInGraphInspector]
+        [HideInGraphInspector, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         public ProcessNode Child;
 
         public override ProcessNode[] GetChildren()

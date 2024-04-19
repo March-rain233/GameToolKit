@@ -10,140 +10,65 @@ namespace GameToolKit.Utility
         /// <summary>
         /// 多叉树布局
         /// </summary>
-        /// <remarks>
-        /// 要求：无环
-        /// </remarks>
-        public static void TreeLayout(GraphLayoutAdapter graph, int root,
-            Vector2 oriPosition = default, float marginWidth = 20f, float marginHeight = 20f)
+        public static void TreeLayout(GraphLayoutAdapter graph, List<int> roots,
+            Vector2 oriPosition = default, float marginWidth = 15f, float marginHeight = 2f)
         {
-            Dictionary<int, Rect> treeRects = new();
-            HashSet<int> visited = new();
-            //生成子树的矩形大小
-            var rectWalker = LambdaUtility.Fix<int, Rect>(f => id =>
-            {
-                visited.Add(id);
-                var node = graph.GetNodeData(id);
-                Rect rect = Rect.zero;
-                var children = graph.GetDescendant(id);
-                foreach (int child in children)
-                {
-                    var cr = f(child);
-                    rect.width = Mathf.Max(cr.width, rect.width);
-                    rect.height += cr.height;
-                }
-                rect.height += marginHeight * (children.Count() - 1);
-                rect.width += children.Count() > 0 ? marginWidth : 0;
-                rect.width += node.Width;
-                rect.height = Mathf.Max(node.Height, rect.height);
-                treeRects.Add(id, rect);
-                return rect;
-            });
-            rectWalker(root);
-            visited.Clear();
-            //设置子树位置
-            if(oriPosition == default)
-            {
+            if (oriPosition == default)
                 oriPosition = Vector2.zero;
-            }
-            var positionWalker = LambdaUtility.Fix<int>(f => id =>
+            bool[] visited = new bool[graph.Nodes.Length];
+            Rect[] box = new Rect[graph.Nodes.Length];
+
+            //生成子树的包围框大小
+            var rectWalker = LambdaUtility.Fix<int>(f => now =>
             {
-                var data = graph.GetNodeData(id);
-                data.Position = treeRects[id].position + new Vector2(data.Width /2, data.Height/2);
-                graph.SetNodeData(id, data);
-                Vector2 pos = treeRects[id].position + new Vector2(data.Width + marginWidth, -treeRects[id].height / 2);
-                foreach (var child in graph.GetDescendant(id))
+                visited[now] = true;
+                float childWidth = 0;
+                float childHeight = 0;
+
+                foreach (var child in graph.GetDescendant(now).Where(i => !visited[i] 
+                && graph.GetPrecursor(i).All(j => graph.EdgeMatrix[j, i] <= graph.EdgeMatrix[now, i])))
                 {
-                    var temp = treeRects[child];
-                    temp.position += pos + new Vector2(0, treeRects[child].height / 2);
-                    treeRects[child] = temp;
-                    pos.y += treeRects[child].height + marginHeight;
                     f(child);
+                    childWidth = Mathf.Max(box[child].width, childWidth);
+                    childHeight += box[child].height;
+                }
+
+                box[now].width = graph.Nodes[now].width + childWidth + 2 * marginWidth;
+                box[now].height = Mathf.Max(graph.Nodes[now].height + 2 * marginHeight, childHeight);
+            });
+
+            foreach(var root in roots)
+                if(!visited[root])
+                    rectWalker(root);
+
+            visited = new bool[graph.Nodes.Length];
+
+            //设置子树位置
+            var positionWalker = LambdaUtility.Fix<int, Vector2>(f => (now, startPos) =>
+            {
+                visited[now] = true;
+                graph.Nodes[now].position = startPos;
+
+                float heightOffset = -box[now].height / 2;
+
+                foreach (var child in graph.GetDescendant(now).Where(i => !visited[i]
+                && graph.GetPrecursor(i).All(j => graph.EdgeMatrix[j, i] <= graph.EdgeMatrix[now, i])))
+                {
+                    f(child, startPos + new Vector2(graph.Nodes[now].width + 2 * marginWidth, heightOffset + box[child].height / 2));
+                    heightOffset += box[child].height;
                 }
             });
-            positionWalker(root);
-            visited.Clear();
-        }
 
-        /// <summary>
-        /// 层级布局
-        /// </summary>
-        /// <remarks>
-        /// 要求：无环
-        /// </remarks>
-        public static void HierarchicalLayout(GraphLayoutAdapter graph, int root, 
-            out float actualWidth, out float actualHeight,
-            Vector2 oriPosition = default, float intervalWidth = 20f, float intervalHeight = 20f)
-        {
-            Dictionary<int, int> levels = new();
-            HashSet<int> visited = new();
-            actualHeight = actualWidth = 0;
-            //确定节点层级
-            System.Action<int> walker = (int start) =>
+            float heightOffset = box[roots[0]].height / 2;
+            foreach (var root in roots)
             {
-                Queue<int> queue = new();
-                Queue<int> buffer = new();
-                queue.Enqueue(start);
-                int level = 0;
-                while(queue.Count > 0 || buffer.Count > 0)
-                {
-                    var id = queue.Dequeue();
-                    visited.Add(id);
-                    if (levels.ContainsKey(id))
-                    {
-                        levels[id] = System.Math.Max(level, levels[id]);
-                    }
-                    else
-                    {
-                        levels.Add(id, level);
-                    }
-                    foreach(var child in graph.GetDescendant(id))
-                    {
-                        buffer.Enqueue(child);
-                    }
-                    if(queue.Count == 0)
-                    {
-                        var temp = buffer;
-                        buffer = queue;
-                        queue = temp;
-                        level += 1;
-                    }
-                }
-            };
-            walker(root);
-            foreach(var n in graph.Nodes)
-            {
-                if (!visited.Contains(n))
-                {
-                    walker(n);
-                }
+                if (visited[root]) continue;
+                heightOffset -= box[root].height / 2;
+                positionWalker(root, oriPosition + new Vector2(0, heightOffset));
+                heightOffset -= box[root].height / 2;
             }
-            //设定节点位置
-            int max = levels.Max(p=>p.Value);
-            float x = 0;
-            for(int i = 0; i <= max; i++)
-            {
-                float maxWidth = 0;
-                float height = 0;
-                foreach(var n in levels.Where(n=>n.Value == i).Select(p=>p.Key))
-                {
-                    var data = graph.GetNodeData(n);
-                    maxWidth = System.Math.Max(maxWidth, data.Width);
-                    height += data.Height;
-                }
-                height += intervalHeight * System.Math.Max(0, levels.Count(n => n.Value == i) - 1);
-                float y = -height / 2;
-                foreach (var n in levels.Where(n => n.Value == i).Select(p => p.Key))
-                {
-                    var data = graph.GetNodeData(n);
-                    data.Position = new Vector2(x + data.Width/2, y + data.Height/2);
-                    graph.SetNodeData(n, data);
-                    y += data.Height + intervalHeight;
-                }
-                x += intervalWidth + maxWidth;
-                actualHeight = Mathf.Max(actualHeight, height);
-            }
-            actualWidth = x - intervalWidth;
-            
+
+            graph.Finish();
         }
     }
 }

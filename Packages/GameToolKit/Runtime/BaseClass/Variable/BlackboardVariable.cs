@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Sirenix.OdinInspector;
+
 namespace GameToolKit
 {
     /// <summary>
     /// 黑板变量基类
     /// </summary>
     [Serializable]
+    [GenericSelector("BaseValue")]
     public abstract class BlackboardVariable
     {
-        [Serializable]
         public delegate void VariableChangedHandler();
 
         /// <summary>
@@ -22,14 +24,13 @@ namespace GameToolKit
             set;
         }
 
-        public bool IsReadOnly = false;
+        public bool ReadOnly = false;
 
         public abstract Type TypeOfValue { get; }
 
         /// <summary>
         /// 当变量值变化时触发事件
         /// </summary>
-        [SerializeField]
         public event VariableChangedHandler ValueChanged;
 
         /// <summary>

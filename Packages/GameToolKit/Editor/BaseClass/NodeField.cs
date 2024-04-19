@@ -5,61 +5,39 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor;
+using UnityEditor.UIElements;
 
 namespace GameToolKit.Editor
 {
     public class NodeField : GraphElementField
     {
-        /// <summary>
-        /// 辅助显示类
-        /// </summary>
-        public class Assist : SerializedScriptableObject
-        {
-            public BaseNode Element;
-            public string Name;
-        }
 
         /// <summary>
         /// 辅助类编辑器
         /// </summary>
-        private class AssistEditor : Sirenix.OdinInspector.Editor.OdinEditor
+        private class NodeEditor : Sirenix.OdinInspector.Editor.OdinEditor
         {
-            Assist assist => target as Assist;
+            InspectorHelper assist => target as InspectorHelper;
             bool foldout = true;
             public override void OnInspectorGUI()
             {
-                SirenixEditorGUI.BeginBox();
+                SirenixEditorGUI.BeginBox() ;
                 SirenixEditorGUI.BeginBoxHeader();
-                foldout = SirenixEditorGUI.Foldout(foldout, assist.Name);
+                foldout = SirenixEditorGUI.Foldout(foldout, (assist.InspectorData as BaseNode).Name);
                 SirenixEditorGUI.EndBoxHeader();
                 if (foldout)
                 {
                     Tree.BeginDraw(true);
-                    var property = Tree.GetPropertyAtPath("Element");
+                    var property = Tree.GetPropertyAtPath("InspectorData");
                     var children = property.Children;
-                    foreach (var child in children)
-                    {
-                        if (child.Attributes.Where(a => a.GetType() == typeof(HideInGraphInspectorAttribute)).Count() > 0)
-                        {
-                            continue;
-                        }
+                    foreach (var child in children.Where(c => c.GetAttribute<HideInGraphInspectorAttribute>() == null))
                         child.Draw();
-                    }
                     Tree.EndDraw();
                 }
                 SirenixEditorGUI.EndBox();
             }
         }
-
-        /// <summary>
-        /// 监视器实例
-        /// </summary>
-        public UnityEditor.Editor Inspector;
-
-        /// <summary>
-        /// 监视器容器
-        /// </summary>
-        public IMGUIContainer GUIContainer;
 
         /// <summary>
         /// 绑定的对象
@@ -74,12 +52,12 @@ namespace GameToolKit.Editor
         public NodeField(BaseNode element, string Name)
         {
             Instance = element;
-            Assist assist = ScriptableObject.CreateInstance<Assist>();
-            assist.Element = Instance;
-            assist.Name = Name;
-            Inspector = Sirenix.OdinInspector.Editor.OdinEditor.CreateEditor(assist, typeof(AssistEditor));
-            GUIContainer = new IMGUIContainer(() => { Inspector.OnInspectorGUI(); });
-            Add(GUIContainer);
+            var assist = ScriptableObject.CreateInstance<InspectorHelper>();
+            assist.InspectorData = element;
+            var editor = UnityEditor.Editor.CreateEditor(assist, typeof(NodeEditor));
+            var inspector = new IMGUIContainer(() => { editor.OnInspectorGUI(); });
+            //var inspector = new InspectorElement(editor);
+            Add(inspector);
         }
 
         public override bool IsAssociatedWith(object obj)

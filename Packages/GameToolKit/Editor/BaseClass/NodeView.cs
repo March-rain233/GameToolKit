@@ -7,40 +7,23 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using Sirenix.Utilities.Editor;
 using System.Linq;
+using System;
+using UnityEditor.UIElements;
+using Sirenix.OdinInspector.Editor;
 
 namespace GameToolKit.Editor
 {
     /// <summary>
     /// 节点视图
     /// </summary>
-    public class NodeView : Node
+    public class NodeView<TNode> : Node
+        where TNode : BaseNode
     {
-        class Assist : SerializedScriptableObject
-        {
-            public BaseNode Node;
-        }
-
-        [CustomEditor(typeof(Assist))]
-        private class AssistEditor : Sirenix.OdinInspector.Editor.OdinEditor
-        {
-            Assist assist => target as Assist;
-            public override void OnInspectorGUI()
-            {
-                Tree.BeginDraw(true);
-                var property = Tree.GetPropertyAtPath("Node");
-                var children = property.Children;
-                foreach (var child in children.Where(c=>c.GetAttribute<ShowInNodeExtension>() != null))
-                {
-                    child.Draw();
-                }
-                Tree.EndDraw();
-            }
-        }
 
         /// <summary>
         /// 节点实例
         /// </summary>
-        public BaseNode Node;
+        public TNode Node;
         /// <summary>
         /// 节点名控件
         /// </summary>
@@ -49,7 +32,7 @@ namespace GameToolKit.Editor
         /// 节点名输入框
         /// </summary>
         private TextField _input;
-        public NodeView(BaseNode node)
+        public NodeView(TNode node)
         {
             Node = node;
 
@@ -85,11 +68,11 @@ namespace GameToolKit.Editor
             if (!type.GetMembers()
                 .All(info => info.GetCustomAttributes(typeof(ShowInNodeExtension), true).Length == 0))
             {
-                var assist = ScriptableObject.CreateInstance<Assist>();
-                assist.Node = node;
-                var editor = UnityEditor.Editor.CreateEditor(assist);
-                var gui = new IMGUIContainer(editor.OnInspectorGUI);
-                extensionContainer.Add(gui);
+                var assist = ScriptableObject.CreateInstance<InspectorHelper>();
+                assist.InspectorData = node;
+                var editor = UnityEditor.Editor.CreateEditor(assist, typeof(NodeViewEditor));
+                var inspector = new InspectorElement(editor);
+                extensionContainer.Add(inspector);
             }
 
             //创建资源端口
@@ -106,7 +89,7 @@ namespace GameToolKit.Editor
                 }
                 if (portData.PortDirection == PortDirection.Input)
                 {
-                    var port = base.InstantiatePort(Orientation.Horizontal,
+                    var port = InstantiateSourcePort(Orientation.Horizontal,
                         Direction.Input,
                         Port.Capacity.Single,
                         portData.PreferredType);
@@ -118,7 +101,7 @@ namespace GameToolKit.Editor
                 }
                 else
                 {
-                    var port = base.InstantiatePort(Orientation.Horizontal,
+                    var port = InstantiateSourcePort(Orientation.Horizontal,
                         Direction.Output,
                         Port.Capacity.Multi,
                         portData.PreferredType);
@@ -175,6 +158,25 @@ namespace GameToolKit.Editor
             });
             evt.menu.AppendSeparator();
             base.BuildContextualMenu(evt);
+        }
+
+        protected SourcePort InstantiateSourcePort(Orientation orientation, Direction direction, Port.Capacity capacity, Type type)
+        {
+            return SourcePort.Create<SourceEdgeView>(orientation, direction, capacity, type);
+        }
+    }
+
+    internal class NodeViewEditor : OdinEditor
+    {
+        InspectorHelper assist => target as InspectorHelper;
+        public override void OnInspectorGUI()
+        {
+            Tree.BeginDraw(true);
+            var property = Tree.GetPropertyAtPath("InspectorData");
+            var children = property.Children;
+            foreach (var child in children.Where(c => c.GetAttribute<ShowInNodeExtension>() != null))
+                child.Draw();
+            Tree.EndDraw();
         }
     }
 }

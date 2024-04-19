@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace GameToolKit.Editor
 {
-    public class NodeSearchProvider<TGraph, TNode> : NodeSearchProviderBase 
+    public class NodeSearchProvider<TGraph, TNode> : ScriptableObject, ISearchWindowProvider
         where TNode : BaseNode
         where TGraph : DataFlowGraph<TGraph, TNode>
     {
@@ -19,18 +19,19 @@ namespace GameToolKit.Editor
             _graphView = graphView;
             _window = editor;
         }
-        public override List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
+        public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             var tree = new List<SearchTreeEntry>();
             var typeList = TypeCache.GetTypesDerivedFrom<TNode>();
             var groups = TypeCache.GetTypesWithAttribute<NodeCategoryAttribute>()
                 .Where(t=>t.IsSubclassOf(typeof(TNode)));
-            tree.Add(new SearchTreeGroupEntry(new GUIContent("Node"), 0));
+            tree.Add(new SearchTreeGroupEntry(new GUIContent("Node")));
+
+            //获取节点类型分组
             foreach (var g in groups)
             {
                 var attr = g.GetCustomAttributes(typeof(NodeCategoryAttribute), false)[0] as NodeCategoryAttribute;
-                if (attr.Category == "NULL")
-                    continue;
+                if (attr.Category == "NULL") continue;
                 int index = 0;
                 var path = attr.Category.Split('/');
                 for (int i = 0; i < path.Length; i++)
@@ -44,23 +45,23 @@ namespace GameToolKit.Editor
                     index = find;
                 }
             }
+
+            //设置类型项
             foreach (var type in typeList)
             {
-                if (type.IsAbstract)
-                    continue;
+                if (type.IsAbstract) continue;
+
                 var category = (type.GetCustomAttributes(typeof(NodeCategoryAttribute), true)[0] as NodeCategoryAttribute).Category;
                 if (category == "NULL")
                 {
                     continue;
                 }
+
                 //获取所在的分组
                 int level = category.Split('/').Length;
                 category = category.Split('/')[level - 1];
                 int index = tree.FindIndex((item) => item.content.text == category);
-                if (index == -1)
-                {
-                    Debug.LogError("出现了未定义分类的节点");
-                }
+                if (index == -1) Debug.LogError("出现了未定义分类的节点");
                 else
                 {
                     var attr = type.GetCustomAttributes(typeof(NodeNameAttribute), false);
@@ -70,48 +71,44 @@ namespace GameToolKit.Editor
                         name = type.Name;
                         if (type.IsGenericType)
                         {
-                            name = name.Remove(name.Length - 2);
+                            name = name[..^2];
                         }
                     }
                     else
                     {
                         name = ((NodeNameAttribute)attr[0]).Name;
                     }
-                    tree.Insert(
-                        index + 1,
-                        new SearchTreeEntry(new GUIContent("    " + name))
-                        {
-                            level = level + 1,
-                            userData = type,
-                        });
+
+                    if (type.IsGenericType)
+                    {
+                        attr = type.GetCustomAttributes(typeof(GenericSelectorAttribute), false);
+                        if (attr.Length == 0) continue;
+                        var genericParameters = ((GenericSelectorAttribute)attr[0]).GetTypes();
+                        for (int i = genericParameters.Count - 1; i >= 0; i--)
+                            tree.Insert(
+                                index + 1,
+                                new SearchTreeEntry(new GUIContent($"    {name}<{genericParameters[i].Name}>"))
+                                {
+                                    level = level + 1,
+                                    userData = type.MakeGenericType(genericParameters[i])
+                                });
+                    }
+                    else
+                        tree.Insert(
+                            index + 1,
+                            new SearchTreeEntry(new GUIContent("    " + name))
+                            {
+                                level = level + 1,
+                                userData = type,
+                            });
                 }
             }
             return tree;
         }
 
-        public override bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
+        public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
         {
             var type = SearchTreeEntry.userData as System.Type;
-            if (type.IsGenericTypeDefinition)
-            {
-                var args = type.GetGenericArguments();
-                var dialog = EditorWindow.CreateWindow<GenericSelectorDialog>();
-                dialog.TypeDatas = new GenericSelectorDialog.TypeData[args.Length];
-                for(int i = 0; i < args.Length; i++)
-                {
-                    dialog.TypeDatas[i].Name = args[i].Name;
-                    dialog.TypeDatas[i].ValidTypes = GenericSelectorDialog.TypeData.
-                        GetValidTypes(args[i].GetGenericArguments());
-                }
-                dialog.Callback = () =>
-                {
-                    var args = dialog.TypeDatas.Select(d => d.Type).ToArray();
-                    var target = type.MakeGenericType(args);
-                    CreateNode(target, context);
-                };
-                dialog.ShowPopup();
-                return true;
-            }
             CreateNode(type, context);
             return true;
         }

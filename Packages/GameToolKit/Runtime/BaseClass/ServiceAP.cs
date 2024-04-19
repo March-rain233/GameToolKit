@@ -16,15 +16,20 @@ namespace GameToolKit
         /// <summary>
         /// 全局变量库
         /// </summary>
-        public GlobalBlackboard GlobalBlackboard;
-        public Dialog.DialogManager DialogManager;
-        public PanelManager PanelManager;
+        public GlobalBlackboard GlobalBlackboard { get; protected set; }
+        public Dialog.DialogManager DialogManager { get; protected set; }
+        public PanelManager PanelManager { get; protected set; }
 
         ServiceAP()
         {
             GlobalBlackboard = GlobalBlackboard.Instance;
-            DialogManager = new Dialog.DialogManager();
-            PanelManager = new PanelManager();
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void Init()
+        {
+            Instance.DialogManager = new Dialog.DialogManager();
+            Instance.PanelManager = new PanelManager();
         }
     }
 }

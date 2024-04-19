@@ -6,7 +6,7 @@ namespace GameToolKit.Behavior.Tree
 {
     public class LogNode : ActionNode
     {
-        [Port("Message", PortDirection.Input)]
+        [SourcePort("Message", PortDirection.Input)]
         [TextArea]
         public string Message;
 

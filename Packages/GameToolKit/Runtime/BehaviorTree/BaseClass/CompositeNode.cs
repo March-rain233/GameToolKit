@@ -22,7 +22,7 @@ namespace GameToolKit.Behavior.Tree
         /// <summary>
         /// вс╫з╣Ц
         /// </summary>
-        [HideInGraphInspector]
+        [HideInGraphInspector, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         public List<ProcessNode> Childrens = new List<ProcessNode>();
 
         public override void AddChild(ProcessNode node) =>

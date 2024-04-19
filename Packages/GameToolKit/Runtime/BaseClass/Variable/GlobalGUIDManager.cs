@@ -16,9 +16,12 @@ namespace GameToolKit
     /// <remarks>
     /// 用于转换uid与名称
     /// </remarks>
-    public class GlobalGUIDManager : ScriptableSingleton<GlobalGUIDManager>, IGUIDManager
+    public class GlobalGUIDManager : IGUIDManager
     {
+        [SerializeField]
         Dictionary<string, string> _id2name = new Dictionary<string, string>();
+
+        [SerializeField]
         Dictionary<string, string> _name2id = new Dictionary<string, string>();
 
         public string ID2Name(string name) => _id2name[name];
@@ -32,9 +35,6 @@ namespace GameToolKit
                 Debug.Log($"{name} has already exist");
                 return null;
             }
-#if UNITY_EDITOR
-            Undo.RecordObject(this, $"add name {name}");
-#endif
 
             string guid = Guid.NewGuid().ToString("N");
             _id2name[guid] = name;
@@ -50,9 +50,7 @@ namespace GameToolKit
             if(!_name2id.ContainsKey(name)) return false;
 
             string uid = _name2id[name];
-#if UNITY_EDITOR
-            Undo.RecordObject(this, $"remove name {name}");
-#endif
+
             _id2name.Remove(uid);
             _name2id.Remove(name);
             return true;
@@ -62,10 +60,8 @@ namespace GameToolKit
         {
             if (!_id2name.ContainsKey(id)) return false;
 
-            string name = _name2id[id];
-#if UNITY_EDITOR
-            Undo.RecordObject(this, $"remove name {name}");
-#endif
+            string name = _id2name[id];
+
             _id2name.Remove(id);
             _name2id.Remove(name);
             return true;
@@ -75,9 +71,7 @@ namespace GameToolKit
         {
             if(!_name2id.ContainsKey(oldName)) return false;
             string uid = _name2id[oldName];
-#if UNITY_EDITOR
-            Undo.RecordObject(this, $"change name {oldName} to {newName}");
-#endif
+
             _id2name[uid] = newName;
             _name2id.Remove(oldName);
             _name2id[newName] = uid;

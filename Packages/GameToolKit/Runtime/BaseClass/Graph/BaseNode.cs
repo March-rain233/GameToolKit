@@ -31,7 +31,7 @@ namespace GameToolKit
         /// <summary>
         /// 唯一标识符
         /// </summary>
-        [HideInGraphInspector, OdinSerialize]
+        [OdinSerialize, HideInGraphInspector, ReadOnly]
         public int Id { get; internal protected set; }
 
         /// <summary>
@@ -51,13 +51,16 @@ namespace GameToolKit
         /// <summary>
         /// 节点是否已初始化
         /// </summary>
+        [OdinSerialize, ReadOnly]
         public bool HasInitialized { get; private set; } = false;
 
         /// <summary>
         /// 当节点为脏
         /// </summary>
+        [NonSerialized]
         public Action OnDirty;
 
+        [SerializeField, HideInInspector]
         private bool _disposedValue = false;
         #endregion
 
@@ -131,11 +134,11 @@ namespace GameToolKit
         /// <param name="sourceNode"></param>
         /// <param name="sourceField"></param>
         /// <param name="targetField"></param>
-        public void RemoveOutputEdge(BaseNode sourceNode, string sourceField, string targetField)
+        public void RemoveOutputEdge(BaseNode targetNode, string sourceField, string targetField)
         {
             for (int i = _outputEdges.Count - 1; i >= 0; --i)
             {
-                if (_outputEdges[i].SourceNode == sourceNode &&
+                if (_outputEdges[i].TargetNode == targetNode &&
                     _outputEdges[i].SourceField == sourceField &&
                     _outputEdges[i].TargetField == targetField)
                 {
@@ -151,11 +154,11 @@ namespace GameToolKit
         /// <param name="sourceNode"></param>
         /// <param name="sourceField"></param>
         /// <param name="targetField"></param>
-        public void RemoveOutputEdge(BaseNode sourceNode)
+        public void RemoveOutputEdge(BaseNode targetNode)
         {
             for (int i = _outputEdges.Count - 1; i >= 0; --i)
             {
-                if (_outputEdges[i].SourceNode == sourceNode)
+                if (_outputEdges[i].TargetNode == targetNode)
                 {
                     _outputEdges.RemoveAt(i);
                     return;
@@ -164,11 +167,21 @@ namespace GameToolKit
         }
 
         /// <summary>
-        /// 设置脏标记
+        /// 向以该节点为源节点的边传播脏标记
         /// </summary>
-        internal void SetDirty()
+        internal void SpreadDirtyFlag()
         {
             OnDirty?.Invoke();
+        }
+
+        /// <summary>
+        /// 设置脏标记
+        /// </summary>
+        /// <remarks>请在需要传输的数据发生变化后使用</remarks>
+        internal protected void SetDirty()
+        {
+            SpreadDirtyFlag();
+            PushOutputData();
         }
 
         /// <summary>
@@ -219,7 +232,8 @@ namespace GameToolKit
         /// <returns></returns>
         protected virtual object PullValue(string fieldName)
         {
-            Refresh();
+            if(_inputEdges.Any(e=>e.IsDirty)) //当存在脏的边时，说明节点的实际值并未计算
+                Refresh();
             return GetValue(fieldName);
         }
 
@@ -235,12 +249,13 @@ namespace GameToolKit
         /// <summary>
         /// 执行数据更新逻辑
         /// </summary>
+        /// <remarks>当数据发生变化时调用SetDirty</remarks>
         protected abstract void OnValueUpdate();
 
         /// <summary>
         /// 拉取输入的数据
         /// </summary>
-        protected void InitInputData()
+        protected void PullInputData()
         {
             foreach (var edge in InputEdges.Where(e => e.IsDirty))
             {
@@ -253,7 +268,7 @@ namespace GameToolKit
         /// <summary>
         /// 推送输出的数据
         /// </summary>
-        protected void InitOutputData()
+        protected void PushOutputData()
         {
             foreach (var edge in OutputEdges)
             {
@@ -266,9 +281,94 @@ namespace GameToolKit
         /// </summary>
         public virtual void Refresh()
         {
-            InitInputData();
+            PullInputData();
             OnValueUpdate();
-            InitOutputData();
+        }
+        #endregion
+
+        #region 生命周期
+        /// <summary>
+        /// 克隆当前节点（仅克隆节点内部信息，与其他节点交互的信息由图实现
+        /// </summary>
+        /// <remarks>
+        /// 默认为浅拷贝，需要深拷贝时请进行重载
+        /// </remarks>
+        public virtual BaseNode Clone()
+        {
+            var node = MemberwiseClone() as BaseNode;
+            node.Id = Id;
+            node._inputEdges = new List<SourceEdge>();
+            node._outputEdges = new List<SourceEdge>();
+            return node;
+        }
+
+        /// <summary>
+        /// 初始化节点
+        /// </summary>
+        public void Init()
+        {
+            OnInit();
+            HasInitialized = true;
+        }
+
+        /// <summary>
+        /// 当初始化
+        /// </summary>
+        protected virtual void OnInit()
+        {
+            foreach (var edge in _inputEdges)
+                edge.RegisterDirtyHandler();
+        }
+
+        /// <summary>
+        /// 终止节点
+        /// </summary>
+        public void Terminate()
+        {
+            OnTerminate();
+            HasInitialized = false;
+        }
+
+
+        /// <summary>
+        /// 当运行终止时
+        /// </summary>
+        protected virtual void OnTerminate()
+        {
+            foreach (var edge in _inputEdges)
+                edge.UnregisterDirtyHandler();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    foreach(var e in _inputEdges)
+                        e.UnregisterDirtyHandler();
+                    _inputEdges.Clear();
+                    _outputEdges.Clear();
+                }
+
+                // TODO: 释放未托管的资源(未托管的对象)并重写终结器
+                // TODO: 将大型字段设置为 null
+                _disposedValue = true;
+            }
+        }
+
+        // // TODO: 仅当“Dispose(bool disposing)”拥有用于释放未托管资源的代码时才替代终结器
+        ~BaseNode()
+        {
+            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
+            Dispose(disposing: false);
+        }
+
+        public void Dispose()
+        {
+            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
         #endregion
 
@@ -282,11 +382,11 @@ namespace GameToolKit
         {
             var list = new List<PortData>();
             var fields = TypeUtility.GetAllField(GetType(), typeof(BaseNode))
-                .Where(field => field.IsDefined(typeof(PortAttribute), true));
+                .Where(field => field.IsDefined(typeof(SourcePortAttribute), true));
             foreach (var field in fields)
             {
-                var attrs = field.GetCustomAttributes(typeof(PortAttribute), true);
-                foreach (PortAttribute attr in attrs)
+                var attrs = field.GetCustomAttributes(typeof(SourcePortAttribute), true);
+                foreach (SourcePortAttribute attr in attrs)
                 {
                     if (attr.IsMemberFields)
                     {
@@ -352,67 +452,6 @@ namespace GameToolKit
             public Type PreferredType;
         }
 #endif
-        #endregion
-
-        #region 生命周期
-        /// <summary>
-        /// 克隆当前节点（仅克隆节点内部信息，与其他节点交互的信息由图实现
-        /// </summary>
-        /// <remarks>
-        /// 默认为浅拷贝，需要深拷贝时请进行重载
-        /// </remarks>
-        public virtual BaseNode Clone()
-        {
-            var node = MemberwiseClone() as BaseNode;
-            node.Id = Id;
-            node._inputEdges = new List<SourceEdge>();
-            node._outputEdges = new List<SourceEdge>();
-            return node;
-        }
-
-        public void Init()
-        {
-            OnInit();
-            HasInitialized = true;
-        }
-
-        protected virtual void OnInit()
-        {
-            foreach (var edge in _inputEdges)
-                edge.RegisterDirtyHandler();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    foreach(var e in _inputEdges)
-                        e.UnregisterDirtyHandler();
-                    _inputEdges.Clear();
-                    _outputEdges.Clear();
-                }
-
-                // TODO: 释放未托管的资源(未托管的对象)并重写终结器
-                // TODO: 将大型字段设置为 null
-                _disposedValue = true;
-            }
-        }
-
-        // // TODO: 仅当“Dispose(bool disposing)”拥有用于释放未托管资源的代码时才替代终结器
-        ~BaseNode()
-        {
-            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
-            Dispose(disposing: false);
-        }
-
-        public void Dispose()
-        {
-            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
         #endregion
     }
 }

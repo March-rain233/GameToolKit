@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="graph-editor" style="flex-grow: 1; align-items: stretch;">
+        <uie:Toolbar name="Toolbar" style="flex-direction: row; align-self: stretch; justify-content: space-between;">
+            <uie:ToolbarSpacer />
+            <uie:ToolbarSearchField focusable="true" name="search-box" style="flex-grow: 1; min-width: auto; min-height: auto; width: auto; flex-shrink: 1;" />
+            <uie:ToolbarSpacer style="flex-shrink: 0;" />
+            <uie:ToolbarToggle focusable="false" label="Inspector" name="inspector-toggle" value="true" style="flex-direction: row; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; left: 0; align-self: auto; -unity-text-align: middle-left; justify-content: flex-start; width: 66px;" />
+            <uie:ToolbarToggle focusable="false" label="Blackboard" name="blackboard-toggle" style="-unity-text-align: middle-left; width: 75px;" />
+        </uie:Toolbar>
+        <ui:VisualElement name="body" style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: auto; align-items: stretch; display: flex;">
+            <ui:VisualElement name="view-container" content-container="anyValue" style="flex-grow: 1;" />
+            <GameToolKit.Editor.GraphInspector name="graph-inspector" style="height: auto; right: 0; position: absolute; top: 0; bottom: 0; width: 30%; align-self: stretch; justify-content: flex-start; align-items: stretch; flex-direction: column; transition-property: right; transition-duration: 0.3s; transition-timing-function: ease-in-out;" />
+        </ui:VisualElement>
+        <ui:Label display-tooltip-when-elided="true" name="filename-label" style="white-space: nowrap; -unity-text-align: middle-right; flex-direction: row-reverse; background-color: rgb(60, 60, 60); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; min-height: 18px; max-height: 18px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
+    </ui:VisualElement>
+</ui:UXML>

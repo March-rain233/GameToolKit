@@ -16,18 +16,7 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 绑定的对话树
         /// </summary>
-        [HideInGraphInspector]
-        [ReadOnly]
-        public DialogTree DialogTree;
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        public virtual void Init() =>
-            OnInit();
-
-        /// <summary>
-        /// 当初始化
-        /// </summary>
-        protected virtual void OnInit() { }
+        [SerializeField, HideInInspector]
+        public DialogGraph DialogTree;
     }
 }

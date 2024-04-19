@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameToolKit.Dialog
 {
-    public class DialogViewConfig : ScriptableSingleton<DialogViewConfig>
+    public class DialogViewConfig : SingletonSO<DialogViewConfig>
     {
         public List<string> DialogBoxEnums;
         public List<string> OptionViewEnums;

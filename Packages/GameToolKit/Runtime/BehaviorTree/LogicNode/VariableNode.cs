@@ -7,61 +7,62 @@ using System.Linq;
 using DG.Tweening;
 namespace GameToolKit.Behavior.Tree
 {
+    [NodeCategory("Logic/Source/BlackVariableNode")]
+    [GenericSelector("BaseValue")]
     public class VariableNode<T> : SourceNode
     {
         [SerializeField]
         [HideInInspector]
-        private string _id = "";
+        private string _variableId = "";
 
         [OdinSerialize]
         [ValueDropdown("GetValidIndex", OnlyChangeValueOnConfirm = true)]
-        [InfoBox("The index is not contained in the dataset", InfoMessageType.Warning, "IsNotContainIndex")]
+        [InfoBox("The index is not contained in the blackboard", InfoMessageType.Warning, "IsNotContainIndex")]
         [DelayedProperty]
-        public string ID
+        public string VariableId
         {
-            get { return _id; }
+            get { return _variableId; }
             set
             {
                 if (!HasInitialized)
                 {
-                    _id = value;
+                    _variableId = value;
                     return;
                 }
-                if (!string.IsNullOrEmpty(_id))
-                    _blackboard[_id, Domain].ValueChanged -= OnValueChanged;
+                if (!string.IsNullOrEmpty(_variableId))
+                    _blackboard[_variableId].ValueChanged -= OnValueChanged;
 
-                _id = value;
-                _blackboard[_id, Domain].ValueChanged += OnValueChanged;
+                _variableId = value;
+                _blackboard[_variableId].ValueChanged += OnValueChanged;
                 OnValueChanged();
             }
         }
 
-        public Domain Domain;
-
-        [Port("Value", PortDirection.Output)]
+        [SourcePort("Value", PortDirection.Output)]
         private T _value;
 
         /// <summary>
         /// 是否不存在该索引
         /// </summary>
-        public bool IsNotContainIndex => _blackboard.GUIDManager.ContainID(_id);
+        public bool IsNotContainIndex => !_blackboard.GUIDManager.ContainID(_variableId);
 
-        protected TreeBlackboard _blackboard => BehaviorTree.Blackboard;
+        protected GraphBlackboard _blackboard => BehaviorTree.Blackboard;
 
         protected override void OnInit()
         {
-            _blackboard[_id, Domain].ValueChanged += OnValueChanged;
-            _value = (T)_blackboard[_id, Domain].Value;
+            _blackboard[_variableId].ValueChanged -= OnValueChanged;
+            _blackboard[_variableId].ValueChanged += OnValueChanged;
+            _value = (T)_blackboard[_variableId].Value;
             base.OnInit();
         }
 
         void OnValueChanged()
         {
-            _value = (T)_blackboard[_id, Domain].Value;
-            InitOutputData();
+            _value = (T)_blackboard[_variableId].Value;
+            SetDirty();
         }
 
-        protected override void OnValueUpdate() { }
+        protected override void OnValueUpdate() { SetDirty(); }
 
 #if UNITY_EDITOR
         /// <summary>

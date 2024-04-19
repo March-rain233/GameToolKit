@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sirenix.OdinInspector;
 
 namespace GameToolKit.Dialog
 {
@@ -17,20 +18,16 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 后继节点
         /// </summary>
-        [HideInGraphInspector]
+        [HideInGraphInspector, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         public List<ProcessNode> Children = new List<ProcessNode>();
 
         /// <summary>
         /// 前驱节点
         /// </summary>
-        [HideInGraphInspector]
+        [HideInGraphInspector, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         public List<ProcessNode> Parents = new List<ProcessNode>();
 
-
-        public sealed override void Init()
-        {
-            base.Init();
-        }
+        public bool IsAbort { get; private set; } = false;
 
         /// <summary>
         /// 运行
@@ -38,7 +35,8 @@ namespace GameToolKit.Dialog
         public void Start(ProcessNode preNode)
         {
             DialogTree.RunningNodes.Add(this);
-            InitInputData();
+            PullInputData();
+            IsAbort = false;
             OnStart(preNode);
         }
 
@@ -50,8 +48,11 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 中断运行
         /// </summary>
-        public void Abort() =>
+        public void Abort()
+        {
+            IsAbort = true;
             OnAbort();
+        }
 
         /// <summary>
         /// 当被中断
@@ -64,7 +65,7 @@ namespace GameToolKit.Dialog
         public void Finish()
         {
             OnFinish();
-            InitOutputData();
+            IsAbort = false;
             DialogTree.RunningNodes.Remove(this);
             RunSubsequentNode();
         }
@@ -72,7 +73,7 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 当结束运行
         /// </summary>
-        protected virtual void OnFinish() { }
+        protected virtual void OnFinish() { SetDirty(); }
 
         /// <summary>
         /// 运行后继节点
@@ -102,7 +103,7 @@ namespace GameToolKit.Dialog
     {
         protected override void OnAbort()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         protected override void OnStart(ProcessNode preNode) =>
@@ -119,7 +120,7 @@ namespace GameToolKit.Dialog
     {
         protected override void OnAbort()
         {
-            throw new System.NotImplementedException();
+
         }
 
         protected override void OnStart(ProcessNode preNode) =>

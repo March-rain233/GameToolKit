@@ -16,9 +16,9 @@ namespace GameToolKit
         {
             get
             {
-                if(_instance == null)
+                if(_instance == null) 
                 {
-                    _instance = System.Activator.CreateInstance<TSingleton>();
+                    _instance = System.Activator.CreateInstance(typeof(TSingleton), true) as TSingleton;
                 }
                 return _instance;
             }

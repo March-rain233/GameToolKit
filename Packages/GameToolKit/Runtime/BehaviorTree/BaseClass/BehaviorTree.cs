@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using Sirenix.Serialization;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 namespace GameToolKit.Behavior.Tree
 {
@@ -16,14 +17,10 @@ namespace GameToolKit.Behavior.Tree
         /// <summary>
         /// 根节点
         /// </summary>
-        [SerializeField]
+        [SerializeField, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         private RootNode _rootNode;
         public RootNode RootNode => _rootNode;
-        /// <summary>
-        /// 变量字典
-        /// </summary>
-        [NonSerialized, OdinSerialize]
-        public TreeBlackboard Blackboard = new TreeBlackboard();
+
         /// <summary>
         /// 当前树的运行对象
         /// </summary>
@@ -37,6 +34,12 @@ namespace GameToolKit.Behavior.Tree
         private void Reset()
         {
             _rootNode = CreateNode(typeof(RootNode)) as RootNode;
+            Blackboard = new GraphBlackboard(true);
+        }
+
+        private void OnEnable()
+        {
+            Blackboard.Init();
         }
 
         /// <summary>
@@ -68,25 +71,20 @@ namespace GameToolKit.Behavior.Tree
                 tree.Blackboard[id, Domain.Local].Value = value.Value;
 
             //初始化节点
-            foreach (var node in tree.Nodes)
-            {
-                node.SetTree(tree);
-                node.Init();
-            }
-            foreach (var node in tree.Nodes)
-                node.Refresh();
+            tree.Init();
             return tree;
         }
 
         public override BehaviorTree Clone()
         {
             var tree = base.Clone();
-            tree.Blackboard = Blackboard.Clone();
             tree._rootNode = tree.Nodes.First(node => node is RootNode) as RootNode;
             //连接行为边
             foreach(var node in tree.Nodes.OfType<ProcessNode>())
                 foreach(var child in (FindNode(node.Id) as ProcessNode).GetChildren())
                     node.AddChild(tree.FindNode(child.Id) as ProcessNode);
+            foreach(var node in tree.Nodes)
+                node.SetTree(tree);
             return tree;
         }
 

@@ -46,13 +46,6 @@ namespace GameToolKit.Behavior.Tree
 
         #region 生命周期相关
         /// <summary>
-        /// 克隆当前节点
-        /// </summary>
-        /// <remarks>
-        /// 默认为浅拷贝，需要深拷贝时请进行重载
-        /// </remarks>
-
-        /// <summary>
         /// 设置行为树
         /// </summary>
         /// <param name="tree"></param>

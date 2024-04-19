@@ -17,26 +17,26 @@ namespace GameToolKit.Dialog
         /// <summary>
         /// 对话树-显示UI引用列表
         /// </summary>
-        List<(DialogTree tree, IDialogBox box)> _dialogReferenceList = new List<(DialogTree, IDialogBox)>();
+        List<(DialogGraph tree, IDialogBox box)> _dialogReferenceList = new List<(DialogGraph, IDialogBox)>();
 
         /// <summary>
         /// 等待运行的对话队列
         /// </summary>
         [ShowInInspector, ReadOnly, SerializeField]
-        Queue<DialogTree> _waitingQueue = new Queue<DialogTree> ();
+        Queue<DialogGraph> _waitingQueue = new Queue<DialogGraph> ();
 
         /// <summary>
         /// 正在运行的对话列表
         /// </summary>
         [ShowInInspector, ReadOnly, SerializeField]
-        List<DialogTree> _runningList = new List<DialogTree> ();
+        List<DialogGraph> _runningList = new List<DialogGraph> ();
 
         /// <summary>
         /// 将对话树推入运行队列
         /// </summary>
         /// <param name="name"></param>
         [Button]
-        public void RunDialogTree(DialogTree dialog)
+        public void RunDialogTree(DialogGraph dialog)
         {
             _waitingQueue.Enqueue(dialog);
             Refresh();
@@ -49,7 +49,7 @@ namespace GameToolKit.Dialog
         /// 运行中的对话树会被中断，还未运行的对话树会被移除出队列
         /// </remarks>
         /// <param name="dialog"></param>
-        public void CancelDialogTree(DialogTree dialog)
+        public void CancelDialogTree(DialogGraph dialog)
         {
             if (_runningList.Contains(dialog))
             {
@@ -57,7 +57,7 @@ namespace GameToolKit.Dialog
                 RemoveDialogTree(dialog);
             }
             else if(_waitingQueue.Contains(dialog))
-                _waitingQueue = new Queue<DialogTree>(_waitingQueue.Where(e => e != dialog));
+                _waitingQueue = new Queue<DialogGraph>(_waitingQueue.Where(e => e != dialog));
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace GameToolKit.Dialog
         /// 移除对话树
         /// </summary>
         /// <param name="dialog"></param>
-        void RemoveDialogTree(DialogTree dialog)
+        void RemoveDialogTree(DialogGraph dialog)
         {
             _runningList.Remove(dialog);
 
@@ -120,8 +120,8 @@ namespace GameToolKit.Dialog
             if(_runningList.Count == 0) AddDialogTree();
 
             //如果当前的对话不是顺序模式的话，加入后续的并发模式对话
-            if(_runningList.Count != 0 && _runningList[0].Mode != DialogTree.DialogMode.Sequential)
-                while (_waitingQueue.Peek().Mode != DialogTree.DialogMode.Sequential)
+            if(_runningList.Count != 0 && _runningList[0].Mode != DialogGraph.DialogMode.Sequential)
+                while (_waitingQueue.Peek().Mode != DialogGraph.DialogMode.Sequential)
                     AddDialogTree();
         }
 
@@ -131,7 +131,7 @@ namespace GameToolKit.Dialog
         /// <param name="boxType">对话框类型</param>
         /// <param name="argument">对话参数</param>
         /// <param name="onDialogEnd">输出结束回调</param>
-        public void PlayDialog(string boxType, DialogArgument argument, Action onDialogEnd, DialogTree source)
+        public void PlayDialog(string boxType, DialogArgument argument, Action onDialogEnd, DialogGraph source)
         {
             var box = ServiceAP.Instance.PanelManager.GetOrOpenPanel(boxType) as IDialogBox;
             _dialogReferenceList.Add((source, box));
@@ -155,7 +155,7 @@ namespace GameToolKit.Dialog
         /// </summary>
         /// <param name="boxtype"></param>
         /// <param name="tree"></param>
-        public void DeleteDialogBoxReference(string boxtype, DialogTree tree)
+        public void DeleteDialogBoxReference(string boxtype, DialogGraph tree)
         {
             ServiceAP.Instance.PanelManager.TryGetPanel(boxtype, out var panel);
             var box = panel as IDialogBox;

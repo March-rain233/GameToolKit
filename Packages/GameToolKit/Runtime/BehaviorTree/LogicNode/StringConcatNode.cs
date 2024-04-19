@@ -9,15 +9,16 @@ namespace GameToolKit.Behavior.Tree
     /// </summary>
     public class StringConcatNode : LogicNode
     {
-        [Port("Input1", PortDirection.Input)]
+        [SourcePort("Input1", PortDirection.Input)]
         public string Input1;
-        [Port("Input2", PortDirection.Input)]
+        [SourcePort("Input2", PortDirection.Input)]
         public string Input2;
-        [Port("Result", PortDirection.Output)]
+        [SourcePort("Result", PortDirection.Output)]
         public string Result;
         protected override void OnValueUpdate()
         {
             Result = Input1 + Input2;
+            SetDirty();
         }
 
         protected override object GetValue(string name)

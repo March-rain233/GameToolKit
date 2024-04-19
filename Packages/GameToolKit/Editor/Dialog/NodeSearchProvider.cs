@@ -5,7 +5,7 @@ using GameToolKit.Editor;
 
 namespace GameToolKit.Dialog.Editor
 {
-    public class NodeSearchProvider : NodeSearchProvider<DialogTree, Node>
+    public class NodeSearchProvider : NodeSearchProvider<DialogGraph, Node>
     {
     }
 }

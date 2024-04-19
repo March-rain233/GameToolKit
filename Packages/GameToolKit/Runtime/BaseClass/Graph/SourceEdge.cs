@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace GameToolKit
 {
     public class SourceEdge
     {
-        [SerializeField, SerializeReference]
+        [SerializeField, SerializeReference, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         BaseNode _sourceNode;
-        [SerializeField, SerializeReference]
+        [SerializeField, SerializeReference, HideDuplicateReferenceBox, HideReferenceObjectPicker]
         BaseNode _targetNode;
 
         /// <summary>
@@ -23,18 +24,16 @@ namespace GameToolKit
         /// <summary>
         /// 源数据段名称
         /// </summary>
-        [SerializeField]
         public string SourceField;
         /// <summary>
         /// 目标数据段名称
         /// </summary>
-        [SerializeField]
         public string TargetField;
 
         /// <summary>
         /// 脏标记
         /// </summary>
-        public bool IsDirty { get; private set; }
+        public bool IsDirty { get; private set; } = true;
 
         public SourceEdge(BaseNode sourceNode, BaseNode targetNode, string sourceField, string targetField)
         {
@@ -70,7 +69,7 @@ namespace GameToolKit
             if (IsDirty)
             {
                 IsDirty = true;
-                TargetNode.SetDirty();
+                TargetNode.SpreadDirtyFlag();
             }
         }
     }

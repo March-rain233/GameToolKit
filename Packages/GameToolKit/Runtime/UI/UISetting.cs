@@ -8,7 +8,7 @@ namespace GameToolKit
     /// UI系统设置
     /// </summary>
     [CreateAssetMenu(fileName = "UISetting", menuName = "Config/UISetting")]
-    public class UISetting : ScriptableSingleton<UISetting>
+    public class UISetting : SingletonSO<UISetting>
     {
         /// <summary>
         /// 预制体字典

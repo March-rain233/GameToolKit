@@ -28,7 +28,7 @@ namespace GameToolKit.Dialog
         protected override void OnInit()
         {
             base.OnInit();
-            InitOutputData();
+            PushOutputData();
         }
     }
 
@@ -38,8 +38,8 @@ namespace GameToolKit.Dialog
     /// <typeparam name="TValue"></typeparam>
     public class SplitNode<TValue> : SourceNode
     {
-        [Port("Value", PortDirection.Output, true)]
-        [Port("Value", PortDirection.Input)]
+        [SourcePort("Value", PortDirection.Output, true)]
+        [SourcePort("Value", PortDirection.Input)]
         public TValue Value;
         protected override void OnValueUpdate()
         {
@@ -53,8 +53,8 @@ namespace GameToolKit.Dialog
     /// <typeparam name="TValue"></typeparam>
     public class CombineNode<TValue> : SourceNode
     {
-        [Port("Value", PortDirection.Output)]
-        [Port("Value", PortDirection.Input, true)]
+        [SourcePort("Value", PortDirection.Output)]
+        [SourcePort("Value", PortDirection.Input, true)]
         public TValue Value;
         protected override void OnValueUpdate()
         {
@@ -68,7 +68,7 @@ namespace GameToolKit.Dialog
     /// <typeparam name="TValue"></typeparam>
     public class InputNode<TValue> : SourceNode
     {
-        [Port("Output", PortDirection.Output)]
+        [SourcePort("Output", PortDirection.Output)]
         [SerializeField]
         [HideInInspector]
         protected TValue _value = default;
@@ -79,7 +79,7 @@ namespace GameToolKit.Dialog
             set
             {
                 _value = value;
-                InitOutputData();
+                PushOutputData();
             }
         }
         protected override void OnValueUpdate()
@@ -95,10 +95,10 @@ namespace GameToolKit.Dialog
 
     public class ToStringNode : LogicNode
     {
-        [Port("Source", PortDirection.Input)]
+        [SourcePort("Source", PortDirection.Input)]
         public object Source;
 
-        [Port("Result", PortDirection.Output)]
+        [SourcePort("Result", PortDirection.Output)]
         public string Result;
         protected override void OnValueUpdate()
         {
@@ -108,11 +108,11 @@ namespace GameToolKit.Dialog
 
     public abstract class BinaryOperationNode<TValueA, TValueB, TResult>: LogicNode
     {
-        [Port("SourceA", PortDirection.Input)]
+        [SourcePort("SourceA", PortDirection.Input)]
         public TValueA SourceA;
-        [Port("SourceB", PortDirection.Input)]
+        [SourcePort("SourceB", PortDirection.Input)]
         public TValueB SourceB;
-        [Port("Result", PortDirection.Output)]
+        [SourcePort("Result", PortDirection.Output)]
         public TResult Result;
     }
 
@@ -154,7 +154,7 @@ namespace GameToolKit.Dialog
     /// </summary>
     public class CounterNode : SourceNode
     {
-        [Port("Counter", PortDirection.Output)]
+        [SourcePort("Counter", PortDirection.Output)]
         public int Counter;
         public int DefaultValue;
 
@@ -188,9 +188,9 @@ namespace GameToolKit.Dialog
     public class BezierEvaluateNode : LogicNode
     {
         public AnimationCurve Curve;
-        [Port("T", PortDirection.Input, new Type[] { typeof(int) })]
+        [SourcePort("T", PortDirection.Input, new Type[] { typeof(int) })]
         public float T;
-        [Port("Result", PortDirection.Output)]
+        [SourcePort("Result", PortDirection.Output)]
         public float Result;
         protected override void OnValueUpdate()
         {
@@ -207,9 +207,9 @@ namespace GameToolKit.Dialog
             Round,
         }
         public ConvertType Type;
-        [Port("Source", PortDirection.Input)]
+        [SourcePort("Source", PortDirection.Input)]
         public float Source;
-        [Port("Source", PortDirection.Output)]
+        [SourcePort("Source", PortDirection.Output)]
         public int Result;
 
         protected override void OnValueUpdate()
@@ -233,7 +233,7 @@ namespace GameToolKit.Dialog
     {
         public int MaxValue;
         public int MinValue;
-        [Port("Value", PortDirection.Output)]
+        [SourcePort("Value", PortDirection.Output)]
         public int Value;
         protected override void OnValueUpdate()
         {

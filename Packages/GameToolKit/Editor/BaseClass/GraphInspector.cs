@@ -11,16 +11,26 @@ namespace GameToolKit.Editor
     /// <summary>
     /// 图监视器
     /// </summary>
-    public class GraphInspector : GraphElement
+    public class GraphInspector : VisualElement
     {
+        public new class UxmlFactory : UxmlFactory<GraphInspector> { }
+
+        public VisualTreeAsset VisualTreeAsset;
         private VisualElement _mainContainer;
         private VisualElement _contentContainer;
         private Label _title;
         private TabbedView _tabbedView;
 
         private Dictionary<string, TabButton> _tabDic = new Dictionary<string, TabButton>();
-        public override string title { get => _title.text; set => _title.text = value; }
         public override VisualElement contentContainer => _contentContainer;
+
+        public string Tittle { get=>_title.text; set => _title.text = value; }
+
+        public GraphInspector():this(null)
+        {
+
+        }
+
 
         /// <summary>
         /// 创建监视器
@@ -28,31 +38,20 @@ namespace GameToolKit.Editor
         /// <param name="tabs">分页组</param>
         /// <param name="width">宽度</param>
         /// <param name="height">高度</param>
-        public GraphInspector(string[] tabs = null, float width = 300, float height = 400)
+        public GraphInspector(string[] tabs = null)
         {
             //加载结构
-            VisualTreeAsset visualTreeAsset = EditorGUIUtility.Load("Packages/com.march_rain.gametoolkit/Editor/BaseClass/UXML/GraphInspector.uxml") as VisualTreeAsset;
-            _mainContainer = visualTreeAsset.Instantiate();
+            var visualAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.march_rain.gametoolkit/Editor/BaseClass/UXML/GraphInspector.uxml");
+            _mainContainer = visualAsset.Instantiate();
             var titleContainer = this.Q("TitleContainer");
             base.hierarchy.Add(_mainContainer);
+            this.Q<TemplateContainer>().style.flexGrow = 1;
 
             //获取组件
             _contentContainer = this.Q("contentContainer");
             _title = this.Q<Label>("title");
 
-            //设置样式
-            base.capabilities |= (Capabilities.Resizable | Capabilities.Movable);
-            base.style.overflow = Overflow.Hidden;
-            base.style.position = Position.Absolute;
-            base.style.width = width;
-            base.style.height = height;
-            base.style.right = 0;
-            base.style.marginBottom = base.style.marginRight = base.style.marginTop = base.style.marginLeft = 0;
-            base.contentContainer.Q<TemplateContainer>().style.flexGrow = 1;
-
             //添加功能
-            hierarchy.Add(new Resizer() { });
-            this.AddManipulator(new Dragger() { clampToParentEdges = true });
             RegisterCallback<WheelEvent>(e=>e.StopImmediatePropagation());//防止滚轮影响到下一层的组件
 
             //添加分页
@@ -68,6 +67,7 @@ namespace GameToolKit.Editor
                 }
                 Add(_tabbedView);
             }
+
         }
 
         #region 分页操作

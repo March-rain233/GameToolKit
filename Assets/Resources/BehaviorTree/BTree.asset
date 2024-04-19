@@ -22,25 +22,105 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: Nodes
+    - Name: Blackboard
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[GameToolKit.Behavior.Tree.Node,
-        GameToolKit.BehaviorTree]], mscorlib
+      Data: 0|GameToolKit.GraphBlackboard, GameToolKit.Runtime
+    - Name: _prototypeVariables
+      Entry: 7
+      Data: 1|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameToolKit.BlackboardVariable,
+        GameToolKit.Runtime]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 2|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _localVariables
+      Entry: 7
+      Data: 3|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameToolKit.BlackboardVariable,
+        GameToolKit.Runtime]], mscorlib
+    - Name: comparer
+      Entry: 9
       Data: 2
     - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _guidManager
       Entry: 7
-      Data: 1|GameToolKit.Behavior.Tree.RootNode, GameToolKit.BehaviorTree
-    - Name: Guid
-      Entry: 1
-      Data: a9cbc7d6-4c40-482d-a1e0-7301cd4bde81
-    - Name: Graph
-      Entry: 10
+      Data: 4|GameToolKit.GraphBlackboard+TreeGUIDManager, GameToolKit.Runtime
+    - Name: _id2name
+      Entry: 7
+      Data: 5|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 2
+    - Name: 
+      Entry: 12
       Data: 0
-    - Name: LastDataUpdataTime
-      Entry: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _name2id
+      Entry: 7
+      Data: 6|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 2
+    - Name: 
+      Entry: 12
       Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: HasPrototypeDomain
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _nodes
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[GameToolKit.Behavior.Tree.Node,
+        GameToolKit.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 8|GameToolKit.Behavior.Tree.RootNode, GameToolKit.Runtime
+    - Name: Id
+      Entry: 3
+      Data: 0
+    - Name: HasInitialized
+      Entry: 5
+      Data: false
     - Name: Name
       Entry: 1
       Data: RootNode
@@ -56,9 +136,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: InputEdges
+    - Name: _inputEdges
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[GameToolKit.SourceInfo, GameToolKit.BaseClass]],
+      Data: 9|System.Collections.Generic.List`1[[GameToolKit.SourceEdge, GameToolKit.Runtime]],
         mscorlib
     - Name: 
       Entry: 12
@@ -69,9 +149,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: OutputEdges
+    - Name: _outputEdges
       Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[GameToolKit.SourceInfo, GameToolKit.BaseClass]],
+      Data: 10|System.Collections.Generic.List`1[[GameToolKit.SourceEdge, GameToolKit.Runtime]],
         mscorlib
     - Name: 
       Entry: 12
@@ -82,88 +162,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: _disposedValue
+      Entry: 5
+      Data: false
     - Name: BehaviorTree
       Entry: 10
       Data: 0
     - Name: Child
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|GameToolKit.Behavior.Tree.RandomSelectorNode, GameToolKit.BehaviorTree
-    - Name: Guid
-      Entry: 1
-      Data: 95c947df-1d8b-4c90-a423-3fb936f0198f
-    - Name: Graph
-      Entry: 10
-      Data: 0
-    - Name: LastDataUpdataTime
-      Entry: 4
-      Data: 0
-    - Name: Name
-      Entry: 1
-      Data: RandomSelectorNode
-    - Name: ViewPosition
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 190.599991
-    - Name: 
-      Entry: 4
-      Data: -43.1999969
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: InputEdges
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[GameToolKit.SourceInfo, GameToolKit.BaseClass]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: OutputEdges
-      Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[GameToolKit.SourceInfo, GameToolKit.BaseClass]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: BehaviorTree
-      Entry: 10
-      Data: 0
-    - Name: _abortType
-      Entry: 3
-      Data: 0
-    - Name: Childrens
-      Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[GameToolKit.Behavior.Tree.ProcessNode,
-        GameToolKit.BehaviorTree]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _weights
       Entry: 6
       Data: 
     - Name: 
@@ -177,68 +182,5 @@ MonoBehaviour:
       Data: 
     - Name: _rootNode
       Entry: 9
-      Data: 1
-    - Name: Blackboard
-      Entry: 7
-      Data: 8|GameToolKit.Behavior.Tree.BehaviorTree+TreeBlackboard, GameToolKit.BehaviorTree
-    - Name: _callBackList
-      Entry: 7
-      Data: 9|GameToolKit.IBlackboard+CallBackList, GameToolKit.BaseClass
-    - Name: _callbacks
-      Entry: 7
-      Data: 10|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Collections.Generic.Dictionary`2[[System.Type,
-        mscorlib],[System.Delegate, mscorlib]], mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 11|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _local
-      Entry: 7
-      Data: 12|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameToolKit.BlackboardVariable,
-        GameToolKit.BaseClass]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 11
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: _prototype
-      Entry: 7
-      Data: 13|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameToolKit.BlackboardVariable,
-        GameToolKit.BaseClass]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 11
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 8
+  _idNum: 1

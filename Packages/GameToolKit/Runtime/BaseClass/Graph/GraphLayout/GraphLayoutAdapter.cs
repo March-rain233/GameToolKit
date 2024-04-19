@@ -12,44 +12,56 @@ namespace GameToolKit.Utility
         /// <summary>
         /// 参与布局的所有节点
         /// </summary>
-        public abstract IEnumerable<int> Nodes { get; }
+        public abstract Rect[] Nodes { get; }
+
+        /// <summary>
+        /// 邻接矩阵
+        /// </summary>
+        /// <remarks>0表示无连接，非0表示边的优先级，高优先级的边布局中更加聚合</remarks>
+        public abstract int [,] EdgeMatrix { get;}
 
         /// <summary>
         /// 获取指定节点的后继节点
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public abstract IEnumerable<int> GetDescendant(int id);
+        public virtual IEnumerable<int> GetDescendant(int index)
+        {
+            var list = new List<int>();
+            for(int i = 0; i < Nodes.Length; i++)
+                if(EdgeMatrix[index, i] != 0)
+                    list.Add(i);
+            return list;
+        }
 
         /// <summary>
         /// 获取指定节点的前驱节点
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public abstract IEnumerable<int> GetPrecursor(int id);
+        public virtual IEnumerable<int> GetPrecursor(int index)
+        {
+            var list = new List<int>();
+            for (int i = 0; i < Nodes.Length; i++)
+                if (EdgeMatrix[i, index] != 0)
+                    list.Add(i);
+            return list;
+        }
 
         /// <summary>
-        /// 获取指定节点的节点数据
+        /// 判断是否是子代关系
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="parent"></param>
+        /// <param name="child"></param>
         /// <returns></returns>
-        public abstract NodeData GetNodeData(int id);
+        public virtual bool IsChild(int parent, int child)
+        {
+            return EdgeMatrix[parent, child] != 0;
+        }
 
         /// <summary>
-        /// 设定指定节点的节点数据
+        /// 结束布局，需要实现设置节点数据
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="data"></param>
-        public abstract void SetNodeData(int id, NodeData data);
-    }
-
-    /// <summary>
-    /// 获取节点数据
-    /// </summary>
-    public struct NodeData
-    {
-        public float Width;
-        public float Height;
-        public Vector2 Position;
+        public abstract void Finish();
     }
 }

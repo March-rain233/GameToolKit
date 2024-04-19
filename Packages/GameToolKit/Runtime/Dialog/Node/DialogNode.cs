@@ -10,7 +10,6 @@ namespace GameToolKit.Dialog
     /// <summary>
     /// 对话节点基类
     /// </summary>
-    [NodeCategory("Dialog")]
     public abstract class DialogNodeBase : ProcessNode
     {
         /// <summary>
@@ -31,7 +30,6 @@ namespace GameToolKit.Dialog
     /// <summary>
     /// 对话节点
     /// </summary>
-    [NodeCategory("Dialog/BodyText")]
     public class DialogNode : DialogNodeBase
     {
         /// <summary>
@@ -53,21 +51,15 @@ namespace GameToolKit.Dialog
         /// </summary>
         int _current = -1;
 
-        /// <summary>
-        /// 是否被中断
-        /// </summary>
-        bool _isAbort = false;
-
         protected override void OnStart(ProcessNode preNode)
         {
             _current = -1;
-            _isAbort = false;
             Output();
         }
 
         void Output()
         {
-            if (_isAbort) return;
+            if (IsAbort) return;
             if(++_current < Sentences.Count)
                 ServiceAP.Instance.DialogManager.PlayDialog(ViewType, Sentences[_current], Output, DialogTree);
             else Finish();
@@ -87,36 +79,30 @@ namespace GameToolKit.Dialog
 
         protected override void OnAbort()
         {
-            _isAbort = true;
+
         }
     }
 
     /// <summary>
     /// 选项选择节点
     /// </summary>
-    [NodeCategory("Dialog/Option")]
+    [NodeCategory("Process/Option")]
     [Node(NodeAttribute.PortType.Multi, NodeAttribute.PortType.Multi)]
     public class OptionSelectorNode : DialogNodeBase
     {
-        [Port("SelectedOptionIndex", PortDirection.Output)]
+        [SourcePort("SelectedOptionIndex", PortDirection.Output)]
         public int SelectedOptionIndex;
-
-        /// <summary>
-        /// 是否被中断
-        /// </summary>
-        bool _isAbort = false;
 
         protected override void OnStart(ProcessNode preNode)
         {
             SelectedOptionIndex = -1;
-            _isAbort = false;
             var options = from optionNode in Children.OfType<OptionNode>() select optionNode.GetOption();
             ServiceAP.Instance.DialogManager.PlayOption(ViewType, options.ToList(), OnSelected);
         }
 
         void OnSelected(int i)
         {
-            if (_isAbort) return;
+            if (IsAbort) return;
             SelectedOptionIndex = i;
             Finish();
         }
@@ -141,10 +127,11 @@ namespace GameToolKit.Dialog
     /// 选项数据节点
     /// </summary>
     [Node(NodeAttribute.PortType.Single, NodeAttribute.PortType.Multi)]
+    [NodeCategory("Process/Option")]
     public class OptionNode : ProcessNode
     {
 
-        [Port("OptionArgument", PortDirection.Input)]
+        [SourcePort("OptionArgument", PortDirection.Input)]
         [SerializeField]
         OptionArgument Option;
 
@@ -159,7 +146,7 @@ namespace GameToolKit.Dialog
         /// <returns></returns>
         public OptionArgument GetOption()
         {
-            InitInputData();
+            PullInputData();
             OnValueUpdate();
             return Option;
         }

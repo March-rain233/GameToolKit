@@ -8,9 +8,11 @@ namespace GameToolKit.Behavior.Tree
     /// 局部变量节点
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
+    [NodeCategory("Logic/Source/Input")]
+    [GenericSelector("BaseValue")]
     public class InputNode<TValue> : SourceNode
     {
-        [Port("Output", PortDirection.Output)]
+        [SourcePort("Output", PortDirection.Output)]
         [SerializeField]
         [HideInInspector]
         protected TValue _value = default;
@@ -22,32 +24,16 @@ namespace GameToolKit.Behavior.Tree
             { 
                 _value = value;
                 if (!HasInitialized) return;
-                InitOutputData();
+                SetDirty();
             }
         }
 
         protected override void OnValueUpdate()
         {
-            
+            SetDirty();
         }
 
         protected override object GetValue(string name) =>
             _value;
     }
-    public sealed class IntegerNode : InputNode<int> { }
-    public sealed class FloatNode : InputNode<float> { }
-    public sealed class DoubleNode : InputNode<double> { }
-    public sealed class StringNode : InputNode<string> { }
-    public sealed class BooleanNode : InputNode<bool> { }
-    public sealed class ObjectNode : InputNode<object> { }
-    public sealed class Vector2Node : InputNode<Vector2> { }
-    public sealed class Vector3Node : InputNode<Vector3> { }
-    public sealed class Vector4Node : InputNode<Vector4> { } 
-    public sealed class QuaternionNode : InputNode<Quaternion> { }
-    public sealed class RectNode : InputNode<Rect> { }
-    public sealed class BoundsNode : InputNode<Bounds> { }
-    public sealed class ColorNode : InputNode<Color> { }
-    public sealed class GameObjectNode : InputNode<GameObject> { }
-    public sealed class ComponentNode : InputNode<Component> { }
-    public sealed class CurveNode : InputNode<AnimationCurve> { }
 }

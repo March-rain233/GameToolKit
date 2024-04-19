@@ -10,8 +10,8 @@
   <xs:import schemaLocation="UnityEditor.ShaderGraph.Drawing.xsd" namespace="UnityEditor.ShaderGraph.Drawing" />
   <xs:include schemaLocation="GlobalNamespace.xsd" />
   <xs:import schemaLocation="UnityEditor.Rendering.LookDev.xsd" namespace="UnityEditor.Rendering.LookDev" />
-  <xs:import schemaLocation="GameToolKit.Behavior.Tree.Editor.xsd" namespace="GameToolKit.Behavior.Tree.Editor" />
   <xs:import schemaLocation="GameToolKit.Dialog.Editor.xsd" namespace="GameToolKit.Dialog.Editor" />
+  <xs:import schemaLocation="GameToolKit.Behavior.Tree.Editor.xsd" namespace="GameToolKit.Behavior.Tree.Editor" />
   <xs:import schemaLocation="UnityEditor.UIElements.Debugger.xsd" namespace="UnityEditor.UIElements.Debugger" />
   <xs:import schemaLocation="Unity.UI.Builder.xsd" namespace="Unity.UI.Builder" />
   <xs:import schemaLocation="UnityEditor.Search.xsd" namespace="UnityEditor.Search" />
